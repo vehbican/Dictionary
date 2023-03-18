@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: #d90429;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.teamfour.dictionary.HomePageController">
+    <BorderPane style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
+      <left>
+          <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+              <Pane layoutY="50.0" prefWidth="200.0" style="-fx-background-color: #ef233c;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+                  <MFXComboBox fx:id="sourceLangComboBox" floatMode="DISABLED" layoutX="10.0" layoutY="25.0" prefWidth="180.0" promptText="Source Language" selectable="true" style="-fx-background-color: transparent; -fx-border-style: hidden hidden solid hidden; -fx-border-radius: 0;" textFill="white">
+                      <font>
+                          <Font name="System Bold" size="15.0" />
+                      </font>
+                  </MFXComboBox>
+                  <MFXTextField fx:id="searchInput" borderGap="0.0" caretVisible="false" floatMode="DISABLED" layoutX="10.0" layoutY="100.0" prefWidth="180.0" promptText="Search" style="-fx-background-color: transparent; -fx-border-style: hidden hidden solid hidden; -fx-border-radius: 0;" textFill="white">
+                      <textFill>
+                          <Color red="1.0" green="1.0" blue="1.0" opacity="0.8700000047683716" />
+                      </textFill>
+                      <font>
+                          <Font name="System Bold" size="15.0" />
+                      </font>
+                  </MFXTextField>
+                 <MFXButton fx:id="searchButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" depthLevel="LEVEL5" graphicTextGap="0.0" layoutX="42.0" layoutY="175.0" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: transparent;" textAlignment="CENTER">
+                  <graphic>
+                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                            <Image url="@images/search.png" />
+                        </ImageView>
+                  </graphic>
+                 </MFXButton>
+              </Pane>
+            <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="10.0" prefWidth="180.0" style="-fx-background-color: transparent; -fx-border-radius: 0; -fx-border-color: #FFFFFF; -fx-border-width: 5; -fx-border-style: solid hidden solid hidden; -fx-border-insets: 0;" text="DICT4TEAM" textAlignment="JUSTIFY" textFill="WHITE" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
+               <font>
+                  <Font name="Bauhaus 93" size="30.0" />
+               </font>
+            </Label>
+            <BorderPane.margin>
+               <Insets top="10.0" />
+            </BorderPane.margin>
+          </AnchorPane>
+      </left>
+      <right>
+         <AnchorPane prefWidth="100.0" style="-fx-background-color: #2b2d42;" BorderPane.alignment="CENTER" />
+      </right>
+      <center>
+         <AnchorPane focusTraversable="true" nodeOrientation="LEFT_TO_RIGHT" style="-fx-border-color: transparent; -fx-border-width: 0;" BorderPane.alignment="CENTER">
+            <children>
+               <ListView fx:id="cardListView" nodeOrientation="LEFT_TO_RIGHT" pickOnBounds="false" style="-fx-background-color: #2b2d42; -fx-border-color: transparent; -fx-border-insets: 0;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                  <cursor>
+                     <Cursor fx:constant="DEFAULT" />
+                  </cursor>
+               </ListView>
+            </children>
+            <BorderPane.margin>
+               <Insets />
+            </BorderPane.margin>
+         </AnchorPane>
+      </center>
+    </BorderPane>
+</AnchorPane>
