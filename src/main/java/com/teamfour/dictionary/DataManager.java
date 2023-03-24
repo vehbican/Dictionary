@@ -4,10 +4,12 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public class DataManager {
+
 
     private HashMap<Integer, Word> ENG_TUR_DICT;
     private HashMap<Integer, Word> ENG_FRA_DICT;
@@ -30,7 +32,7 @@ public class DataManager {
         ENG_GRE_DICT = new HashMap<>();
         ENG_SWE_DICT = new HashMap<>();
 
-        LoadEnglishDictionaries();
+      //  LoadEnglishDictionaries();
 
         AllDictionaries.add(ENG_TUR_DICT);
         AllDictionaries.add(ENG_FRA_DICT);
@@ -41,16 +43,50 @@ public class DataManager {
 
     }
 
+    public static String[] getDictionaries() {
+        String eng_tur = Config.eng_tur_tei;
+        String eng_fra = Config.eng_fra_tei;
+        String eng_ita = Config.eng_ita_tei;
+        String eng_ell = Config.eng_ell_tei;
+        String eng_swe = Config.eng_swe_tei;
+        //String eng_deu = Config.eng_deu_tei;
+
+        String[] dictionaryPaths = {eng_tur, eng_fra,  eng_ita, eng_ell, eng_swe, eng_tur};
+        return dictionaryPaths;
+
+    }
+
+    public static String[] getFlags() {
+      //  String englandFlagImg = Config.englandFlagImg;
+        String franceFlagImg = Config.franceFlagImg;
+        String germanyFlagImg = Config.germanyFlagImg;
+        String greeceFlagImg = Config.greeceFlagImg;
+        String italyFlagImg = Config.italyFlagImg;
+        String swedenFlagImg = Config.swedenFlagImg;
+        String turkeyFlagImg = Config.turkeyFlagImg;
 
 
+        String[] flagPaths = {turkeyFlagImg, franceFlagImg,  italyFlagImg, greeceFlagImg, swedenFlagImg, germanyFlagImg};
+        return flagPaths;
+    }
+
+
+    /*
     public void LoadEnglishDictionaries(){
 
         //parsing
         List<String> eng_tur_eng;
         List<String> eng_tur_tur;
+        List<String> eng_tur;
+        List<String> eng_ita;
+        TeiParser teiParser = new TeiParser();
 
+        eng_ita = BufferedReaderToList(Config.eng_ita_tei);
+        eng_tur = BufferedReaderToList(Config.eng_tur_tei);
         eng_tur_eng = BufferedReaderToList(Config.ENG_TUR_ENG_TXT);
         eng_tur_tur = BufferedReaderToList(Config.ENG_TUR_TUR_TXT);
+
+
 
         for (int i=0;i<eng_tur_eng.size();i++){
 
@@ -83,6 +119,7 @@ public class DataManager {
 
     }
 
+
     private static List<String> BufferedReaderToList(String path) {
 
         List<String> list = new ArrayList<>();
@@ -99,7 +136,7 @@ public class DataManager {
             e.printStackTrace();
         }
         return list;
-    }
+    } */
 
 
     public HashMap<Integer, Word> getENG_TUR_DICT() {

@@ -12,8 +12,22 @@ public class Config {
     public static final String swedenFlagImg = "com/teamfour/dictionary/images/sweden.png";
     public static final String turkeyFlagImg = "com/teamfour/dictionary/images/turkey.png";
 
-    public static final String ENG_TUR_ENG_TXT = "src\\main\\resources\\com\\teamfour\\dictionary\\dicts\\ingtur-ing.txt";
-    public static final String ENG_TUR_TUR_TXT = "src\\main\\resources\\com\\teamfour\\dictionary\\dicts\\ingtur-tur.txt";
+
+
+
+    public static final String eng_ita_tei = "src\\main\\resources\\com\\teamfour\\dictionary\\dicts\\eng-ita.tei";
+
+    public static final String eng_tur_tei = "src\\main\\resources\\com\\teamfour\\dictionary\\dicts\\eng-tur.tei";
+
+    public static final String eng_deu_tei = "src\\main\\resources\\com\\teamfour\\dictionary\\dicts\\eng-deu.tei";
+
+    public static final String eng_ell_tei = "src\\main\\resources\\com\\teamfour\\dictionary\\dicts\\eng-ell.tei";
+
+    public static final String eng_swe_tei = "src\\main\\resources\\com\\teamfour\\dictionary\\dicts\\eng-swe.tei";
+
+    public static final String eng_fra_tei = "src\\main\\resources\\com\\teamfour\\dictionary\\dicts\\eng-fra.tei";
+
+
 
     public enum Languages{
 

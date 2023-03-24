@@ -5,7 +5,11 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
+import java.util.List;
 
 public class App extends Application {
 
@@ -14,11 +18,15 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+
+        //TeiParser teiParser = new TeiParser();
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("home-page.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1080, 720);
-        stage.setTitle("Hello!");
+     //   stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
+
+
 
         dataManager = new DataManager();
 

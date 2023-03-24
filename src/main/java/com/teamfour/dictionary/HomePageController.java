@@ -11,6 +11,10 @@ import javafx.geometry.Orientation;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -52,7 +56,7 @@ public class HomePageController implements Initializable {
     }
 
 
-    public void HandleSearchButtonAction(DataManager dataManager){
+    public void HandleSearchButtonAction(DataManager dataManager) {
 
 
         cardListView.getItems().clear();
@@ -74,12 +78,26 @@ public class HomePageController implements Initializable {
 
             WordCard card = new WordCard(cardListView);
 
-            if(dataManager.getAllDictionaries().get(i).containsKey(searchTarget.getHashCode())){
+            if(true){
 
-                Word w = dataManager.getAllDictionaries().get(i).get(searchTarget.getHashCode());
+                //Word w = dataManager.getAllDictionaries().get(i).get(searchTarget.getHashCode());
 
-                card.getDefinitionsListView().getItems().addAll(w.getTranslations());
-                card.getFlagImage().setImage(new Image(w.getFlagImgPath()));
+                //card.getDefinitionsListView().getItems().addAll(w.getTranslations());
+                System.out.println(DataManager.getDictionaries()[i]);
+
+                try {
+                    card.getDefinitionsListView().getItems().addAll(TeiParser.getTranslations(searchTarget.getWord(), DataManager.getDictionaries()[i]));
+
+                } catch (ParserConfigurationException e) {
+                    throw new RuntimeException(e);
+                } catch (SAXException e) {
+                    throw new RuntimeException(e);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+                card.getFlagImage().setImage(new Image(DataManager.getFlags()[i]));
+                //card.getFlagImage().setImage(new Image(w.getFlagImgPath()));
 
             }
 
