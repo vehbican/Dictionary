@@ -1,11 +1,5 @@
 package com.teamfour.dictionary;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.lang.reflect.Array;
-import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public class DataManager {
@@ -18,32 +12,37 @@ public class DataManager {
     private HashMap<Integer, Word> ENG_GRE_DICT;
     private HashMap<Integer, Word> ENG_SWE_DICT;
 
-    private ArrayList<HashMap<Integer, Word>> AllDictionaries;
+    private ArrayList<HashMap<Integer, Word>> ENGXDictionaries;
+
+    public HashMap<Integer,Word> WordsDatabase;
 
     public DataManager() {
 
-        AllDictionaries = new ArrayList<>();
+        TeiParser teiParser = new TeiParser();
+        WordsDatabase = new HashMap<>();
+        ENGXDictionaries = new ArrayList<>();
 
         //From English to All
-        ENG_TUR_DICT = new HashMap<>();
-        ENG_FRA_DICT = new HashMap<>();
-        ENG_GER_DICT = new HashMap<>();
-        ENG_ITA_DICT = new HashMap<>();
-        ENG_GRE_DICT = new HashMap<>();
-        ENG_SWE_DICT = new HashMap<>();
+        ENG_TUR_DICT = teiParser.ParseTEIToHashMap(this,Config.eng_tur_tei, Config.Languages.ENGLISH, Config.Languages.TURKISH);
+        ENG_FRA_DICT = teiParser.ParseTEIToHashMap(this,Config.eng_fra_tei, Config.Languages.ENGLISH, Config.Languages.FRENCH);
+        ENG_ITA_DICT = teiParser.ParseTEIToHashMap(this,Config.eng_ita_tei, Config.Languages.ENGLISH, Config.Languages.ITALIAN);
+        ENG_GRE_DICT = teiParser.ParseTEIToHashMap(this,Config.eng_ell_tei, Config.Languages.ENGLISH, Config.Languages.GREEK);
+        ENG_SWE_DICT = teiParser.ParseTEIToHashMap(this,Config.eng_swe_tei, Config.Languages.ENGLISH, Config.Languages.SWEDISH);
+        //ENG_GER_DICT = teiParser.ParseTEIToHashMap(this,Config.eng_deu_tei, Config.Languages.ENGLISH, Config.Languages.GERMAN);
 
-      //  LoadEnglishDictionaries();
+        ENGXDictionaries.add(Config.eng_tur_index,ENG_TUR_DICT);
+        ENGXDictionaries.add(Config.eng_fra_index,ENG_FRA_DICT);
+        ENGXDictionaries.add(Config.eng_ita_index,ENG_ITA_DICT);
+        ENGXDictionaries.add(Config.eng_gre_index,ENG_GRE_DICT);
+        ENGXDictionaries.add(Config.eng_swe_index,ENG_SWE_DICT);
+        //ENGXDictionaries.add(Config.eng_ger_index,ENG_GER_DICT);
 
-        AllDictionaries.add(ENG_TUR_DICT);
-        AllDictionaries.add(ENG_FRA_DICT);
-        AllDictionaries.add(ENG_GER_DICT);
-        AllDictionaries.add(ENG_ITA_DICT);
-        AllDictionaries.add(ENG_GRE_DICT);
-        AllDictionaries.add(ENG_SWE_DICT);
+
+
 
     }
 
-    public static String[] getDictionaries() {
+    public String[] getDictionaries() {
         String eng_tur = Config.eng_tur_tei;
         String eng_fra = Config.eng_fra_tei;
         String eng_ita = Config.eng_ita_tei;
@@ -51,13 +50,13 @@ public class DataManager {
         String eng_swe = Config.eng_swe_tei;
         //String eng_deu = Config.eng_deu_tei;
 
-        String[] dictionaryPaths = {eng_tur, eng_fra,  eng_ita, eng_ell, eng_swe, eng_tur};
-        return dictionaryPaths;
+        return new String[]{eng_tur, eng_fra,  eng_ita, eng_ell, eng_swe};
 
     }
 
-    public static String[] getFlags() {
-      //  String englandFlagImg = Config.englandFlagImg;
+    public String[] getFlags() {
+
+        String englandFlagImg = Config.englandFlagImg;
         String franceFlagImg = Config.franceFlagImg;
         String germanyFlagImg = Config.germanyFlagImg;
         String greeceFlagImg = Config.greeceFlagImg;
@@ -66,60 +65,12 @@ public class DataManager {
         String turkeyFlagImg = Config.turkeyFlagImg;
 
 
-        String[] flagPaths = {turkeyFlagImg, franceFlagImg,  italyFlagImg, greeceFlagImg, swedenFlagImg, germanyFlagImg};
-        return flagPaths;
+
+        return new String[]{turkeyFlagImg, franceFlagImg ,italyFlagImg, greeceFlagImg, swedenFlagImg,germanyFlagImg,englandFlagImg};
     }
 
 
     /*
-    public void LoadEnglishDictionaries(){
-
-        //parsing
-        List<String> eng_tur_eng;
-        List<String> eng_tur_tur;
-        List<String> eng_tur;
-        List<String> eng_ita;
-        TeiParser teiParser = new TeiParser();
-
-        eng_ita = BufferedReaderToList(Config.eng_ita_tei);
-        eng_tur = BufferedReaderToList(Config.eng_tur_tei);
-        eng_tur_eng = BufferedReaderToList(Config.ENG_TUR_ENG_TXT);
-        eng_tur_tur = BufferedReaderToList(Config.ENG_TUR_TUR_TXT);
-
-
-
-        for (int i=0;i<eng_tur_eng.size();i++){
-
-            Word eng = new Word(Config.Languages.ENGLISH,eng_tur_eng.get(i).trim().toLowerCase());
-            Word tur = new Word(Config.Languages.TURKISH,eng_tur_tur.get(i).trim().toLowerCase());
-            Word fra = new Word(Config.Languages.FRENCH,eng_tur_tur.get(i).trim().toLowerCase());
-            Word ger = new Word(Config.Languages.GERMAN,eng_tur_tur.get(i).trim().toLowerCase());
-            Word ita = new Word(Config.Languages.ITALIAN,eng_tur_tur.get(i).trim().toLowerCase());
-            Word gre = new Word(Config.Languages.GREEK,eng_tur_tur.get(i).trim().toLowerCase());
-            Word swe = new Word(Config.Languages.SWEDISH,eng_tur_tur.get(i).trim().toLowerCase());
-
-            String[] a = tur.getWord().split(";");
-
-            tur.setTranslations(a);
-            fra.setTranslations(a);
-            ger.setTranslations(a);
-            ita.setTranslations(a);
-            gre.setTranslations(a);
-            swe.setTranslations(a);
-
-
-            ENG_TUR_DICT.put(eng.getHashCode(), tur);
-            ENG_FRA_DICT.put(eng.getHashCode(), fra);
-            ENG_GER_DICT.put(eng.getHashCode(), ger);
-            ENG_ITA_DICT.put(eng.getHashCode(), ita);
-            ENG_GRE_DICT.put(eng.getHashCode(), gre);
-            ENG_SWE_DICT.put(eng.getHashCode(), swe);
-        }
-
-
-    }
-
-
     private static List<String> BufferedReaderToList(String path) {
 
         List<String> list = new ArrayList<>();
@@ -136,63 +87,41 @@ public class DataManager {
             e.printStackTrace();
         }
         return list;
-    } */
-
+    }
+    */
 
     public HashMap<Integer, Word> getENG_TUR_DICT() {
         return ENG_TUR_DICT;
-    }
-
-    public void setENG_TUR_DICT(HashMap<Integer, Word> ENG_TUR_DICT) {
-        this.ENG_TUR_DICT = ENG_TUR_DICT;
     }
 
     public HashMap<Integer, Word> getENG_FRA_DICT() {
         return ENG_FRA_DICT;
     }
 
-    public void setENG_FRA_DICT(HashMap<Integer, Word> ENG_FRA_DICT) {
-        this.ENG_FRA_DICT = ENG_FRA_DICT;
-    }
-
     public HashMap<Integer, Word> getENG_GER_DICT() {
         return ENG_GER_DICT;
-    }
-
-    public void setENG_GER_DICT(HashMap<Integer, Word> ENG_GER_DICT) {
-        this.ENG_GER_DICT = ENG_GER_DICT;
     }
 
     public HashMap<Integer, Word> getENG_ITA_DICT() {
         return ENG_ITA_DICT;
     }
 
-    public void setENG_ITA_DICT(HashMap<Integer, Word> ENG_ITA_DICT) {
-        this.ENG_ITA_DICT = ENG_ITA_DICT;
-    }
-
     public HashMap<Integer, Word> getENG_GRE_DICT() {
         return ENG_GRE_DICT;
-    }
-
-    public void setENG_GRE_DICT(HashMap<Integer, Word> ENG_GRE_DICT) {
-        this.ENG_GRE_DICT = ENG_GRE_DICT;
     }
 
     public HashMap<Integer, Word> getENG_SWE_DICT() {
         return ENG_SWE_DICT;
     }
 
-    public void setENG_SWE_DICT(HashMap<Integer, Word> ENG_SWE_DICT) {
-        this.ENG_SWE_DICT = ENG_SWE_DICT;
+    public ArrayList<HashMap<Integer, Word>> getENGXDictionaries() {
+        return ENGXDictionaries;
     }
 
-    public ArrayList<HashMap<Integer, Word>> getAllDictionaries() {
-        return AllDictionaries;
+    public HashMap<Integer, Word> getWordsDatabase() {
+        return WordsDatabase;
     }
 
-    public void setAllDictionaries(ArrayList<HashMap<Integer, Word>> allDictionaries) {
-        this.AllDictionaries = allDictionaries;
-    }
+
 
 }

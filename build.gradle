@@ -38,6 +38,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
     implementation("io.github.palexdev:materialfx:11.14.0-EA3")
+    implementation("org.apache.commons:commons-collections4:4.4")
 
 }
 

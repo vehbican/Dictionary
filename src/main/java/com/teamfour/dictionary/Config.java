@@ -28,6 +28,13 @@ public class Config {
     public static final String eng_fra_tei = "src\\main\\resources\\com\\teamfour\\dictionary\\dicts\\eng-fra.tei";
 
 
+    public static int eng_tur_index = 0;
+    public static int eng_fra_index = 1;
+    public static int eng_ita_index = 2;
+    public static int eng_gre_index = 3;
+    public static int eng_swe_index = 4;
+    public static int eng_ger_index = 5;
+
 
     public enum Languages{
 

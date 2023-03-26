@@ -17,8 +17,8 @@ public class WordCard extends AnchorPane{
     private ImageView flagImage;
     private Text label_def;
     private Text label_synonyms;
-    private ListView<String> definitionsListView;
-    private ListView<String> synonymsListView;
+    private ListView<Word> definitionsListView;
+    private ListView<Word> synonymsListView;
 
 
     public WordCard(ListView<AnchorPane> parent) {
@@ -119,19 +119,19 @@ public class WordCard extends AnchorPane{
         this.flagImage = flagImage;
     }
 
-    public ListView<String> getDefinitionsListView() {
+    public ListView<Word> getDefinitionsListView() {
         return definitionsListView;
     }
 
-    public void setDefinitionsListView(ListView<String> definitionsListView) {
+    public void setDefinitionsListView(ListView<Word> definitionsListView) {
         this.definitionsListView = definitionsListView;
     }
 
-    public ListView<String> getSynonymsListView() {
+    public ListView<Word> getSynonymsListView() {
         return synonymsListView;
     }
 
-    public void setSynonymsListView(ListView<String> synonymsListView) {
+    public void setSynonymsListView(ListView<Word> synonymsListView) {
         this.synonymsListView = synonymsListView;
     }
 }

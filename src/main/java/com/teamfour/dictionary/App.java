@@ -5,11 +5,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.xml.sax.SAXException;
-
-import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
-import java.util.List;
 
 public class App extends Application {
 
@@ -19,16 +15,17 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        //TeiParser teiParser = new TeiParser();
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("home-page.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1080, 720);
-     //   stage.setTitle("Hello!");
+        stage.setTitle("DICT4TEAM Multi-Dictionary");
         stage.setScene(scene);
         stage.show();
 
-
-
+        long start = System.currentTimeMillis();
         dataManager = new DataManager();
+        long end = System.currentTimeMillis() - start;
+
+        System.out.println("Program Başlama Süresi : " + end);
 
         controller = fxmlLoader.getController();
 

@@ -1,12 +1,13 @@
 package com.teamfour.dictionary;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Word {
 
     private Config.Languages language; // which contains this word
     private String word;
-    private String[] translations; // to other languages
+    private List<Word> translations; // to other languages
     private String type; // pronoun,noun,verb etc.
     private ArrayList<String> synonyms; // if exist
     private String flagImgPath;
@@ -16,6 +17,7 @@ public class Word {
 
         this.language = language;
         this.word = word;
+        this.translations = new ArrayList<>();
 
         if (this.word != null) {
             this.hashCode = this.word.hashCode();
@@ -51,11 +53,11 @@ public class Word {
         this.word = word;
     }
 
-    public String[] getTranslations() {
+    public List<Word> getTranslations() {
         return translations;
     }
 
-    public void setTranslations(String[] translations) {
+    public void setTranslations(List<Word> translations) {
         this.translations = translations;
     }
 
@@ -85,7 +87,7 @@ public class Word {
 
     @Override
     public String toString() {
-        return language.toString();
+        return word;
     }
 
 
