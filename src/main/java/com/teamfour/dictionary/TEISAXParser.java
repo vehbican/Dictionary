@@ -108,7 +108,7 @@ public class TEISAXParser {
                 System.out.println("Orth: " + currentOrth + " - " + quotes);
                 System.out.println();*/
 
-                Word sourceWord = new Word(Config.Languages.ENGLISH,currentOrth.trim().toLowerCase());
+                Word sourceWord = new Word(sourceLang,currentOrth.trim().toLowerCase());
 
                 if(dictionary.containsKey(sourceWord.getHashCode())){
 
@@ -138,16 +138,9 @@ public class TEISAXParser {
 
                 //System.out.println("Quote (" + currentLang + "): " + currentQuote);
 
-                /*Charset c = StandardCharsets.UTF_8;
-                if(targetLang == Config.Languages.GREEK){
-
-                    c = Charset.forName("ISO-8859-7");
-
-                }*/
-
                 if(currentQuote != null){
 
-                    //Word quote = new Word(targetLang, Objects.requireNonNull(decodeText(currentQuote.toString(), c)).trim().toLowerCase());
+
                     Word quote = new Word(targetLang, currentQuote.toString().trim().toLowerCase());
 
                     quotes.add(quote);

@@ -72,7 +72,7 @@ public class HomePageController implements Initializable {
         //Word searchTarget = new Word(sourceLang.getLanguage(),searchInput.getText().trim().toLowerCase());
         Word searchTarget = dataManager.getWordsDatabase().get(searchInput.getText().trim().toLowerCase().hashCode());
 
-        if(searchTarget.getLanguage() != sourceLang.getLanguage()){
+        /*if(searchTarget.getLanguage() != sourceLang.getLanguage()){
 
             System.out.println("Not Found");
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -80,7 +80,9 @@ public class HomePageController implements Initializable {
             alert.setContentText("This word is not found for this source.");
             alert.show();
             return;
-        }
+        }*/
+
+        System.out.println(searchTarget.getLanguage().toString() + " - " + sourceLang.getLanguage().toString());
 
         switch (sourceLang.getLanguage()){
 
