@@ -32,8 +32,6 @@ public class App extends Application {
         controller.searchButton.setOnAction(event -> controller.HandleSearchButtonAction(dataManager));
 
 
-
-
     }
 
     public static void main(String[] args) {

@@ -18,24 +18,33 @@ public class DataManager {
 
     public DataManager() {
 
-        TeiParser teiParser = new TeiParser();
+        //TeiParser teiParser = new TeiParser();
+        TEISAXParser teiParser = new TEISAXParser();
         WordsDatabase = new HashMap<>();
         ENGXDictionaries = new ArrayList<>();
 
         //From English to All
-        ENG_TUR_DICT = teiParser.ParseTEIToHashMap(this,Config.eng_tur_tei, Config.Languages.ENGLISH, Config.Languages.TURKISH);
-        ENG_FRA_DICT = teiParser.ParseTEIToHashMap(this,Config.eng_fra_tei, Config.Languages.ENGLISH, Config.Languages.FRENCH);
-        ENG_ITA_DICT = teiParser.ParseTEIToHashMap(this,Config.eng_ita_tei, Config.Languages.ENGLISH, Config.Languages.ITALIAN);
-        ENG_GRE_DICT = teiParser.ParseTEIToHashMap(this,Config.eng_ell_tei, Config.Languages.ENGLISH, Config.Languages.GREEK);
-        ENG_SWE_DICT = teiParser.ParseTEIToHashMap(this,Config.eng_swe_tei, Config.Languages.ENGLISH, Config.Languages.SWEDISH);
+        //ENG_TUR_DICT = teiParser.ParseTEIToHashMap(this,Config.eng_tur_tei, Config.Languages.ENGLISH, Config.Languages.TURKISH);
+        //ENG_FRA_DICT = teiParser.ParseTEIToHashMap(this,Config.eng_fra_tei, Config.Languages.ENGLISH, Config.Languages.FRENCH);
+        //ENG_ITA_DICT = teiParser.ParseTEIToHashMap(this,Config.eng_ita_tei, Config.Languages.ENGLISH, Config.Languages.ITALIAN);
+        //ENG_GRE_DICT = teiParser.ParseTEIToHashMap(this,Config.eng_ell_tei, Config.Languages.ENGLISH, Config.Languages.GREEK);
+        //ENG_SWE_DICT = teiParser.ParseTEIToHashMap(this,Config.eng_swe_tei, Config.Languages.ENGLISH, Config.Languages.SWEDISH);
         //ENG_GER_DICT = teiParser.ParseTEIToHashMap(this,Config.eng_deu_tei, Config.Languages.ENGLISH, Config.Languages.GERMAN);
+
+        //From English to All
+        ENG_TUR_DICT = teiParser.ParseIntoHashMap(this,Config.eng_tur_tei, Config.Languages.ENGLISH, Config.Languages.TURKISH);
+        ENG_FRA_DICT = teiParser.ParseIntoHashMap(this,Config.eng_fra_tei, Config.Languages.ENGLISH, Config.Languages.FRENCH);
+        ENG_ITA_DICT = teiParser.ParseIntoHashMap(this,Config.eng_ita_tei, Config.Languages.ENGLISH, Config.Languages.ITALIAN);
+        ENG_GRE_DICT = teiParser.ParseIntoHashMap(this,Config.eng_ell_tei, Config.Languages.ENGLISH, Config.Languages.GREEK);
+        ENG_SWE_DICT = teiParser.ParseIntoHashMap(this,Config.eng_swe_tei, Config.Languages.ENGLISH, Config.Languages.SWEDISH);
+        ENG_GER_DICT = teiParser.ParseIntoHashMap(this,Config.eng_deu_tei, Config.Languages.ENGLISH, Config.Languages.GERMAN);
 
         ENGXDictionaries.add(Config.eng_tur_index,ENG_TUR_DICT);
         ENGXDictionaries.add(Config.eng_fra_index,ENG_FRA_DICT);
         ENGXDictionaries.add(Config.eng_ita_index,ENG_ITA_DICT);
         ENGXDictionaries.add(Config.eng_gre_index,ENG_GRE_DICT);
         ENGXDictionaries.add(Config.eng_swe_index,ENG_SWE_DICT);
-        //ENGXDictionaries.add(Config.eng_ger_index,ENG_GER_DICT);
+        ENGXDictionaries.add(Config.eng_ger_index,ENG_GER_DICT);
 
 
 
@@ -48,9 +57,9 @@ public class DataManager {
         String eng_ita = Config.eng_ita_tei;
         String eng_ell = Config.eng_ell_tei;
         String eng_swe = Config.eng_swe_tei;
-        //String eng_deu = Config.eng_deu_tei;
+        String eng_deu = Config.eng_deu_tei;
 
-        return new String[]{eng_tur, eng_fra,  eng_ita, eng_ell, eng_swe};
+        return new String[]{eng_tur, eng_fra,  eng_ita, eng_ell, eng_swe,eng_deu};
 
     }
 

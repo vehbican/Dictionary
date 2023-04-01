@@ -90,7 +90,7 @@ public class HomePageController implements Initializable {
             case ITALIAN -> SearchInItalian(dataManager,searchTarget);
             case SWEDISH -> SearchInSwedish(dataManager,searchTarget);
             case GREEK -> SearchInGreek(dataManager,searchTarget);
-            case GERMAN -> SearchInGerman();
+            case GERMAN -> SearchInGerman(dataManager,searchTarget);
 
         }
 
@@ -143,7 +143,7 @@ public class HomePageController implements Initializable {
         List<Word> itaList=new ArrayList<>();
         List<Word> greList=new ArrayList<>();
         List<Word> sweList=new ArrayList<>();
-        //List<Word> gerList=new ArrayList<>();
+        List<Word> gerList=new ArrayList<>();
 
         List<List<Word>> all = new ArrayList<>();
 
@@ -152,7 +152,7 @@ public class HomePageController implements Initializable {
         all.add(Config.eng_ita_index,itaList);
         all.add(Config.eng_gre_index,greList);
         all.add(Config.eng_swe_index,sweList);
-
+        all.add(Config.eng_ger_index,gerList);
 
         for (Word temp : dataManager.getENG_TUR_DICT().values()) {
 
@@ -224,7 +224,20 @@ public class HomePageController implements Initializable {
             }
 
         }
+        for (Word temp : dataManager.getENG_GER_DICT().values()) {
 
+
+            for (Word t : engList){
+
+                if(t.getWord().equals(temp.getWord())){
+
+                    gerList.addAll(temp.getTranslations());
+
+                }
+
+            }
+
+        }
 
         //Update UI
         for (int i=0;i<all.size();i++){
@@ -285,7 +298,7 @@ public class HomePageController implements Initializable {
         List<Word> itaList=new ArrayList<>();
         List<Word> greList=new ArrayList<>();
         List<Word> sweList=new ArrayList<>();
-        //List<Word> gerList=new ArrayList<>();
+        List<Word> gerList=new ArrayList<>();
 
         List<List<Word>> all = new ArrayList<>();
 
@@ -294,7 +307,7 @@ public class HomePageController implements Initializable {
         all.add(Config.eng_ita_index,itaList);
         all.add(Config.eng_gre_index,greList);
         all.add(Config.eng_swe_index,sweList);
-
+        all.add(Config.eng_ger_index,gerList);
 
         for (Word temp : dataManager.getENG_FRA_DICT().values()) {
 
@@ -360,6 +373,20 @@ public class HomePageController implements Initializable {
                 if(t.getWord().equals(temp.getWord())){
 
                     sweList.addAll(temp.getTranslations());
+
+                }
+
+            }
+
+        }
+        for (Word temp : dataManager.getENG_GER_DICT().values()) {
+
+
+            for (Word t : engList){
+
+                if(t.getWord().equals(temp.getWord())){
+
+                    gerList.addAll(temp.getTranslations());
 
                 }
 
@@ -428,7 +455,7 @@ public class HomePageController implements Initializable {
         List<Word> turList=new ArrayList<>();
         List<Word> greList=new ArrayList<>();
         List<Word> sweList=new ArrayList<>();
-        //List<Word> gerList=new ArrayList<>();
+        List<Word> gerList=new ArrayList<>();
 
         List<List<Word>> all = new ArrayList<>();
 
@@ -437,7 +464,7 @@ public class HomePageController implements Initializable {
         all.add(Config.eng_ita_index,engList);
         all.add(Config.eng_gre_index,greList);
         all.add(Config.eng_swe_index,sweList);
-
+        all.add(Config.eng_ger_index,gerList);
 
         for (Word temp : dataManager.getENG_ITA_DICT().values()) {
 
@@ -509,7 +536,20 @@ public class HomePageController implements Initializable {
             }
 
         }
+        for (Word temp : dataManager.getENG_GER_DICT().values()) {
 
+
+            for (Word t : engList){
+
+                if(t.getWord().equals(temp.getWord())){
+
+                    gerList.addAll(temp.getTranslations());
+
+                }
+
+            }
+
+        }
 
         //Update UI
         for (int i=0;i<all.size();i++){
@@ -570,7 +610,7 @@ public class HomePageController implements Initializable {
         List<Word> itaList=new ArrayList<>();
         List<Word> greList=new ArrayList<>();
         List<Word> turList=new ArrayList<>();
-        //List<Word> gerList=new ArrayList<>();
+        List<Word> gerList=new ArrayList<>();
 
         List<List<Word>> all = new ArrayList<>();
 
@@ -579,6 +619,7 @@ public class HomePageController implements Initializable {
         all.add(Config.eng_ita_index,itaList);
         all.add(Config.eng_gre_index,greList);
         all.add(Config.eng_swe_index,engList);
+        all.add(Config.eng_ger_index,gerList);
 
 
         for (Word temp : dataManager.getENG_SWE_DICT().values()) {
@@ -651,7 +692,20 @@ public class HomePageController implements Initializable {
             }
 
         }
+        for (Word temp : dataManager.getENG_GER_DICT().values()) {
 
+
+            for (Word t : engList){
+
+                if(t.getWord().equals(temp.getWord())){
+
+                    gerList.addAll(temp.getTranslations());
+
+                }
+
+            }
+
+        }
 
         //Update UI
         for (int i=0;i<all.size();i++){
@@ -713,7 +767,7 @@ public class HomePageController implements Initializable {
         List<Word> itaList=new ArrayList<>();
         List<Word> turList=new ArrayList<>();
         List<Word> sweList=new ArrayList<>();
-        //List<Word> gerList=new ArrayList<>();
+        List<Word> gerList=new ArrayList<>();
 
         List<List<Word>> all = new ArrayList<>();
 
@@ -722,6 +776,7 @@ public class HomePageController implements Initializable {
         all.add(Config.eng_ita_index,itaList);
         all.add(Config.eng_gre_index,engList);
         all.add(Config.eng_swe_index,sweList);
+        all.add(Config.eng_swe_index,gerList);
 
 
         for (Word temp : dataManager.getENG_GRE_DICT().values()) {
@@ -794,7 +849,20 @@ public class HomePageController implements Initializable {
             }
 
         }
+        for (Word temp : dataManager.getENG_GER_DICT().values()) {
 
+
+            for (Word t : engList){
+
+                if(t.getWord().equals(temp.getWord())){
+
+                    gerList.addAll(temp.getTranslations());
+
+                }
+
+            }
+
+        }
 
         //Update UI
         for (int i=0;i<all.size();i++){
@@ -848,8 +916,159 @@ public class HomePageController implements Initializable {
         }
 
     }
-    private void SearchInGerman(){
-        System.out.println("Not Implemented.");
+    private void SearchInGerman(DataManager dataManager,Word searchTarget){
+        List<Word> engList=new ArrayList<>();
+        List<Word> fraList=new ArrayList<>();
+        List<Word> itaList=new ArrayList<>();
+        List<Word> greList=new ArrayList<>();
+        List<Word> sweList=new ArrayList<>();
+        List<Word> turList=new ArrayList<>();
+
+        List<List<Word>> all = new ArrayList<>();
+
+        all.add(Config.eng_ger_index,engList);
+        all.add(Config.eng_fra_index,fraList);
+        all.add(Config.eng_ita_index,itaList);
+        all.add(Config.eng_gre_index,greList);
+        all.add(Config.eng_swe_index,sweList);
+        all.add(Config.eng_tur_index,turList);
+
+
+        for (Word temp : dataManager.getENG_GER_DICT().values()) {
+
+
+            for (Word t :temp.getTranslations()){
+
+                if(t.getWord().equals(searchTarget.getWord())){
+
+                    engList.add(temp);
+
+                }
+
+            }
+
+        }
+        for (Word temp : dataManager.getENG_FRA_DICT().values()) {
+
+
+            for (Word t : engList){
+
+                if(t.getWord().equals(temp.getWord())){
+
+                    fraList.addAll(temp.getTranslations());
+
+                }
+
+            }
+
+        }
+        for (Word temp : dataManager.getENG_ITA_DICT().values()) {
+
+
+            for (Word t : engList){
+
+                if(t.getWord().equals(temp.getWord())){
+
+                    itaList.addAll(temp.getTranslations());
+
+                }
+
+            }
+
+        }
+        for (Word temp : dataManager.getENG_GRE_DICT().values()) {
+
+
+            for (Word t : engList){
+
+                if(t.getWord().equals(temp.getWord())){
+
+                    greList.addAll(temp.getTranslations());
+
+                }
+
+            }
+
+        }
+        for (Word temp : dataManager.getENG_SWE_DICT().values()) {
+
+
+            for (Word t : engList){
+
+                if(t.getWord().equals(temp.getWord())){
+
+                    sweList.addAll(temp.getTranslations());
+
+                }
+
+            }
+
+        }
+        for (Word temp : dataManager.getENG_TUR_DICT().values()) {
+
+
+            for (Word t : engList){
+
+                if(t.getWord().equals(temp.getWord())){
+
+                    turList.addAll(temp.getTranslations());
+
+                }
+
+            }
+
+        }
+
+        //Update UI
+        for (int i=0;i<all.size();i++){
+
+            WordCard card = new WordCard(cardListView);
+
+            List<Word> translations = all.get(i);
+
+
+            if(all.get(i).size()>0){
+
+                Image image = new Image(translations.get(0).getFlagImgPath());
+                card.getDefinitionsListView().getItems().addAll(translations);
+                card.getFlagImage().setImage(image);
+
+            }else{
+
+                Word t = new Word(Config.Languages.ENGLISH,"There is no translation for \""+searchTarget+"\" in this language.");
+                card.getDefinitionsListView().getItems().add(t);
+
+                Image image;
+
+                if (translations.equals(engList)) {
+                    image = new Image(Config.englandFlagImg);
+                }else if(translations.equals(fraList)){
+                    image = new Image(Config.franceFlagImg);
+                }else if(translations.equals(itaList)){
+                    image = new Image(Config.italyFlagImg);
+                }else if(translations.equals(greList)){
+                    image = new Image(Config.greeceFlagImg);
+                }else if(translations.equals(sweList)){
+                    image = new Image(Config.swedenFlagImg);
+                }else{
+                    image = new Image(Config.germanyFlagImg);
+                }
+
+                card.getFlagImage().setImage(image);
+
+            }
+
+            cardListView.getItems().add(card);
+
+            if(i<5){
+
+                AnchorPane separator = new AnchorPane();
+                separator.setPrefSize(Region.USE_COMPUTED_SIZE,20);
+                separator.setStyle("-fx-background-color:  #ef233c");
+                cardListView.getItems().add(separator);
+            }
+
+        }
     }
 
 

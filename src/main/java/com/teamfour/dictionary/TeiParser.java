@@ -1,6 +1,8 @@
 package com.teamfour.dictionary;
 
 import java.io.*;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.nio.charset.CodingErrorAction;
@@ -67,6 +69,7 @@ public class TeiParser {
         HashMap<Integer, Word> dictionary = new HashMap<>();
         List<Word> translations;
         File file = new File(path);
+
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder db;
         Document doc;
@@ -80,7 +83,7 @@ public class TeiParser {
             NodeList entryList;
             if(targetLang == Config.Languages.GERMAN){
 
-                entryList = doc.getElementsByTagName("form");
+                entryList = doc.getElementsByTagName("entry");
 
             }else{
 
