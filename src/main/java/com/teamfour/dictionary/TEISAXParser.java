@@ -108,7 +108,7 @@ public class TEISAXParser {
                 System.out.println("Orth: " + currentOrth + " - " + quotes);
                 System.out.println();*/
 
-                Word sourceWord = new Word(sourceLang,currentOrth.trim().toLowerCase());
+                Word sourceWord = new Word(sourceLang,currentOrth.trim());
 
                 if(dictionary.containsKey(sourceWord.getHashCode())){
 
@@ -141,7 +141,7 @@ public class TEISAXParser {
                 if(currentQuote != null){
 
 
-                    Word quote = new Word(targetLang, currentQuote.toString().trim().toLowerCase());
+                    Word quote = new Word(targetLang, currentQuote.toString().trim());
 
                     quotes.add(quote);
 

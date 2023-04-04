@@ -69,10 +69,9 @@ public class HomePageController implements Initializable {
 
         temp.remove(sourceLang);
 
-        //Word searchTarget = new Word(sourceLang.getLanguage(),searchInput.getText().trim().toLowerCase());
-        Word searchTarget = dataManager.getWordsDatabase().get(searchInput.getText().trim().toLowerCase().hashCode());
+        Word searchTarget = dataManager.getWordsDatabase().get(searchInput.getText().trim().hashCode());
 
-        /*if(searchTarget.getLanguage() != sourceLang.getLanguage()){
+        if(searchTarget.getLanguage() != sourceLang.getLanguage()){
 
             System.out.println("Not Found");
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -80,7 +79,7 @@ public class HomePageController implements Initializable {
             alert.setContentText("This word is not found for this source.");
             alert.show();
             return;
-        }*/
+        }
 
         System.out.println(searchTarget.getLanguage().toString() + " - " + sourceLang.getLanguage().toString());
 
@@ -147,7 +146,7 @@ public class HomePageController implements Initializable {
         List<Word> sweList=new ArrayList<>();
         List<Word> gerList=new ArrayList<>();
 
-        List<List<Word>> all = new ArrayList<>();
+        List<List<Word>> all = new ArrayList<>(6);
 
         all.add(Config.eng_tur_index,engList);
         all.add(Config.eng_fra_index,fraList);
@@ -302,7 +301,7 @@ public class HomePageController implements Initializable {
         List<Word> sweList=new ArrayList<>();
         List<Word> gerList=new ArrayList<>();
 
-        List<List<Word>> all = new ArrayList<>();
+        List<List<Word>> all = new ArrayList<>(6);
 
         all.add(Config.eng_tur_index,turList);
         all.add(Config.eng_fra_index,engList);
@@ -459,7 +458,7 @@ public class HomePageController implements Initializable {
         List<Word> sweList=new ArrayList<>();
         List<Word> gerList=new ArrayList<>();
 
-        List<List<Word>> all = new ArrayList<>();
+        List<List<Word>> all = new ArrayList<>(6);
 
         all.add(Config.eng_tur_index,turList);
         all.add(Config.eng_fra_index,fraList);
@@ -614,7 +613,7 @@ public class HomePageController implements Initializable {
         List<Word> turList=new ArrayList<>();
         List<Word> gerList=new ArrayList<>();
 
-        List<List<Word>> all = new ArrayList<>();
+        List<List<Word>> all = new ArrayList<>(6);
 
         all.add(Config.eng_tur_index,turList);
         all.add(Config.eng_fra_index,fraList);
@@ -771,7 +770,7 @@ public class HomePageController implements Initializable {
         List<Word> sweList=new ArrayList<>();
         List<Word> gerList=new ArrayList<>();
 
-        List<List<Word>> all = new ArrayList<>();
+        List<List<Word>> all = new ArrayList<>(6);
 
         all.add(Config.eng_tur_index,turList);
         all.add(Config.eng_fra_index,fraList);
@@ -926,14 +925,14 @@ public class HomePageController implements Initializable {
         List<Word> sweList=new ArrayList<>();
         List<Word> turList=new ArrayList<>();
 
-        List<List<Word>> all = new ArrayList<>();
+        List<List<Word>> all = new ArrayList<>(6);
 
-        all.add(Config.eng_ger_index,engList);
+        all.add(Config.eng_tur_index,turList);
         all.add(Config.eng_fra_index,fraList);
         all.add(Config.eng_ita_index,itaList);
         all.add(Config.eng_gre_index,greList);
         all.add(Config.eng_swe_index,sweList);
-        all.add(Config.eng_tur_index,turList);
+        all.add(Config.eng_ger_index,engList);
 
 
         for (Word temp : dataManager.getENG_GER_DICT().values()) {
