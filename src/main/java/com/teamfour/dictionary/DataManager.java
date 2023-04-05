@@ -14,6 +14,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class DataManager {
 
@@ -67,8 +69,18 @@ public class DataManager {
             e.printStackTrace();
         }*/
 
+        System.out.println(WordsDatabase.size());
 
 
+    }
+
+    boolean IsFirstCharUpper(String input){
+
+        input = input.trim();
+        Pattern p = Pattern.compile("\\b([A-Z][a-z]*)\\b");
+        Matcher m = p.matcher(input);
+
+        return m.find();
 
     }
 

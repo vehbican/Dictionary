@@ -8,6 +8,8 @@ import java.nio.charset.CharsetDecoder;
 import java.nio.charset.CodingErrorAction;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.Attributes;
@@ -108,7 +110,12 @@ public class TEISAXParser {
                 System.out.println("Orth: " + currentOrth + " - " + quotes);
                 System.out.println();*/
 
-                Word sourceWord = new Word(sourceLang,currentOrth.trim());
+                if(dataManager.IsFirstCharUpper(currentOrth)){
+
+                    currentOrth = currentOrth.trim().toLowerCase();
+
+                }
+                Word sourceWord = new Word(sourceLang,currentOrth);
 
                 if(dictionary.containsKey(sourceWord.getHashCode())){
 
@@ -140,8 +147,14 @@ public class TEISAXParser {
 
                 if(currentQuote != null){
 
+                    String q = currentQuote.toString().trim();
+                    if(dataManager.IsFirstCharUpper(q)){
 
-                    Word quote = new Word(targetLang, currentQuote.toString().trim());
+                        q = q.trim().toLowerCase();
+
+                    }
+
+                    Word quote = new Word(targetLang, q);
 
                     quotes.add(quote);
 
@@ -167,6 +180,9 @@ public class TEISAXParser {
 
             return null;
         }
+
+
+
     }
 }
 

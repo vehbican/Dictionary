@@ -69,7 +69,15 @@ public class HomePageController implements Initializable {
 
         temp.remove(sourceLang);
 
-        Word searchTarget = dataManager.getWordsDatabase().get(searchInput.getText().trim().hashCode());
+        String s = searchInput.getText().trim();
+
+        if(dataManager.IsFirstCharUpper(s)){
+
+            s = s.toLowerCase();
+
+        }
+
+        Word searchTarget = dataManager.getWordsDatabase().get(s.hashCode());
 
 
         if(searchTarget == null ||(searchTarget.getLanguage() != sourceLang.getLanguage())){
@@ -249,7 +257,7 @@ public class HomePageController implements Initializable {
             List<Word> translations = all.get(i);
 
 
-            if(all.get(i).size()>0){
+            if(translations.size()>0){
 
                 Image image = new Image(translations.get(0).getFlagImgPath());
                 card.getDefinitionsListView().getItems().addAll(translations);
@@ -262,15 +270,15 @@ public class HomePageController implements Initializable {
 
                 Image image;
 
-                if (translations.equals(engList)) {
+                if (translations == engList) {
                     image = new Image(Config.englandFlagImg);
-                }else if(translations.equals(fraList)){
+                }else if(translations == fraList){
                     image = new Image(Config.franceFlagImg);
-                }else if(translations.equals(itaList)){
+                }else if(translations == itaList){
                     image = new Image(Config.italyFlagImg);
-                }else if(translations.equals(greList)){
+                }else if(translations == greList){
                     image = new Image(Config.greeceFlagImg);
-                }else if(translations.equals(sweList)){
+                }else if(translations == sweList){
                     image = new Image(Config.swedenFlagImg);
                 }else{
                     image = new Image(Config.germanyFlagImg);
@@ -418,15 +426,15 @@ public class HomePageController implements Initializable {
 
                 Image image;
 
-                if (translations.equals(engList)) {
+                if (translations == (engList)) {
                     image = new Image(Config.englandFlagImg);
-                }else if(translations.equals(turList)){
+                }else if(translations == (turList)){
                     image = new Image(Config.turkeyFlagImg);
-                }else if(translations.equals(itaList)){
+                }else if(translations == (itaList)){
                     image = new Image(Config.italyFlagImg);
-                }else if(translations.equals(greList)){
+                }else if(translations == (greList)){
                     image = new Image(Config.greeceFlagImg);
-                }else if(translations.equals(sweList)){
+                }else if(translations == (sweList)){
                     image = new Image(Config.swedenFlagImg);
                 }else{
                     image = new Image(Config.germanyFlagImg);
@@ -574,15 +582,15 @@ public class HomePageController implements Initializable {
 
                 Image image;
 
-                if (translations.equals(engList)) {
+                if (translations == (engList)) {
                     image = new Image(Config.englandFlagImg);
-                }else if(translations.equals(fraList)){
+                }else if(translations == (fraList)){
                     image = new Image(Config.franceFlagImg);
-                }else if(translations.equals(turList)){
+                }else if(translations == (turList)){
                     image = new Image(Config.turkeyFlagImg);
-                }else if(translations.equals(greList)){
+                }else if(translations == (greList)){
                     image = new Image(Config.greeceFlagImg);
-                }else if(translations.equals(sweList)){
+                }else if(translations == (sweList)){
                     image = new Image(Config.swedenFlagImg);
                 }else{
                     image = new Image(Config.germanyFlagImg);
@@ -730,15 +738,15 @@ public class HomePageController implements Initializable {
 
                 Image image;
 
-                if (translations.equals(engList)) {
+                if (translations == (engList)) {
                     image = new Image(Config.englandFlagImg);
-                }else if(translations.equals(fraList)){
+                }else if(translations == (fraList)){
                     image = new Image(Config.franceFlagImg);
-                }else if(translations.equals(itaList)){
+                }else if(translations == (itaList)){
                     image = new Image(Config.italyFlagImg);
-                }else if(translations.equals(greList)){
+                }else if(translations == (greList)){
                     image = new Image(Config.greeceFlagImg);
-                }else if(translations.equals(turList)){
+                }else if(translations == (turList)){
                     image = new Image(Config.turkeyFlagImg);
                 }else{
                     image = new Image(Config.germanyFlagImg);
@@ -886,16 +894,15 @@ public class HomePageController implements Initializable {
                 card.getDefinitionsListView().getItems().add(t);
 
                 Image image;
-
-                if (translations.equals(engList)) {
+                if (translations == (engList)) {
                     image = new Image(Config.englandFlagImg);
-                }else if(translations.equals(fraList)){
+                }else if(translations == (fraList)){
                     image = new Image(Config.franceFlagImg);
-                }else if(translations.equals(itaList)){
+                }else if(translations == (itaList)){
                     image = new Image(Config.italyFlagImg);
-                }else if(translations.equals(turList)){
+                }else if(translations == (turList)){
                     image = new Image(Config.turkeyFlagImg);
-                }else if(translations.equals(sweList)){
+                }else if(translations == (sweList)){
                     image = new Image(Config.swedenFlagImg);
                 }else{
                     image = new Image(Config.germanyFlagImg);
@@ -1042,15 +1049,15 @@ public class HomePageController implements Initializable {
 
                 Image image;
 
-                if (translations.equals(engList)) {
+                if (translations == (engList)) {
                     image = new Image(Config.englandFlagImg);
-                }else if(translations.equals(fraList)){
+                }else if(translations == (fraList)){
                     image = new Image(Config.franceFlagImg);
-                }else if(translations.equals(itaList)){
+                }else if(translations == (itaList)){
                     image = new Image(Config.italyFlagImg);
-                }else if(translations.equals(greList)){
+                }else if(translations == (greList)){
                     image = new Image(Config.greeceFlagImg);
-                }else if(translations.equals(sweList)){
+                }else if(translations == (sweList)){
                     image = new Image(Config.swedenFlagImg);
                 }else{
                     image = new Image(Config.germanyFlagImg);
