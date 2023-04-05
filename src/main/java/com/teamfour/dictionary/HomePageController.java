@@ -1060,7 +1060,7 @@ public class HomePageController implements Initializable {
                 }else if(translations == (sweList)){
                     image = new Image(Config.swedenFlagImg);
                 }else{
-                    image = new Image(Config.germanyFlagImg);
+                    image = new Image(Config.turkeyFlagImg);
                 }
 
                 card.getFlagImage().setImage(image);
