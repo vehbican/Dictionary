@@ -1,5 +1,14 @@
 package com.teamfour.dictionary;
 
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.*;
 
 public class DataManager {
@@ -46,7 +55,20 @@ public class DataManager {
         ENGXDictionaries.add(Config.eng_swe_index,ENG_SWE_DICT);
         ENGXDictionaries.add(Config.eng_ger_index,ENG_GER_DICT);
 
+        //Write into JSON
+        /*try {
+            WriteLargeJSON(JSONSerializer.toJSON(ENG_GER_DICT),Config.eng_deu_json);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
 
+        //Read From JSON
+        /*try {
+            String d = Files.readString(Path.of(Config.eng_deu_json),Charset.forName("ISO-8859-1"));
+            ENG_GER_DICT = (HashMap<Integer, Word>) JSONSerializer.getFromJSON(d,HashMap.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
 
 
     }
@@ -78,6 +100,16 @@ public class DataManager {
         return new String[]{turkeyFlagImg, franceFlagImg ,italyFlagImg, greeceFlagImg, swedenFlagImg,germanyFlagImg,englandFlagImg};
     }
 
+    public void WriteLargeJSON(String json,String outputPath) throws IOException {
+
+        FileChannel rwChannel = new RandomAccessFile(outputPath, "rw").getChannel();
+        ByteBuffer wrBuf = rwChannel.map(FileChannel.MapMode.READ_WRITE, 0, json.length());
+
+        wrBuf.put(json.getBytes());
+
+        rwChannel.close();
+
+    }
 
     /*
     private static List<String> BufferedReaderToList(String path) {
