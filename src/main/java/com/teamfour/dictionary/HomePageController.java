@@ -71,7 +71,8 @@ public class HomePageController implements Initializable {
 
         Word searchTarget = dataManager.getWordsDatabase().get(searchInput.getText().trim().hashCode());
 
-        if(searchTarget.getLanguage() != sourceLang.getLanguage()){
+
+        if(searchTarget == null ||(searchTarget.getLanguage() != sourceLang.getLanguage())){
 
             System.out.println("Not Found");
             Alert alert = new Alert(Alert.AlertType.WARNING);

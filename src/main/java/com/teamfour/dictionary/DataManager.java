@@ -1,5 +1,9 @@
 package com.teamfour.dictionary;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
@@ -58,17 +62,12 @@ public class DataManager {
         //Write into JSON
         /*try {
             WriteLargeJSON(JSONSerializer.toJSON(ENG_GER_DICT),Config.eng_deu_json);
+            WriteLargeJSON(JSONSerializer.toJSON(new Word(Config.Languages.ENGLISH,"life")),"output.txt");
         } catch (IOException e) {
             e.printStackTrace();
         }*/
 
-        //Read From JSON
-        /*try {
-            String d = Files.readString(Path.of(Config.eng_deu_json),Charset.forName("ISO-8859-1"));
-            ENG_GER_DICT = (HashMap<Integer, Word>) JSONSerializer.getFromJSON(d,HashMap.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
+
 
 
     }
