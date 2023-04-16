@@ -3,15 +3,23 @@ package com.teamfour.dictionary;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Orientation;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.fxml.FXMLLoader;
+import javafx.stage.Stage;
+
+import java.awt.event.ActionEvent;
+import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
@@ -22,18 +30,20 @@ public class HomePageController implements Initializable {
     protected MFXButton searchButton;
     @FXML
     protected MFXTextField searchInput;
-
     @FXML
     private ObservableList<Word> languageCards;
-
     @FXML
     protected ListView<AnchorPane> cardListView;
+    @FXML
+    protected MFXButton addButton;
 
+    private Stage stage;
 
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-
 
         Word tr = new Word(Config.Languages.TURKISH,"Turkish");
         Word fra = new Word(Config.Languages.FRENCH,"French");
@@ -48,6 +58,14 @@ public class HomePageController implements Initializable {
 
         cardListView.setStyle("-fx-control-inner-background: #2b2d42; -fx-background-insets: 0;-fx-padding: 0; -fx-cell-size: 10");
         cardListView.setOrientation(Orientation.VERTICAL);
+
+        addButton.setOnAction(actionEvent -> {
+            try {
+                onAdd();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
 
 
     }
@@ -1079,7 +1097,17 @@ public class HomePageController implements Initializable {
 
         }
     }
+    private void onAdd() throws IOException {
 
+        Parent root;
+        FXMLLoader loader;
+        loader = new FXMLLoader(Objects.requireNonNull(App.class.getResource("add-page.fxml")));
+        root = loader.load();
+        AddController a = loader.getController();
+        Stage add_stage = new Stage();
+        add_stage.setScene(new Scene(root));
+        a.setStage(stage);
+        add_stage.show();
 
-
+    }
 }
