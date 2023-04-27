@@ -1,33 +1,24 @@
 package com.teamfour.dictionary;
-
 import javafx.scene.paint.Color;
+
 
 public class Config {
 
-    public static final String englandFlagImg = "com/teamfour/dictionary/images/england.png";
-    public static final String franceFlagImg = "com/teamfour/dictionary/images/france.png";
-    public static final String germanyFlagImg = "com/teamfour/dictionary/images/germany.png";
-    public static final String greeceFlagImg = "com/teamfour/dictionary/images/greece.png";
-    public static final String italyFlagImg = "com/teamfour/dictionary/images/italy.png";
-    public static final String swedenFlagImg = "com/teamfour/dictionary/images/sweden.png";
-    public static final String turkeyFlagImg = "com/teamfour/dictionary/images/turkey.png";
+    public static final String englandFlagImg =  "images/england.png";
+    public static final String franceFlagImg = "images/france.png";
+    public static final String germanyFlagImg = "images/germany.png";
+    public static final String greeceFlagImg = "images/greece.png";
+    public static final String italyFlagImg = "images/italy.png";
+    public static final String swedenFlagImg = "images/sweden.png";
+    public static final String turkeyFlagImg = "images/turkey.png";
 
 
-
-
-    public static final String eng_ita_tei = "src\\main\\resources\\com\\teamfour\\dictionary\\dicts\\eng-ita.tei";
-
-    public static final String eng_tur_tei = "src\\main\\resources\\com\\teamfour\\dictionary\\dicts\\eng-tur.tei";
-
-    public static final String eng_deu_tei = "src\\main\\resources\\com\\teamfour\\dictionary\\dicts\\eng-deu.tei";
-
-    public static final String eng_ell_tei = "src\\main\\resources\\com\\teamfour\\dictionary\\dicts\\eng-ell.tei";
-
-    public static final String eng_swe_tei = "src\\main\\resources\\com\\teamfour\\dictionary\\dicts\\eng-swe.tei";
-
-    public static final String eng_fra_tei = "src\\main\\resources\\com\\teamfour\\dictionary\\dicts\\eng-fra.tei";
-
-    public static final String eng_deu_json = "src\\main\\resources\\com\\teamfour\\dictionary\\dicts\\eng-deu.txt";
+    public static final String eng_ita_tei = "dicts/eng-ita.tei";
+    public static final String eng_tur_tei = "dicts/eng-tur.tei";
+    public static final String eng_deu_tei = "dicts/eng-deu.tei";
+    public static final String eng_ell_tei = "dicts/eng-ell.tei";
+    public static final String eng_swe_tei = "dicts/eng-swe.tei";
+    public static final String eng_fra_tei = "dicts/eng-fra.tei";
 
     public static int eng_tur_index = 0;
     public static int eng_fra_index = 1;

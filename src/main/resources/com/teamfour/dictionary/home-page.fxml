@@ -15,7 +15,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: #d90429;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.teamfour.dictionary.HomePageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: #d90429;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.teamfour.dictionary.HomePageController">
     <BorderPane style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
       <left>
           <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
@@ -40,7 +40,6 @@
                         </ImageView>
                   </graphic>
                  </MFXButton>
-               <MFXButton fx:id="addButton" layoutX="73.0" layoutY="330.0" text="Add" />
               </Pane>
             <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="10.0" prefWidth="180.0" style="-fx-background-color: transparent; -fx-border-radius: 0; -fx-border-color: #FFFFFF; -fx-border-width: 5; -fx-border-style: solid hidden solid hidden; -fx-border-insets: 0;" text="DICT4TEAM" textAlignment="JUSTIFY" textFill="WHITE" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
                <font>

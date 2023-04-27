@@ -3,23 +3,17 @@ package com.teamfour.dictionary;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXTextField;
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Orientation;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
-import javafx.fxml.FXMLLoader;
-import javafx.stage.Stage;
 
-import java.awt.event.ActionEvent;
-import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.*;
 
@@ -30,20 +24,18 @@ public class HomePageController implements Initializable {
     protected MFXButton searchButton;
     @FXML
     protected MFXTextField searchInput;
+
     @FXML
     private ObservableList<Word> languageCards;
+
     @FXML
     protected ListView<AnchorPane> cardListView;
-    @FXML
-    protected MFXButton addButton;
 
-    private Stage stage;
 
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+
 
         Word tr = new Word(Config.Languages.TURKISH,"Turkish");
         Word fra = new Word(Config.Languages.FRENCH,"French");
@@ -58,14 +50,6 @@ public class HomePageController implements Initializable {
 
         cardListView.setStyle("-fx-control-inner-background: #2b2d42; -fx-background-insets: 0;-fx-padding: 0; -fx-cell-size: 10");
         cardListView.setOrientation(Orientation.VERTICAL);
-
-        addButton.setOnAction(actionEvent -> {
-            try {
-                onAdd();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
 
 
     }
@@ -108,8 +92,6 @@ public class HomePageController implements Initializable {
             return;
         }
 
-        System.out.println(searchTarget.getLanguage().toString() + " - " + sourceLang.getLanguage().toString());
-
         switch (sourceLang.getLanguage()){
 
             case ENGLISH -> SearchInEnglish(dataManager,searchTarget);
@@ -127,7 +109,19 @@ public class HomePageController implements Initializable {
 
     }
 
+    private Image createFlagImage(String path){
+
+        URL url = TEISAXParser.class.getResource(path);
+        assert url != null;
+        InputStream inputStream = TEISAXParser.class.getResourceAsStream(path);
+        assert inputStream != null;
+        return new Image(inputStream);
+
+    }
+
     private void SearchInEnglish(DataManager dataManager,Word searchTarget){
+
+
 
         for (int i=0;i<dataManager.getDictionaries().length;i++){
 
@@ -139,13 +133,15 @@ public class HomePageController implements Initializable {
             if(w != null && w.getLanguage() == Config.Languages.ENGLISH){
 
                 card.getDefinitionsListView().getItems().addAll(w.getTranslations());
-                card.getFlagImage().setImage(new Image(w.getTranslations().get(0).getFlagImgPath()));
+
+                card.getFlagImage().setImage(createFlagImage(w.getTranslations().get(0).getFlagImgPath()));
+
 
             }else{
 
                 Word t = new Word(Config.Languages.ENGLISH,"There is no translation for \""+searchTarget+"\" in this language.");
                 card.getDefinitionsListView().getItems().add(t);
-                card.getFlagImage().setImage(new Image(dataManager.getFlags()[i]));
+                card.getFlagImage().setImage(createFlagImage(dataManager.getFlags()[i]));
 
             }
 
@@ -277,9 +273,8 @@ public class HomePageController implements Initializable {
 
             if(translations.size()>0){
 
-                Image image = new Image(translations.get(0).getFlagImgPath());
                 card.getDefinitionsListView().getItems().addAll(translations);
-                card.getFlagImage().setImage(image);
+                card.getFlagImage().setImage(createFlagImage(translations.get(0).getFlagImgPath()));
 
             }else{
 
@@ -289,17 +284,17 @@ public class HomePageController implements Initializable {
                 Image image;
 
                 if (translations == engList) {
-                    image = new Image(Config.englandFlagImg);
+                    image = createFlagImage(Config.englandFlagImg);
                 }else if(translations == fraList){
-                    image = new Image(Config.franceFlagImg);
+                    image = createFlagImage(Config.franceFlagImg);
                 }else if(translations == itaList){
-                    image = new Image(Config.italyFlagImg);
+                    image = createFlagImage(Config.italyFlagImg);
                 }else if(translations == greList){
-                    image = new Image(Config.greeceFlagImg);
+                    image = createFlagImage(Config.greeceFlagImg);
                 }else if(translations == sweList){
-                    image = new Image(Config.swedenFlagImg);
+                    image = createFlagImage(Config.swedenFlagImg);
                 }else{
-                    image = new Image(Config.germanyFlagImg);
+                    image = createFlagImage(Config.germanyFlagImg);
                 }
 
                 card.getFlagImage().setImage(image);
@@ -433,7 +428,7 @@ public class HomePageController implements Initializable {
 
             if(all.get(i).size()>0){
 
-                Image image = new Image(translations.get(0).getFlagImgPath());
+                Image image = createFlagImage(translations.get(0).getFlagImgPath());
                 card.getDefinitionsListView().getItems().addAll(translations);
                 card.getFlagImage().setImage(image);
 
@@ -445,17 +440,17 @@ public class HomePageController implements Initializable {
                 Image image;
 
                 if (translations == (engList)) {
-                    image = new Image(Config.englandFlagImg);
+                    image = createFlagImage(Config.englandFlagImg);
                 }else if(translations == (turList)){
-                    image = new Image(Config.turkeyFlagImg);
+                    image = createFlagImage(Config.turkeyFlagImg);
                 }else if(translations == (itaList)){
-                    image = new Image(Config.italyFlagImg);
+                    image = createFlagImage(Config.italyFlagImg);
                 }else if(translations == (greList)){
-                    image = new Image(Config.greeceFlagImg);
+                    image = createFlagImage(Config.greeceFlagImg);
                 }else if(translations == (sweList)){
-                    image = new Image(Config.swedenFlagImg);
+                    image = createFlagImage(Config.swedenFlagImg);
                 }else{
-                    image = new Image(Config.germanyFlagImg);
+                    image = createFlagImage(Config.germanyFlagImg);
                 }
 
                 card.getFlagImage().setImage(image);
@@ -589,7 +584,7 @@ public class HomePageController implements Initializable {
 
             if(all.get(i).size()>0){
 
-                Image image = new Image(translations.get(0).getFlagImgPath());
+                Image image = createFlagImage(translations.get(0).getFlagImgPath());
                 card.getDefinitionsListView().getItems().addAll(translations);
                 card.getFlagImage().setImage(image);
 
@@ -601,17 +596,17 @@ public class HomePageController implements Initializable {
                 Image image;
 
                 if (translations == (engList)) {
-                    image = new Image(Config.englandFlagImg);
+                    image = createFlagImage(Config.englandFlagImg);
                 }else if(translations == (fraList)){
-                    image = new Image(Config.franceFlagImg);
+                    image = createFlagImage(Config.franceFlagImg);
                 }else if(translations == (turList)){
-                    image = new Image(Config.turkeyFlagImg);
+                    image = createFlagImage(Config.turkeyFlagImg);
                 }else if(translations == (greList)){
-                    image = new Image(Config.greeceFlagImg);
+                    image = createFlagImage(Config.greeceFlagImg);
                 }else if(translations == (sweList)){
-                    image = new Image(Config.swedenFlagImg);
+                    image = createFlagImage(Config.swedenFlagImg);
                 }else{
-                    image = new Image(Config.germanyFlagImg);
+                    image = createFlagImage(Config.germanyFlagImg);
                 }
 
                 card.getFlagImage().setImage(image);
@@ -745,7 +740,7 @@ public class HomePageController implements Initializable {
 
             if(all.get(i).size()>0){
 
-                Image image = new Image(translations.get(0).getFlagImgPath());
+                Image image = createFlagImage(translations.get(0).getFlagImgPath());
                 card.getDefinitionsListView().getItems().addAll(translations);
                 card.getFlagImage().setImage(image);
 
@@ -757,17 +752,17 @@ public class HomePageController implements Initializable {
                 Image image;
 
                 if (translations == (engList)) {
-                    image = new Image(Config.englandFlagImg);
+                    image = createFlagImage(Config.englandFlagImg);
                 }else if(translations == (fraList)){
-                    image = new Image(Config.franceFlagImg);
+                    image = createFlagImage(Config.franceFlagImg);
                 }else if(translations == (itaList)){
-                    image = new Image(Config.italyFlagImg);
+                    image = createFlagImage(Config.italyFlagImg);
                 }else if(translations == (greList)){
-                    image = new Image(Config.greeceFlagImg);
+                    image = createFlagImage(Config.greeceFlagImg);
                 }else if(translations == (turList)){
-                    image = new Image(Config.turkeyFlagImg);
+                    image = createFlagImage(Config.turkeyFlagImg);
                 }else{
-                    image = new Image(Config.germanyFlagImg);
+                    image = createFlagImage(Config.germanyFlagImg);
                 }
 
                 card.getFlagImage().setImage(image);
@@ -902,7 +897,7 @@ public class HomePageController implements Initializable {
 
             if(all.get(i).size()>0){
 
-                Image image = new Image(translations.get(0).getFlagImgPath());
+                Image image = createFlagImage(translations.get(0).getFlagImgPath());
                 card.getDefinitionsListView().getItems().addAll(translations);
                 card.getFlagImage().setImage(image);
 
@@ -913,17 +908,17 @@ public class HomePageController implements Initializable {
 
                 Image image;
                 if (translations == (engList)) {
-                    image = new Image(Config.englandFlagImg);
+                    image = createFlagImage(Config.englandFlagImg);
                 }else if(translations == (fraList)){
-                    image = new Image(Config.franceFlagImg);
+                    image = createFlagImage(Config.franceFlagImg);
                 }else if(translations == (itaList)){
-                    image = new Image(Config.italyFlagImg);
+                    image = createFlagImage(Config.italyFlagImg);
                 }else if(translations == (turList)){
-                    image = new Image(Config.turkeyFlagImg);
+                    image = createFlagImage(Config.turkeyFlagImg);
                 }else if(translations == (sweList)){
-                    image = new Image(Config.swedenFlagImg);
+                    image = createFlagImage(Config.swedenFlagImg);
                 }else{
-                    image = new Image(Config.germanyFlagImg);
+                    image = createFlagImage(Config.germanyFlagImg);
                 }
 
                 card.getFlagImage().setImage(image);
@@ -1056,7 +1051,7 @@ public class HomePageController implements Initializable {
 
             if(all.get(i).size()>0){
 
-                Image image = new Image(translations.get(0).getFlagImgPath());
+                Image image = createFlagImage(translations.get(0).getFlagImgPath());
                 card.getDefinitionsListView().getItems().addAll(translations);
                 card.getFlagImage().setImage(image);
 
@@ -1068,17 +1063,17 @@ public class HomePageController implements Initializable {
                 Image image;
 
                 if (translations == (engList)) {
-                    image = new Image(Config.englandFlagImg);
+                    image = createFlagImage(Config.englandFlagImg);
                 }else if(translations == (fraList)){
-                    image = new Image(Config.franceFlagImg);
+                    image = createFlagImage(Config.franceFlagImg);
                 }else if(translations == (itaList)){
-                    image = new Image(Config.italyFlagImg);
+                    image = createFlagImage(Config.italyFlagImg);
                 }else if(translations == (greList)){
-                    image = new Image(Config.greeceFlagImg);
+                    image = createFlagImage(Config.greeceFlagImg);
                 }else if(translations == (sweList)){
-                    image = new Image(Config.swedenFlagImg);
+                    image = createFlagImage(Config.swedenFlagImg);
                 }else{
-                    image = new Image(Config.turkeyFlagImg);
+                    image = createFlagImage(Config.turkeyFlagImg);
                 }
 
                 card.getFlagImage().setImage(image);
@@ -1097,17 +1092,7 @@ public class HomePageController implements Initializable {
 
         }
     }
-    private void onAdd() throws IOException {
 
-        Parent root;
-        FXMLLoader loader;
-        loader = new FXMLLoader(Objects.requireNonNull(App.class.getResource("add-page.fxml")));
-        root = loader.load();
-        AddController a = loader.getController();
-        Stage add_stage = new Stage();
-        add_stage.setScene(new Scene(root));
-        a.setStage(stage);
-        add_stage.show();
 
-    }
+
 }

@@ -1,18 +1,5 @@
 package com.teamfour.dictionary;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
-import java.io.IOException;
-import java.io.RandomAccessFile;
-import java.nio.ByteBuffer;
-import java.nio.channels.FileChannel;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -33,18 +20,9 @@ public class DataManager {
 
     public DataManager() {
 
-        //TeiParser teiParser = new TeiParser();
         TEISAXParser teiParser = new TEISAXParser();
         WordsDatabase = new HashMap<>();
         ENGXDictionaries = new ArrayList<>();
-
-        //From English to All
-        //ENG_TUR_DICT = teiParser.ParseTEIToHashMap(this,Config.eng_tur_tei, Config.Languages.ENGLISH, Config.Languages.TURKISH);
-        //ENG_FRA_DICT = teiParser.ParseTEIToHashMap(this,Config.eng_fra_tei, Config.Languages.ENGLISH, Config.Languages.FRENCH);
-        //ENG_ITA_DICT = teiParser.ParseTEIToHashMap(this,Config.eng_ita_tei, Config.Languages.ENGLISH, Config.Languages.ITALIAN);
-        //ENG_GRE_DICT = teiParser.ParseTEIToHashMap(this,Config.eng_ell_tei, Config.Languages.ENGLISH, Config.Languages.GREEK);
-        //ENG_SWE_DICT = teiParser.ParseTEIToHashMap(this,Config.eng_swe_tei, Config.Languages.ENGLISH, Config.Languages.SWEDISH);
-        //ENG_GER_DICT = teiParser.ParseTEIToHashMap(this,Config.eng_deu_tei, Config.Languages.ENGLISH, Config.Languages.GERMAN);
 
         //From English to All
         ENG_TUR_DICT = teiParser.ParseIntoHashMap(this,Config.eng_tur_tei, Config.Languages.ENGLISH, Config.Languages.TURKISH);
@@ -60,17 +38,6 @@ public class DataManager {
         ENGXDictionaries.add(Config.eng_gre_index,ENG_GRE_DICT);
         ENGXDictionaries.add(Config.eng_swe_index,ENG_SWE_DICT);
         ENGXDictionaries.add(Config.eng_ger_index,ENG_GER_DICT);
-
-        //Write into JSON
-        /*try {
-            WriteLargeJSON(JSONSerializer.toJSON(ENG_GER_DICT),Config.eng_deu_json);
-            WriteLargeJSON(JSONSerializer.toJSON(new Word(Config.Languages.ENGLISH,"life")),"output.txt");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
-
-        System.out.println(WordsDatabase.size());
-
 
     }
 
@@ -110,37 +77,6 @@ public class DataManager {
 
         return new String[]{turkeyFlagImg, franceFlagImg ,italyFlagImg, greeceFlagImg, swedenFlagImg,germanyFlagImg,englandFlagImg};
     }
-
-    public void WriteLargeJSON(String json,String outputPath) throws IOException {
-
-        FileChannel rwChannel = new RandomAccessFile(outputPath, "rw").getChannel();
-        ByteBuffer wrBuf = rwChannel.map(FileChannel.MapMode.READ_WRITE, 0, json.length());
-
-        wrBuf.put(json.getBytes());
-
-        rwChannel.close();
-
-    }
-
-    /*
-    private static List<String> BufferedReaderToList(String path) {
-
-        List<String> list = new ArrayList<>();
-
-        try {
-            final BufferedReader in = new BufferedReader(
-                    new InputStreamReader(new FileInputStream(path), StandardCharsets.UTF_8));
-            String line;
-            while ((line = in.readLine()) != null) {
-                list.add(line);
-            }
-            in.close();
-        } catch (final IOException e) {
-            e.printStackTrace();
-        }
-        return list;
-    }
-    */
 
     public HashMap<Integer, Word> getENG_TUR_DICT() {
         return ENG_TUR_DICT;

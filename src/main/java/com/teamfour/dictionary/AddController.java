@@ -23,7 +23,7 @@ import org.w3c.dom.Element;
 public class AddController implements Initializable {
 
     TEISAXParser teisaxParser = new TEISAXParser();
-    TeiParser teiParser = new TeiParser();
+
 /*
 
 

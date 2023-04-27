@@ -1,15 +1,11 @@
 package com.teamfour.dictionary;
 
 import java.io.*;
-import java.nio.MappedByteBuffer;
-import java.nio.channels.FileChannel;
+import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.nio.charset.CodingErrorAction;
-import java.nio.charset.StandardCharsets;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.Attributes;
@@ -23,21 +19,18 @@ public class TEISAXParser {
         HashMap<Integer, Word> dictionary = new HashMap<>();
 
         try {
-            File inputFile = new File(path);
-            FileInputStream inputStream = new FileInputStream(inputFile);
-            FileChannel fileChannel = inputStream.getChannel();
-            MappedByteBuffer mappedByteBuffer = fileChannel.map(FileChannel.MapMode.READ_ONLY, 0, fileChannel.size());
-            Charset charset = StandardCharsets.UTF_8;
-            if(targetLang == Config.Languages.GREEK){charset = Charset.forName("ISO-8859-7");}
-            byte[] bytes = new byte[mappedByteBuffer.limit()];
-            mappedByteBuffer.get(bytes);
-            String xmlString = new String(bytes, charset);
+
+            URL url = TEISAXParser.class.getResource(path);
+            assert url != null;
+            InputStream inputStream = App.class.getResourceAsStream(path);
+            assert inputStream != null;
 
             SAXParserFactory factory = SAXParserFactory.newInstance();
             SAXParser saxParser = factory.newSAXParser();
             MyHandler handler = new MyHandler(dictionary,sourceLang,targetLang,dataManager);
-            saxParser.parse(inputFile, handler);
+            saxParser.parse(inputStream, handler);
             return handler.dictionary;
+
         } catch (Exception e) {
             e.printStackTrace();
         }

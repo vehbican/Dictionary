@@ -16,8 +16,6 @@ ext {
     junitVersion = '5.8.1'
 }
 
-sourceCompatibility = '17'
-targetCompatibility = '17'
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
@@ -25,7 +23,7 @@ tasks.withType(JavaCompile) {
 
 application {
     mainModule = 'com.teamfour.dictionary'
-    mainClass = 'com.teamfour.dictionary.HelloApplication'
+    mainClass = 'com.teamfour.dictionary.App'
 }
 
 javafx {
