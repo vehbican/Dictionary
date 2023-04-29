@@ -80,7 +80,7 @@ public class HomePageController implements Initializable {
         }
 
         Word searchTarget = dataManager.getWordsDatabase().get(s.hashCode());
-
+        translate(dataManager,searchTarget);
 
         if(searchTarget == null ||(searchTarget.getLanguage() != sourceLang.getLanguage())){
 
@@ -92,20 +92,469 @@ public class HomePageController implements Initializable {
             return;
         }
 
-        switch (sourceLang.getLanguage()){
 
-            case ENGLISH -> SearchInEnglish(dataManager,searchTarget);
-            case TURKISH -> SearchInTurkish(dataManager,searchTarget);
-            case FRENCH -> SearchInFrench(dataManager,searchTarget);
-            case ITALIAN -> SearchInItalian(dataManager,searchTarget);
-            case SWEDISH -> SearchInSwedish(dataManager,searchTarget);
-            case GREEK -> SearchInGreek(dataManager,searchTarget);
-            case GERMAN -> SearchInGerman(dataManager,searchTarget);
 
-        }
+
+
 
         sourceLangComboBox.clearSelection();
         sourceLangComboBox.selectItem(sourceLang);
+
+    }
+
+    private void translate(DataManager dataManager,Word searchTarget){
+
+
+        Word sourceLang = sourceLangComboBox.getValue();
+
+
+
+
+        switch (sourceLang.getLanguage()){
+            case GERMAN:
+                for(int i = 0;i<dataManager.getDEUXDictionaries().size();i++){
+                    WordCard card = new WordCard(cardListView);
+                    Word w = dataManager.getDEUXDictionaries().get(i).get(searchTarget.getHashCode());
+                    if (w != null ) {
+
+                        System.out.println(w.getTranslations());
+
+                        card.getDefinitionsListView().getItems().addAll(w.getTranslations());
+
+                        card.getFlagImage().setImage(createFlagImage(w.getTranslations().get(0).getFlagImgPath()));
+
+
+                    } else  {
+
+                        Word t = new Word(Config.Languages.FRENCH, "There is no translation for \"" + searchTarget + "\" in this language.");
+                        card.getDefinitionsListView().getItems().add(t);
+                        card.getFlagImage().setImage(createFlagImage(dataManager.getFlags()[i]));
+
+                    }
+
+
+                }
+
+                // GUI
+
+         /*       for (int i=0;i<dataManager.getDEUXDictionaries().size();i++){
+
+                    WordCard card = new WordCard(cardListView);
+                    String s = searchInput.getText().trim();
+
+                    if(dataManager.IsFirstCharUpper(s)){
+
+                        s = s.toLowerCase();
+
+                    }
+                    Word w = dataManager.getWordsDatabase().get(s.hashCode());
+                    HashMap<Integer, Word> translations = dataManager.getDEUXDictionaries().get(i);
+
+
+                    if(dataManager.getDEUXDictionaries().get(i).size()>0){
+
+                        Image image = createFlagImage(translations.get(0).getFlagImgPath());
+                        card.getDefinitionsListView().getItems().addAll((Collection<? extends Word>) translations);
+                        card.getFlagImage().setImage(image);
+
+                    }else{
+
+                        Word t = new Word(Config.Languages.ENGLISH,"There is no translation for \""+searchTarget+"\" in this language.");
+                        card.getDefinitionsListView().getItems().add(t);
+
+                        Image image;
+
+                        if (w.getLanguage().equals(Config.Languages.ENGLISH)) {
+                            image = createFlagImage(Config.englandFlagImg);
+                        }else if(w.getLanguage().equals(Config.Languages.FRENCH)){
+                            image = createFlagImage(Config.franceFlagImg);
+                        }else if(w.getLanguage().equals(Config.Languages.ITALIAN)){
+                            image = createFlagImage(Config.italyFlagImg);
+                        }else if(w.getLanguage().equals(Config.Languages.GREEK)){
+                            image = createFlagImage(Config.greeceFlagImg);
+                        }else if(w.getLanguage().equals(Config.Languages.SWEDISH)){
+                            image = createFlagImage(Config.swedenFlagImg);
+                        }else{
+                            image = createFlagImage(Config.turkeyFlagImg);
+                        }
+
+                        card.getFlagImage().setImage(image);
+
+                    }
+
+                    cardListView.getItems().add(card);
+
+                    if(i<5){
+
+                        AnchorPane separator = new AnchorPane();
+                        separator.setPrefSize(Region.USE_COMPUTED_SIZE,20);
+                        separator.setStyle("-fx-background-color:  #ef233c");
+                        cardListView.getItems().add(separator);
+                    }
+
+                }*/
+
+
+                break;
+
+            case ENGLISH:
+              for(int i = 0;i<dataManager.getENGXDictionaries().size();i++){
+                  WordCard card = new WordCard(cardListView);
+                  Word w = dataManager.getENGXDictionaries().get(i).get(searchTarget.getHashCode());
+                  if (w != null) {
+                        System.out.println(w.getTranslations());
+
+                      card.getDefinitionsListView().getItems().addAll(w.getTranslations());
+
+                      card.getFlagImage().setImage(createFlagImage(w.getTranslations().get(0).getFlagImgPath()));
+
+
+                  } else {
+
+                      Word t = new Word(Config.Languages.ENGLISH, "There is no translation for \"" + searchTarget + "\" in this language.");
+                      card.getDefinitionsListView().getItems().add(t);
+                      card.getFlagImage().setImage(createFlagImage(dataManager.getFlags()[i]));
+
+                  }
+
+              }
+              break;
+            case FRENCH:
+                for(int i = 0;i<dataManager.getFRAXDictionaries().size();i++){
+                    WordCard card = new WordCard(cardListView);
+                    Word w = dataManager.getFRAXDictionaries().get(i).get(searchTarget.getHashCode());
+                    if (w != null ) {
+                        System.out.println(w.getTranslations());
+
+                        card.getDefinitionsListView().getItems().addAll(w.getTranslations());
+
+                        card.getFlagImage().setImage(createFlagImage(w.getTranslations().get(0).getFlagImgPath()));
+
+
+                    } else {
+
+                        Word t = new Word(Config.Languages.FRENCH, "There is no translation for \"" + searchTarget + "\" in this language.");
+                        card.getDefinitionsListView().getItems().add(t);
+                        card.getFlagImage().setImage(createFlagImage(dataManager.getFlags()[i]));
+
+                    }
+
+                }
+                break;
+            case ITALIAN:
+                for(int i = 0;i<dataManager.getITAXDictionaries().size();i++){
+                    WordCard card = new WordCard(cardListView);
+                    Word w = dataManager.getITAXDictionaries().get(i).get(searchTarget.getHashCode());
+                    if (w != null) {
+                        System.out.println(w.getTranslations());
+
+                        card.getDefinitionsListView().getItems().addAll(w.getTranslations());
+
+                        card.getFlagImage().setImage(createFlagImage(w.getTranslations().get(0).getFlagImgPath()));
+
+
+                    } else {
+
+                        Word t = new Word(Config.Languages.ITALIAN, "There is no translation for \"" + searchTarget + "\" in this language.");
+                        card.getDefinitionsListView().getItems().add(t);
+                        card.getFlagImage().setImage(createFlagImage(dataManager.getFlags()[i]));
+
+                    }
+
+                }
+                break;
+
+
+            case SWEDISH:
+                for(int i = 0;i<dataManager.getSWEXDictionaries().size();i++){
+                    WordCard card = new WordCard(cardListView);
+                    Word w = dataManager.getSWEXDictionaries().get(i).get(searchTarget.getHashCode());
+                    if (w != null) {
+                        System.out.println(w.getTranslations());
+
+                        card.getDefinitionsListView().getItems().addAll(w.getTranslations());
+
+                        card.getFlagImage().setImage(createFlagImage(w.getTranslations().get(0).getFlagImgPath()));
+
+
+                    } else {
+
+                        Word t = new Word(Config.Languages.SWEDISH, "There is no translation for \"" + searchTarget + "\" in this language.");
+                        card.getDefinitionsListView().getItems().add(t);
+                        card.getFlagImage().setImage(createFlagImage(dataManager.getFlags()[i]));
+
+                    }
+
+                }
+
+
+                break;
+
+            case TURKISH:
+                List<Word> engList=new ArrayList<>();
+                List<Word> fraList=new ArrayList<>();
+                List<Word> itaList=new ArrayList<>();
+                List<Word> greList=new ArrayList<>();
+                List<Word> sweList=new ArrayList<>();
+                List<Word> gerList=new ArrayList<>();
+
+                List<List<Word>> all = new ArrayList<>(6);
+
+                all.add(Config.eng_tur_index,engList);
+                all.add(Config.eng_fra_index,fraList);
+                all.add(Config.eng_ita_index,itaList);
+                all.add(Config.eng_gre_index,greList);
+                all.add(Config.eng_swe_index,sweList);
+                all.add(Config.eng_ger_index,gerList);
+
+                for (Word temp : dataManager.getENG_TUR_DICT().values()) {
+
+
+                    for (Word t :temp.getTranslations()){
+
+                        if(t.getWord().equals(searchTarget.getWord())){
+                            System.out.println(temp);
+
+                            engList.add(temp);
+
+                        }
+
+                    }
+
+                }
+                for (Word temp : dataManager.getENG_FRA_DICT().values()) {
+
+
+                    for (Word t : engList){
+
+                        if(t.getWord().equals(temp.getWord())){
+                            System.out.println(temp);
+                            fraList.addAll(temp.getTranslations());
+
+                        }
+
+                    }
+
+                }
+                for (Word temp : dataManager.getENG_ITA_DICT().values()) {
+
+
+                    for (Word t : engList){
+
+                        if(t.getWord().equals(temp.getWord())){
+                            System.out.println(temp);
+                            itaList.addAll(temp.getTranslations());
+
+                        }
+
+                    }
+
+                }
+                for (Word temp : dataManager.getENG_GRE_DICT().values()) {
+
+
+                    for (Word t : engList){
+
+                        if(t.getWord().equals(temp.getWord())){
+                            System.out.println(temp);
+                            greList.addAll(temp.getTranslations());
+
+                        }
+
+                    }
+
+                }
+                for (Word temp : dataManager.getENG_SWE_DICT().values()) {
+
+
+                    for (Word t : engList){
+
+                        if(t.getWord().equals(temp.getWord())){
+                            System.out.println(temp);
+                            sweList.addAll(temp.getTranslations());
+
+                        }
+
+                    }
+
+                }
+                for (Word temp : dataManager.getENG_GER_DICT().values()) {
+
+
+                    for (Word t : engList){
+
+                        if(t.getWord().equals(temp.getWord())){
+                            System.out.println(temp);
+                            gerList.addAll(temp.getTranslations());
+
+                        }
+
+                    }
+
+                }
+                break;
+
+            case GREEK:
+                List<Word> engList1=new ArrayList<>();
+                List<Word> fraList1=new ArrayList<>();
+                List<Word> itaList1=new ArrayList<>();
+                List<Word> turList=new ArrayList<>();
+                List<Word> sweList1=new ArrayList<>();
+                List<Word> gerList1=new ArrayList<>();
+
+                all = new ArrayList<>(6);
+
+                all.add(Config.eng_tur_index,turList);
+                all.add(Config.eng_fra_index,fraList1);
+                all.add(Config.eng_ita_index,itaList1);
+                all.add(Config.eng_gre_index,engList1);
+                all.add(Config.eng_swe_index,sweList1);
+                all.add(Config.eng_ger_index,gerList1);
+
+                for (Word temp : dataManager.getENG_GRE_DICT().values()) {
+
+
+                    for (Word t :temp.getTranslations()){
+
+                        if(t.getWord().equals(searchTarget.getWord())){
+                            System.out.println(temp);
+                            engList1.add(temp);
+
+                        }
+
+                    }
+
+                }
+                for (Word temp : dataManager.getENG_FRA_DICT().values()) {
+
+
+                    for (Word t : engList1){
+
+                        if(t.getWord().equals(temp.getWord())){
+                            System.out.println(temp);
+                            fraList1.addAll(temp.getTranslations());
+
+                        }
+
+                    }
+
+                }
+                for (Word temp : dataManager.getENG_ITA_DICT().values()) {
+
+
+                    for (Word t : engList1){
+
+                        if(t.getWord().equals(temp.getWord())){
+                            System.out.println(temp);
+                            itaList1.addAll(temp.getTranslations());
+
+                        }
+
+                    }
+
+                }
+                for (Word temp : dataManager.getENG_TUR_DICT().values()) {
+
+
+                    for (Word t : engList1){
+
+                        if(t.getWord().equals(temp.getWord())){
+                            System.out.println(temp);
+                            turList.addAll(temp.getTranslations());
+
+                        }
+
+                    }
+
+                }
+                for (Word temp : dataManager.getENG_SWE_DICT().values()) {
+
+
+                    for (Word t : engList1){
+
+                        if(t.getWord().equals(temp.getWord())){
+                            System.out.println(temp);
+                            sweList1.addAll(temp.getTranslations());
+
+                        }
+
+                    }
+
+                }
+                for (Word temp : dataManager.getENG_GER_DICT().values()) {
+
+
+                    for (Word t : engList1){
+
+                        if(t.getWord().equals(temp.getWord())){
+                            System.out.println(temp);
+                            gerList1.addAll(temp.getTranslations());
+
+                        }
+
+                    }
+
+                }
+
+
+
+                break;
+
+
+
+
+        }
+
+        /*  for (int i=0;i<dataManager.getDictionaries().length;i++) {
+
+
+
+          //  WordCard card = new WordCard(cardListView);
+           // Word w,w1,w2,w3,w4,w5;
+
+          //   w = dataManager.getENGXDictionaries().get(i).get(searchTarget.getHashCode());
+           //  w1 = dataManager.getDEUXDictionaries().get(i).get(searchTarget.getHashCode());
+
+
+
+
+          if (w != null && w.getLanguage() == Config.Languages.ENGLISH) {
+              //  System.out.println(w.getTranslations());
+
+                card.getDefinitionsListView().getItems().addAll(w.getTranslations());
+
+                card.getFlagImage().setImage(createFlagImage(w.getTranslations().get(0).getFlagImgPath()));
+
+
+            } else {
+
+                Word t = new Word(Config.Languages.ENGLISH, "There is no translation for \"" + searchTarget + "\" in this language.");
+                card.getDefinitionsListView().getItems().add(t);
+                card.getFlagImage().setImage(createFlagImage(dataManager.getFlags()[i]));
+
+            }
+
+            if (w1 != null && w.getLanguage() == Config.Languages.GERMAN) {
+                System.out.println(w1.getTranslations());
+
+                card.getDefinitionsListView().getItems().addAll(w.getTranslations());
+
+                card.getFlagImage().setImage(createFlagImage(w.getTranslations().get(0).getFlagImgPath()));
+
+
+            } else {
+
+                Word t = new Word(Config.Languages.ENGLISH, "There is no translation for \"" + searchTarget + "\" in this language.");
+                card.getDefinitionsListView().getItems().add(t);
+                card.getFlagImage().setImage(createFlagImage(dataManager.getFlags()[i]));
+
+            }
+
+
+
+
+
+        }*/
 
     }
 
@@ -119,979 +568,15 @@ public class HomePageController implements Initializable {
 
     }
 
-    private void SearchInEnglish(DataManager dataManager,Word searchTarget){
 
 
 
-        for (int i=0;i<dataManager.getDictionaries().length;i++){
 
-            WordCard card = new WordCard(cardListView);
 
-            Word w = dataManager.getENGXDictionaries().get(i).get(searchTarget.getHashCode());
 
 
-            if(w != null && w.getLanguage() == Config.Languages.ENGLISH){
 
-                card.getDefinitionsListView().getItems().addAll(w.getTranslations());
 
-                card.getFlagImage().setImage(createFlagImage(w.getTranslations().get(0).getFlagImgPath()));
-
-
-            }else{
-
-                Word t = new Word(Config.Languages.ENGLISH,"There is no translation for \""+searchTarget+"\" in this language.");
-                card.getDefinitionsListView().getItems().add(t);
-                card.getFlagImage().setImage(createFlagImage(dataManager.getFlags()[i]));
-
-            }
-
-            cardListView.getItems().add(card);
-
-            if(i<5){
-
-                AnchorPane separator = new AnchorPane();
-                separator.setPrefSize(Region.USE_COMPUTED_SIZE,20);
-                separator.setStyle("-fx-background-color:  #ef233c");
-                cardListView.getItems().add(separator);
-            }
-
-        }
-
-
-
-    }
-    private void SearchInTurkish(DataManager dataManager,Word searchTarget){
-
-        List<Word> engList=new ArrayList<>();
-        List<Word> fraList=new ArrayList<>();
-        List<Word> itaList=new ArrayList<>();
-        List<Word> greList=new ArrayList<>();
-        List<Word> sweList=new ArrayList<>();
-        List<Word> gerList=new ArrayList<>();
-
-        List<List<Word>> all = new ArrayList<>(6);
-
-        all.add(Config.eng_tur_index,engList);
-        all.add(Config.eng_fra_index,fraList);
-        all.add(Config.eng_ita_index,itaList);
-        all.add(Config.eng_gre_index,greList);
-        all.add(Config.eng_swe_index,sweList);
-        all.add(Config.eng_ger_index,gerList);
-
-        for (Word temp : dataManager.getENG_TUR_DICT().values()) {
-
-
-            for (Word t :temp.getTranslations()){
-
-                if(t.getWord().equals(searchTarget.getWord())){
-
-                    engList.add(temp);
-
-                }
-
-            }
-
-        }
-        for (Word temp : dataManager.getENG_FRA_DICT().values()) {
-
-
-            for (Word t : engList){
-
-                if(t.getWord().equals(temp.getWord())){
-
-                    fraList.addAll(temp.getTranslations());
-
-                }
-
-            }
-
-        }
-        for (Word temp : dataManager.getENG_ITA_DICT().values()) {
-
-
-            for (Word t : engList){
-
-                if(t.getWord().equals(temp.getWord())){
-
-                    itaList.addAll(temp.getTranslations());
-
-                }
-
-            }
-
-        }
-        for (Word temp : dataManager.getENG_GRE_DICT().values()) {
-
-
-            for (Word t : engList){
-
-                if(t.getWord().equals(temp.getWord())){
-
-                    greList.addAll(temp.getTranslations());
-
-                }
-
-            }
-
-        }
-        for (Word temp : dataManager.getENG_SWE_DICT().values()) {
-
-
-            for (Word t : engList){
-
-                if(t.getWord().equals(temp.getWord())){
-
-                    sweList.addAll(temp.getTranslations());
-
-                }
-
-            }
-
-        }
-        for (Word temp : dataManager.getENG_GER_DICT().values()) {
-
-
-            for (Word t : engList){
-
-                if(t.getWord().equals(temp.getWord())){
-
-                    gerList.addAll(temp.getTranslations());
-
-                }
-
-            }
-
-        }
-
-        //Update UI
-        for (int i=0;i<all.size();i++){
-
-            WordCard card = new WordCard(cardListView);
-
-            List<Word> translations = all.get(i);
-
-
-            if(translations.size()>0){
-
-                card.getDefinitionsListView().getItems().addAll(translations);
-                card.getFlagImage().setImage(createFlagImage(translations.get(0).getFlagImgPath()));
-
-            }else{
-
-                Word t = new Word(Config.Languages.ENGLISH,"There is no translation for \""+searchTarget+"\" in this language.");
-                card.getDefinitionsListView().getItems().add(t);
-
-                Image image;
-
-                if (translations == engList) {
-                    image = createFlagImage(Config.englandFlagImg);
-                }else if(translations == fraList){
-                    image = createFlagImage(Config.franceFlagImg);
-                }else if(translations == itaList){
-                    image = createFlagImage(Config.italyFlagImg);
-                }else if(translations == greList){
-                    image = createFlagImage(Config.greeceFlagImg);
-                }else if(translations == sweList){
-                    image = createFlagImage(Config.swedenFlagImg);
-                }else{
-                    image = createFlagImage(Config.germanyFlagImg);
-                }
-
-                card.getFlagImage().setImage(image);
-
-            }
-
-            cardListView.getItems().add(card);
-
-            if(i<5){
-
-                AnchorPane separator = new AnchorPane();
-                separator.setPrefSize(Region.USE_COMPUTED_SIZE,20);
-                separator.setStyle("-fx-background-color:  #ef233c");
-                cardListView.getItems().add(separator);
-            }
-
-        }
-
-    }
-    private void SearchInFrench(DataManager dataManager,Word searchTarget){
-
-        List<Word> engList=new ArrayList<>();
-        List<Word> turList=new ArrayList<>();
-        List<Word> itaList=new ArrayList<>();
-        List<Word> greList=new ArrayList<>();
-        List<Word> sweList=new ArrayList<>();
-        List<Word> gerList=new ArrayList<>();
-
-        List<List<Word>> all = new ArrayList<>(6);
-
-        all.add(Config.eng_tur_index,turList);
-        all.add(Config.eng_fra_index,engList);
-        all.add(Config.eng_ita_index,itaList);
-        all.add(Config.eng_gre_index,greList);
-        all.add(Config.eng_swe_index,sweList);
-        all.add(Config.eng_ger_index,gerList);
-
-        for (Word temp : dataManager.getENG_FRA_DICT().values()) {
-
-
-            for (Word t :temp.getTranslations()){
-
-                if(t.getWord().equals(searchTarget.getWord())){
-
-                    engList.add(temp);
-
-                }
-
-            }
-
-        }
-        for (Word temp : dataManager.getENG_TUR_DICT().values()) {
-
-
-            for (Word t : engList){
-
-                if(t.getWord().equals(temp.getWord())){
-
-                    turList.addAll(temp.getTranslations());
-
-                }
-
-            }
-
-        }
-        for (Word temp : dataManager.getENG_ITA_DICT().values()) {
-
-
-            for (Word t : engList){
-
-                if(t.getWord().equals(temp.getWord())){
-
-                    itaList.addAll(temp.getTranslations());
-
-                }
-
-            }
-
-        }
-        for (Word temp : dataManager.getENG_GRE_DICT().values()) {
-
-
-            for (Word t : engList){
-
-                if(t.getWord().equals(temp.getWord())){
-
-                    greList.addAll(temp.getTranslations());
-
-                }
-
-            }
-
-        }
-        for (Word temp : dataManager.getENG_SWE_DICT().values()) {
-
-
-            for (Word t : engList){
-
-                if(t.getWord().equals(temp.getWord())){
-
-                    sweList.addAll(temp.getTranslations());
-
-                }
-
-            }
-
-        }
-        for (Word temp : dataManager.getENG_GER_DICT().values()) {
-
-
-            for (Word t : engList){
-
-                if(t.getWord().equals(temp.getWord())){
-
-                    gerList.addAll(temp.getTranslations());
-
-                }
-
-            }
-
-        }
-
-
-        //Update UI
-        for (int i=0;i<all.size();i++){
-
-            WordCard card = new WordCard(cardListView);
-
-            List<Word> translations = all.get(i);
-
-
-            if(all.get(i).size()>0){
-
-                Image image = createFlagImage(translations.get(0).getFlagImgPath());
-                card.getDefinitionsListView().getItems().addAll(translations);
-                card.getFlagImage().setImage(image);
-
-            }else{
-
-                Word t = new Word(Config.Languages.ENGLISH,"There is no translation for \""+searchTarget+"\" in this language.");
-                card.getDefinitionsListView().getItems().add(t);
-
-                Image image;
-
-                if (translations == (engList)) {
-                    image = createFlagImage(Config.englandFlagImg);
-                }else if(translations == (turList)){
-                    image = createFlagImage(Config.turkeyFlagImg);
-                }else if(translations == (itaList)){
-                    image = createFlagImage(Config.italyFlagImg);
-                }else if(translations == (greList)){
-                    image = createFlagImage(Config.greeceFlagImg);
-                }else if(translations == (sweList)){
-                    image = createFlagImage(Config.swedenFlagImg);
-                }else{
-                    image = createFlagImage(Config.germanyFlagImg);
-                }
-
-                card.getFlagImage().setImage(image);
-
-            }
-
-            cardListView.getItems().add(card);
-
-            if(i<5){
-
-                AnchorPane separator = new AnchorPane();
-                separator.setPrefSize(Region.USE_COMPUTED_SIZE,20);
-                separator.setStyle("-fx-background-color:  #ef233c");
-                cardListView.getItems().add(separator);
-            }
-
-        }
-
-
-    }
-    private void SearchInItalian(DataManager dataManager,Word searchTarget){
-
-        List<Word> engList=new ArrayList<>();
-        List<Word> fraList=new ArrayList<>();
-        List<Word> turList=new ArrayList<>();
-        List<Word> greList=new ArrayList<>();
-        List<Word> sweList=new ArrayList<>();
-        List<Word> gerList=new ArrayList<>();
-
-        List<List<Word>> all = new ArrayList<>(6);
-
-        all.add(Config.eng_tur_index,turList);
-        all.add(Config.eng_fra_index,fraList);
-        all.add(Config.eng_ita_index,engList);
-        all.add(Config.eng_gre_index,greList);
-        all.add(Config.eng_swe_index,sweList);
-        all.add(Config.eng_ger_index,gerList);
-
-        for (Word temp : dataManager.getENG_ITA_DICT().values()) {
-
-
-            for (Word t :temp.getTranslations()){
-
-                if(t.getWord().equals(searchTarget.getWord())){
-
-                    engList.add(temp);
-
-                }
-
-            }
-
-        }
-        for (Word temp : dataManager.getENG_FRA_DICT().values()) {
-
-
-            for (Word t : engList){
-
-                if(t.getWord().equals(temp.getWord())){
-
-                    fraList.addAll(temp.getTranslations());
-
-                }
-
-            }
-
-        }
-        for (Word temp : dataManager.getENG_TUR_DICT().values()) {
-
-
-            for (Word t : engList){
-
-                if(t.getWord().equals(temp.getWord())){
-
-                    turList.addAll(temp.getTranslations());
-
-                }
-
-            }
-
-        }
-        for (Word temp : dataManager.getENG_GRE_DICT().values()) {
-
-
-            for (Word t : engList){
-
-                if(t.getWord().equals(temp.getWord())){
-
-                    greList.addAll(temp.getTranslations());
-
-                }
-
-            }
-
-        }
-        for (Word temp : dataManager.getENG_SWE_DICT().values()) {
-
-
-            for (Word t : engList){
-
-                if(t.getWord().equals(temp.getWord())){
-
-                    sweList.addAll(temp.getTranslations());
-
-                }
-
-            }
-
-        }
-        for (Word temp : dataManager.getENG_GER_DICT().values()) {
-
-
-            for (Word t : engList){
-
-                if(t.getWord().equals(temp.getWord())){
-
-                    gerList.addAll(temp.getTranslations());
-
-                }
-
-            }
-
-        }
-
-        //Update UI
-        for (int i=0;i<all.size();i++){
-
-            WordCard card = new WordCard(cardListView);
-
-            List<Word> translations = all.get(i);
-
-
-            if(all.get(i).size()>0){
-
-                Image image = createFlagImage(translations.get(0).getFlagImgPath());
-                card.getDefinitionsListView().getItems().addAll(translations);
-                card.getFlagImage().setImage(image);
-
-            }else{
-
-                Word t = new Word(Config.Languages.ENGLISH,"There is no translation for \""+searchTarget+"\" in this language.");
-                card.getDefinitionsListView().getItems().add(t);
-
-                Image image;
-
-                if (translations == (engList)) {
-                    image = createFlagImage(Config.englandFlagImg);
-                }else if(translations == (fraList)){
-                    image = createFlagImage(Config.franceFlagImg);
-                }else if(translations == (turList)){
-                    image = createFlagImage(Config.turkeyFlagImg);
-                }else if(translations == (greList)){
-                    image = createFlagImage(Config.greeceFlagImg);
-                }else if(translations == (sweList)){
-                    image = createFlagImage(Config.swedenFlagImg);
-                }else{
-                    image = createFlagImage(Config.germanyFlagImg);
-                }
-
-                card.getFlagImage().setImage(image);
-
-            }
-
-            cardListView.getItems().add(card);
-
-            if(i<5){
-
-                AnchorPane separator = new AnchorPane();
-                separator.setPrefSize(Region.USE_COMPUTED_SIZE,20);
-                separator.setStyle("-fx-background-color:  #ef233c");
-                cardListView.getItems().add(separator);
-            }
-
-        }
-
-    }
-    private void SearchInSwedish(DataManager dataManager,Word searchTarget){
-
-        List<Word> engList=new ArrayList<>();
-        List<Word> fraList=new ArrayList<>();
-        List<Word> itaList=new ArrayList<>();
-        List<Word> greList=new ArrayList<>();
-        List<Word> turList=new ArrayList<>();
-        List<Word> gerList=new ArrayList<>();
-
-        List<List<Word>> all = new ArrayList<>(6);
-
-        all.add(Config.eng_tur_index,turList);
-        all.add(Config.eng_fra_index,fraList);
-        all.add(Config.eng_ita_index,itaList);
-        all.add(Config.eng_gre_index,greList);
-        all.add(Config.eng_swe_index,engList);
-        all.add(Config.eng_ger_index,gerList);
-
-
-        for (Word temp : dataManager.getENG_SWE_DICT().values()) {
-
-
-            for (Word t :temp.getTranslations()){
-
-                if(t.getWord().equals(searchTarget.getWord())){
-
-                    engList.add(temp);
-
-                }
-
-            }
-
-        }
-        for (Word temp : dataManager.getENG_FRA_DICT().values()) {
-
-
-            for (Word t : engList){
-
-                if(t.getWord().equals(temp.getWord())){
-
-                    fraList.addAll(temp.getTranslations());
-
-                }
-
-            }
-
-        }
-        for (Word temp : dataManager.getENG_ITA_DICT().values()) {
-
-
-            for (Word t : engList){
-
-                if(t.getWord().equals(temp.getWord())){
-
-                    itaList.addAll(temp.getTranslations());
-
-                }
-
-            }
-
-        }
-        for (Word temp : dataManager.getENG_GRE_DICT().values()) {
-
-
-            for (Word t : engList){
-
-                if(t.getWord().equals(temp.getWord())){
-
-                    greList.addAll(temp.getTranslations());
-
-                }
-
-            }
-
-        }
-        for (Word temp : dataManager.getENG_TUR_DICT().values()) {
-
-
-            for (Word t : engList){
-
-                if(t.getWord().equals(temp.getWord())){
-
-                    turList.addAll(temp.getTranslations());
-
-                }
-
-            }
-
-        }
-        for (Word temp : dataManager.getENG_GER_DICT().values()) {
-
-
-            for (Word t : engList){
-
-                if(t.getWord().equals(temp.getWord())){
-
-                    gerList.addAll(temp.getTranslations());
-
-                }
-
-            }
-
-        }
-
-        //Update UI
-        for (int i=0;i<all.size();i++){
-
-            WordCard card = new WordCard(cardListView);
-
-            List<Word> translations = all.get(i);
-
-
-            if(all.get(i).size()>0){
-
-                Image image = createFlagImage(translations.get(0).getFlagImgPath());
-                card.getDefinitionsListView().getItems().addAll(translations);
-                card.getFlagImage().setImage(image);
-
-            }else{
-
-                Word t = new Word(Config.Languages.ENGLISH,"There is no translation for \""+searchTarget+"\" in this language.");
-                card.getDefinitionsListView().getItems().add(t);
-
-                Image image;
-
-                if (translations == (engList)) {
-                    image = createFlagImage(Config.englandFlagImg);
-                }else if(translations == (fraList)){
-                    image = createFlagImage(Config.franceFlagImg);
-                }else if(translations == (itaList)){
-                    image = createFlagImage(Config.italyFlagImg);
-                }else if(translations == (greList)){
-                    image = createFlagImage(Config.greeceFlagImg);
-                }else if(translations == (turList)){
-                    image = createFlagImage(Config.turkeyFlagImg);
-                }else{
-                    image = createFlagImage(Config.germanyFlagImg);
-                }
-
-                card.getFlagImage().setImage(image);
-
-            }
-
-            cardListView.getItems().add(card);
-
-            if(i<5){
-
-                AnchorPane separator = new AnchorPane();
-                separator.setPrefSize(Region.USE_COMPUTED_SIZE,20);
-                separator.setStyle("-fx-background-color:  #ef233c");
-                cardListView.getItems().add(separator);
-            }
-
-        }
-
-
-    }
-    private void SearchInGreek(DataManager dataManager,Word searchTarget){
-
-        List<Word> engList=new ArrayList<>();
-        List<Word> fraList=new ArrayList<>();
-        List<Word> itaList=new ArrayList<>();
-        List<Word> turList=new ArrayList<>();
-        List<Word> sweList=new ArrayList<>();
-        List<Word> gerList=new ArrayList<>();
-
-        List<List<Word>> all = new ArrayList<>(6);
-
-        all.add(Config.eng_tur_index,turList);
-        all.add(Config.eng_fra_index,fraList);
-        all.add(Config.eng_ita_index,itaList);
-        all.add(Config.eng_gre_index,engList);
-        all.add(Config.eng_swe_index,sweList);
-        all.add(Config.eng_swe_index,gerList);
-
-
-        for (Word temp : dataManager.getENG_GRE_DICT().values()) {
-
-
-            for (Word t :temp.getTranslations()){
-
-                if(t.getWord().equals(searchTarget.getWord())){
-
-                    engList.add(temp);
-
-                }
-
-            }
-
-        }
-        for (Word temp : dataManager.getENG_FRA_DICT().values()) {
-
-
-            for (Word t : engList){
-
-                if(t.getWord().equals(temp.getWord())){
-
-                    fraList.addAll(temp.getTranslations());
-
-                }
-
-            }
-
-        }
-        for (Word temp : dataManager.getENG_ITA_DICT().values()) {
-
-
-            for (Word t : engList){
-
-                if(t.getWord().equals(temp.getWord())){
-
-                    itaList.addAll(temp.getTranslations());
-
-                }
-
-            }
-
-        }
-        for (Word temp : dataManager.getENG_TUR_DICT().values()) {
-
-
-            for (Word t : engList){
-
-                if(t.getWord().equals(temp.getWord())){
-
-                    turList.addAll(temp.getTranslations());
-
-                }
-
-            }
-
-        }
-        for (Word temp : dataManager.getENG_SWE_DICT().values()) {
-
-
-            for (Word t : engList){
-
-                if(t.getWord().equals(temp.getWord())){
-
-                    sweList.addAll(temp.getTranslations());
-
-                }
-
-            }
-
-        }
-        for (Word temp : dataManager.getENG_GER_DICT().values()) {
-
-
-            for (Word t : engList){
-
-                if(t.getWord().equals(temp.getWord())){
-
-                    gerList.addAll(temp.getTranslations());
-
-                }
-
-            }
-
-        }
-
-        //Update UI
-        for (int i=0;i<all.size();i++){
-
-            WordCard card = new WordCard(cardListView);
-
-            List<Word> translations = all.get(i);
-
-
-            if(all.get(i).size()>0){
-
-                Image image = createFlagImage(translations.get(0).getFlagImgPath());
-                card.getDefinitionsListView().getItems().addAll(translations);
-                card.getFlagImage().setImage(image);
-
-            }else{
-
-                Word t = new Word(Config.Languages.ENGLISH,"There is no translation for \""+searchTarget+"\" in this language.");
-                card.getDefinitionsListView().getItems().add(t);
-
-                Image image;
-                if (translations == (engList)) {
-                    image = createFlagImage(Config.englandFlagImg);
-                }else if(translations == (fraList)){
-                    image = createFlagImage(Config.franceFlagImg);
-                }else if(translations == (itaList)){
-                    image = createFlagImage(Config.italyFlagImg);
-                }else if(translations == (turList)){
-                    image = createFlagImage(Config.turkeyFlagImg);
-                }else if(translations == (sweList)){
-                    image = createFlagImage(Config.swedenFlagImg);
-                }else{
-                    image = createFlagImage(Config.germanyFlagImg);
-                }
-
-                card.getFlagImage().setImage(image);
-
-            }
-
-            cardListView.getItems().add(card);
-
-            if(i<5){
-
-                AnchorPane separator = new AnchorPane();
-                separator.setPrefSize(Region.USE_COMPUTED_SIZE,20);
-                separator.setStyle("-fx-background-color:  #ef233c");
-                cardListView.getItems().add(separator);
-            }
-
-        }
-
-    }
-    private void SearchInGerman(DataManager dataManager,Word searchTarget){
-        List<Word> engList=new ArrayList<>();
-        List<Word> fraList=new ArrayList<>();
-        List<Word> itaList=new ArrayList<>();
-        List<Word> greList=new ArrayList<>();
-        List<Word> sweList=new ArrayList<>();
-        List<Word> turList=new ArrayList<>();
-
-        List<List<Word>> all = new ArrayList<>(6);
-
-        all.add(Config.eng_tur_index,turList);
-        all.add(Config.eng_fra_index,fraList);
-        all.add(Config.eng_ita_index,itaList);
-        all.add(Config.eng_gre_index,greList);
-        all.add(Config.eng_swe_index,sweList);
-        all.add(Config.eng_ger_index,engList);
-
-
-        for (Word temp : dataManager.getENG_GER_DICT().values()) {
-
-
-            for (Word t :temp.getTranslations()){
-
-                if(t.getWord().equals(searchTarget.getWord())){
-
-                    engList.add(temp);
-
-                }
-
-            }
-
-        }
-        for (Word temp : dataManager.getENG_FRA_DICT().values()) {
-
-
-            for (Word t : engList){
-
-                if(t.getWord().equals(temp.getWord())){
-
-                    fraList.addAll(temp.getTranslations());
-
-                }
-
-            }
-
-        }
-        for (Word temp : dataManager.getENG_ITA_DICT().values()) {
-
-
-            for (Word t : engList){
-
-                if(t.getWord().equals(temp.getWord())){
-
-                    itaList.addAll(temp.getTranslations());
-
-                }
-
-            }
-
-        }
-        for (Word temp : dataManager.getENG_GRE_DICT().values()) {
-
-
-            for (Word t : engList){
-
-                if(t.getWord().equals(temp.getWord())){
-
-                    greList.addAll(temp.getTranslations());
-
-                }
-
-            }
-
-        }
-        for (Word temp : dataManager.getENG_SWE_DICT().values()) {
-
-
-            for (Word t : engList){
-
-                if(t.getWord().equals(temp.getWord())){
-
-                    sweList.addAll(temp.getTranslations());
-
-                }
-
-            }
-
-        }
-        for (Word temp : dataManager.getENG_TUR_DICT().values()) {
-
-
-            for (Word t : engList){
-
-                if(t.getWord().equals(temp.getWord())){
-
-                    turList.addAll(temp.getTranslations());
-
-                }
-
-            }
-
-        }
-
-        //Update UI
-        for (int i=0;i<all.size();i++){
-
-            WordCard card = new WordCard(cardListView);
-
-            List<Word> translations = all.get(i);
-
-
-            if(all.get(i).size()>0){
-
-                Image image = createFlagImage(translations.get(0).getFlagImgPath());
-                card.getDefinitionsListView().getItems().addAll(translations);
-                card.getFlagImage().setImage(image);
-
-            }else{
-
-                Word t = new Word(Config.Languages.ENGLISH,"There is no translation for \""+searchTarget+"\" in this language.");
-                card.getDefinitionsListView().getItems().add(t);
-
-                Image image;
-
-                if (translations == (engList)) {
-                    image = createFlagImage(Config.englandFlagImg);
-                }else if(translations == (fraList)){
-                    image = createFlagImage(Config.franceFlagImg);
-                }else if(translations == (itaList)){
-                    image = createFlagImage(Config.italyFlagImg);
-                }else if(translations == (greList)){
-                    image = createFlagImage(Config.greeceFlagImg);
-                }else if(translations == (sweList)){
-                    image = createFlagImage(Config.swedenFlagImg);
-                }else{
-                    image = createFlagImage(Config.turkeyFlagImg);
-                }
-
-                card.getFlagImage().setImage(image);
-
-            }
-
-            cardListView.getItems().add(card);
-
-            if(i<5){
-
-                AnchorPane separator = new AnchorPane();
-                separator.setPrefSize(Region.USE_COMPUTED_SIZE,20);
-                separator.setStyle("-fx-background-color:  #ef233c");
-                cardListView.getItems().add(separator);
-            }
-
-        }
-    }
 
 
 

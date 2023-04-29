@@ -14,29 +14,37 @@ import org.xml.sax.helpers.DefaultHandler;
 
 public class TEISAXParser {
 
-    public HashMap<Integer,Word> ParseIntoHashMap(DataManager dataManager, String path, Config.Languages sourceLang, Config.Languages targetLang){
+    public HashMap<Integer, Word> ParseIntoHashMap(DataManager dataManager, String path, Config.Languages sourceLang, Config.Languages targetLang) {
 
         HashMap<Integer, Word> dictionary = new HashMap<>();
 
         try {
-
-            URL url = TEISAXParser.class.getResource(path);
-            assert url != null;
+            // Load the resource from the classpath
             InputStream inputStream = App.class.getResourceAsStream(path);
-            assert inputStream != null;
 
-            SAXParserFactory factory = SAXParserFactory.newInstance();
-            SAXParser saxParser = factory.newSAXParser();
-            MyHandler handler = new MyHandler(dictionary,sourceLang,targetLang,dataManager);
-            saxParser.parse(inputStream, handler);
-            return handler.dictionary;
+            if (inputStream != null) {
+                // Create the SAXParser and MyHandler
+                SAXParserFactory factory = SAXParserFactory.newInstance();
+                SAXParser saxParser = factory.newSAXParser();
+                MyHandler handler = new MyHandler(dictionary,sourceLang,targetLang,dataManager);
 
+                // Parse the XML file
+                saxParser.parse(inputStream, handler);
+
+                // Return the dictionary
+                return handler.dictionary;
+            } else {
+                // Resource not found, handle error appropriately
+                throw new IllegalArgumentException("Resource not found: " + path);
+            }
         } catch (Exception e) {
+            // Handle any other exceptions that occur
             e.printStackTrace();
         }
 
         return dictionary;
     }
+
 
 
 

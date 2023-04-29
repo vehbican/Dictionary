@@ -21,12 +21,12 @@ public class Config {
     public static final String eng_fra_tei = "dicts/eng-fra.tei";
 
 
-    public static final String deu_tur_tei = "dicts/deu-tur-tei";
-    public static final String deu_ita_tei = "dicts/deu-ita-tei";
-    public static final String deu_fra_tei = "dicts/deu-fra-tei";
-    public static final String deu_ell_tei = "dicts/deu-ell-tei";
-    public static final String deu_eng_tei = "dicts/deu-eng-tei";
-    public static final String deu_swe_tei = "dicts/deu-swe-tei";
+    public static final String deu_tur_tei = "dicts/deu-tur.tei";
+    public static final String deu_ell_tei = "dicts/deu-ell.tei";
+    public static final String deu_eng_tei = "dicts/deu-eng.tei";
+    public static final String deu_fra_tei = "dicts/deu-fra.tei";
+    public static final String deu_ita_tei = "dicts/deu-ita.tei";
+    public static final String deu_swe_tei = "dicts/deu-swe.tei";
 
 
 
@@ -54,18 +54,12 @@ public class Config {
     public static final String ita_fra_tei = "dicts/ita-fra.tei";
 
 
+   // public static final String ell_eng_tei = "dicts/ell-eng.tei";
+   // public static final String ell_fra_tei = "dicts/ell-fra.tei";
+   // public static final String ell_ita_tei = "dicts/ell-ita.tei";
 
-
-/*
-    public static final String tur_deu_tei = "dicts/tur-deu-tei";
-    public static final String tur_eng_tei = "dicts/tur-eng.tei";*/
-
-
-
-
-
-
-
+   // public static final String tur_deu_tei = "dicts/tur-deu-tei";
+    //public static final String tur_eng_tei = "dicts/tur-eng.tei";
 
 
 
@@ -75,6 +69,47 @@ public class Config {
     public static int eng_gre_index = 3;
     public static int eng_swe_index = 4;
     public static int eng_ger_index = 5;
+
+
+    public static int deu_tur_index = 0;
+    public static int deu_ell_index = 1;
+    public static int deu_eng_index = 2;
+    public static int deu_fra_index = 3;
+    public static int deu_ita_index = 4;
+    public static int deu_swe_index = 5;
+
+
+    public static int fra_eng_index = 0;
+    public static int fra_ita_index = 1;
+    public static int fra_deu_index = 2;
+    public static int fra_tur_index = 3;
+    public static int fra_ell_index = 4;
+    public static int fra_swe_index = 5;
+
+
+
+
+    public static int ita_eng_index = 0;
+    public static int ita_fra_index = 1;
+    public static int ita_deu_index = 2;
+    public static int ita_tur_index = 3;
+    public static int ita_ell_index = 4;
+    public static int ita_swe_index = 5;
+
+
+
+
+    public static int swe_eng_index = 0;
+    public static int swe_fra_index = 1;
+    public static int swe_deu_index = 2;
+    public static int swe_tur_index = 3;
+    public static int swe_ell_index = 4;
+    public static int swe_ita_index = 5;
+
+
+
+
+
 
 
     public enum Languages{
