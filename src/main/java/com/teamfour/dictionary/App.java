@@ -19,7 +19,9 @@ public class App extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 1080, 720);
         stage.setTitle("DICT4TEAM Multi-Dictionary");
         stage.setScene(scene);
+        stage.setMaximized(true);
         stage.show();
+
 
         long start = System.currentTimeMillis();
         dataManager = new DataManager();
@@ -29,6 +31,7 @@ public class App extends Application {
 
         controller = fxmlLoader.getController();
 
+        controller.dataManager = dataManager;
         controller.searchButton.setOnAction(event -> controller.HandleSearchButtonAction(dataManager));
 
 

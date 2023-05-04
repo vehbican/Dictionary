@@ -51,31 +51,29 @@ public class AddController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-      /*  Word tr = new Word(Config.Languages.TURKISH, "Turkish");
-        Word fra = new Word(Config.Languages.FRENCH, "French");
-        Word eng = new Word(Config.Languages.ENGLISH, "English");
-        Word swe = new Word(Config.Languages.SWEDISH, "Swedish");
-        Word gre = new Word(Config.Languages.GREEK, "Greek");
-        Word ita = new Word(Config.Languages.ITALIAN, "Italian");
-        Word deu = new Word(Config.Languages.GERMAN, "German");*/
+
 
 
     }
 
-    private void addEng(String word, String definitions, String path) throws ParserConfigurationException, IOException, SAXException, TransformerException {
+    public void addEng(String word, String definitions) throws ParserConfigurationException, IOException, SAXException, TransformerException {
 
 
+        if (sourceLangComboBox.getValue() == null) {
+            sourceLangComboBox.selectIndex(0);
+        }
         Word sourceLang = sourceLangComboBox.getValue();
-        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-        DocumentBuilder db = dbf.newDocumentBuilder();
-        Document doc = db.parse(path);
-        Element text = doc.getDocumentElement();
 
-        //  ArrayList<> a = dataManager.getENGXDictionaries();
 
         for (int i = 0; i < dataManager.getENGXDictionaries().size(); i++) {
             switch (sourceLang.getLanguage()) {
-                case TURKISH:
+                case TURKISH: {
+
+                    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder db = dbf.newDocumentBuilder();
+                    Document doc = db.parse(Config.eng_tur_tei);
+                    Element text = doc.getDocumentElement();
+
                     Element entry = doc.createElement("entry");
 
 
@@ -118,14 +116,319 @@ public class AddController implements Initializable {
                         Element body = (Element) text.getElementsByTagName("body").item(0);
                         body.appendChild(entry);
 
+
                         // Write the modified document back to file
                         TransformerFactory tf = TransformerFactory.newInstance();
                         Transformer transformer = tf.newTransformer();
                         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
                         DOMSource source = new DOMSource(doc);
-                        StreamResult result = new StreamResult(new File(path));
+                        StreamResult result = new StreamResult(new File(Config.eng_tur_tei));
                         transformer.transform(source, result);
+
                     }
+                }
+
+                break;
+                case FRENCH: {
+                    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder db = dbf.newDocumentBuilder();
+                    Document doc = db.parse(Config.eng_fra_tei);
+                    Element text = doc.getDocumentElement();
+                    Element entry = doc.createElement("entry");
+
+
+                    Element form = doc.createElement("form");
+
+
+                    Element orth = doc.createElement("orth");
+                    orth.appendChild(doc.createTextNode(word));
+                    form.appendChild(orth);
+
+
+                    entry.appendChild(form);
+
+
+                    String[] definitionsArray = definitions.split(";"); // split the definitions string into an array
+                    for (int j = 0; j < definitionsArray.length; j++) {
+                        String definition = definitionsArray[j].trim(); // trim any leading/trailing whitespace from the definition
+
+                        // Create a new "sense" element with the n attribute set to the current index + 1
+                        Element sense = doc.createElement("sense");
+                        sense.setAttribute("n", Integer.toString(j + 1));
+
+
+                        Element cit = doc.createElement("cit");
+                        cit.setAttribute("type", "trans");
+
+
+                        Element quote = doc.createElement("quote");
+                        quote.appendChild(doc.createTextNode(definition));
+
+
+                        cit.appendChild(quote);
+
+
+                        sense.appendChild(cit);
+
+
+                        entry.appendChild(sense);
+
+                        Element body = (Element) text.getElementsByTagName("body").item(0);
+                        body.appendChild(entry);
+
+
+                        // Write the modified document back to file
+                        TransformerFactory tf = TransformerFactory.newInstance();
+                        Transformer transformer = tf.newTransformer();
+                        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                        DOMSource source = new DOMSource(doc);
+                        StreamResult result = new StreamResult(new File(Config.eng_fra_tei));
+                        transformer.transform(source, result);
+                        break;
+
+                    }
+
+                }
+                case ITALIAN: {
+
+                    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder db = dbf.newDocumentBuilder();
+                    Document doc = db.parse(Config.eng_ita_tei);
+                    Element text = doc.getDocumentElement();
+
+                    Element entry = doc.createElement("entry");
+
+
+                    Element form = doc.createElement("form");
+
+
+                    Element orth = doc.createElement("orth");
+                    orth.appendChild(doc.createTextNode(word));
+                    form.appendChild(orth);
+
+
+                    entry.appendChild(form);
+
+
+                    String[] definitionsArray = definitions.split(";"); // split the definitions string into an array
+                    for (int j = 0; j < definitionsArray.length; j++) {
+                        String definition = definitionsArray[j].trim(); // trim any leading/trailing whitespace from the definition
+
+                        // Create a new "sense" element with the n attribute set to the current index + 1
+                        Element sense = doc.createElement("sense");
+                        sense.setAttribute("n", Integer.toString(j + 1));
+
+
+                        Element cit = doc.createElement("cit");
+                        cit.setAttribute("type", "trans");
+
+
+                        Element quote = doc.createElement("quote");
+                        quote.appendChild(doc.createTextNode(definition));
+
+
+                        cit.appendChild(quote);
+
+
+                        sense.appendChild(cit);
+
+
+                        entry.appendChild(sense);
+
+                        Element body = (Element) text.getElementsByTagName("body").item(0);
+                        body.appendChild(entry);
+
+
+                        // Write the modified document back to file
+                        TransformerFactory tf = TransformerFactory.newInstance();
+                        Transformer transformer = tf.newTransformer();
+                        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                        DOMSource source = new DOMSource(doc);
+                        StreamResult result = new StreamResult(new File(Config.eng_ita_tei));
+                        transformer.transform(source, result);
+
+                    }
+                }
+                case GREEK: {
+
+                    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder db = dbf.newDocumentBuilder();
+                    Document doc = db.parse(Config.eng_ell_tei);
+                    Element text = doc.getDocumentElement();
+
+                    Element entry = doc.createElement("entry");
+
+
+                    Element form = doc.createElement("form");
+
+
+                    Element orth = doc.createElement("orth");
+                    orth.appendChild(doc.createTextNode(word));
+                    form.appendChild(orth);
+
+
+                    entry.appendChild(form);
+
+
+                    String[] definitionsArray = definitions.split(";"); // split the definitions string into an array
+                    for (int j = 0; j < definitionsArray.length; j++) {
+                        String definition = definitionsArray[j].trim(); // trim any leading/trailing whitespace from the definition
+
+                        // Create a new "sense" element with the n attribute set to the current index + 1
+                        Element sense = doc.createElement("sense");
+                        sense.setAttribute("n", Integer.toString(j + 1));
+
+
+                        Element cit = doc.createElement("cit");
+                        cit.setAttribute("type", "trans");
+
+
+                        Element quote = doc.createElement("quote");
+                        quote.appendChild(doc.createTextNode(definition));
+
+
+                        cit.appendChild(quote);
+
+
+                        sense.appendChild(cit);
+
+
+                        entry.appendChild(sense);
+
+                        Element body = (Element) text.getElementsByTagName("body").item(0);
+                        body.appendChild(entry);
+
+
+                        // Write the modified document back to file
+                        TransformerFactory tf = TransformerFactory.newInstance();
+                        Transformer transformer = tf.newTransformer();
+                        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                        DOMSource source = new DOMSource(doc);
+                        StreamResult result = new StreamResult(new File(Config.eng_ell_tei));
+                        transformer.transform(source, result);
+
+                    }
+                }
+                case SWEDISH: {
+
+                    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder db = dbf.newDocumentBuilder();
+                    Document doc = db.parse(Config.eng_swe_tei);
+                    Element text = doc.getDocumentElement();
+
+                    Element entry = doc.createElement("entry");
+
+
+                    Element form = doc.createElement("form");
+
+
+                    Element orth = doc.createElement("orth");
+                    orth.appendChild(doc.createTextNode(word));
+                    form.appendChild(orth);
+
+
+                    entry.appendChild(form);
+
+
+                    String[] definitionsArray = definitions.split(";"); // split the definitions string into an array
+                    for (int j = 0; j < definitionsArray.length; j++) {
+                        String definition = definitionsArray[j].trim(); // trim any leading/trailing whitespace from the definition
+
+                        // Create a new "sense" element with the n attribute set to the current index + 1
+                        Element sense = doc.createElement("sense");
+                        sense.setAttribute("n", Integer.toString(j + 1));
+
+
+                        Element cit = doc.createElement("cit");
+                        cit.setAttribute("type", "trans");
+
+
+                        Element quote = doc.createElement("quote");
+                        quote.appendChild(doc.createTextNode(definition));
+
+
+                        cit.appendChild(quote);
+
+
+                        sense.appendChild(cit);
+
+
+                        entry.appendChild(sense);
+
+                        Element body = (Element) text.getElementsByTagName("body").item(0);
+                        body.appendChild(entry);
+
+
+                        // Write the modified document back to file
+                        TransformerFactory tf = TransformerFactory.newInstance();
+                        Transformer transformer = tf.newTransformer();
+                        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                        DOMSource source = new DOMSource(doc);
+                        StreamResult result = new StreamResult(new File(Config.eng_swe_tei));
+                        transformer.transform(source, result);
+
+                    }
+                }
+                case GERMAN: {
+
+                    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder db = dbf.newDocumentBuilder();
+                    Document doc = db.parse(Config.eng_deu_tei);
+                    Element text = doc.getDocumentElement();
+
+                    Element entry = doc.createElement("entry");
+
+
+                    Element form = doc.createElement("form");
+
+
+                    Element orth = doc.createElement("orth");
+                    orth.appendChild(doc.createTextNode(word));
+                    form.appendChild(orth);
+
+
+                    entry.appendChild(form);
+
+
+                    String[] definitionsArray = definitions.split(";"); // split the definitions string into an array
+                    for (int j = 0; j < definitionsArray.length; j++) {
+                        String definition = definitionsArray[j].trim(); // trim any leading/trailing whitespace from the definition
+
+                        // Create a new "sense" element with the n attribute set to the current index + 1
+                        Element sense = doc.createElement("sense");
+                        sense.setAttribute("n", Integer.toString(j + 1));
+
+
+                        Element cit = doc.createElement("cit");
+                        cit.setAttribute("type", "trans");
+
+
+                        Element quote = doc.createElement("quote");
+                        quote.appendChild(doc.createTextNode(definition));
+
+
+                        cit.appendChild(quote);
+
+
+                        sense.appendChild(cit);
+
+
+                        entry.appendChild(sense);
+
+                        Element body = (Element) text.getElementsByTagName("body").item(0);
+                        body.appendChild(entry);
+
+
+                        // Write the modified document back to file
+                        TransformerFactory tf = TransformerFactory.newInstance();
+                        Transformer transformer = tf.newTransformer();
+                        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                        DOMSource source = new DOMSource(doc);
+                        StreamResult result = new StreamResult(new File(Config.eng_deu_tei));
+                        transformer.transform(source, result);
+
+                    }
+                }
 
 
             }
@@ -136,27 +439,1530 @@ public class AddController implements Initializable {
 
     }
 
-    public void addDeu() {
+    public void addIta(String word, String definitions) throws ParserConfigurationException, IOException, SAXException, TransformerException {
+        if (sourceLangComboBox.getValue() == null) {
+            sourceLangComboBox.selectIndex(0);
+        }
+        Word sourceLang = sourceLangComboBox.getValue();
+
+
+        for (int i = 0; i < dataManager.getITAXDictionaries().size(); i++) {
+            switch (sourceLang.getLanguage()) {
+                case TURKISH: {
+
+                    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder db = dbf.newDocumentBuilder();
+                    Document doc = db.parse(Config.ita_tur_tei);
+                    Element text = doc.getDocumentElement();
+
+                    Element entry = doc.createElement("entry");
+
+
+                    Element form = doc.createElement("form");
+
+
+                    Element orth = doc.createElement("orth");
+                    orth.appendChild(doc.createTextNode(word));
+                    form.appendChild(orth);
+
+
+                    entry.appendChild(form);
+
+
+                    String[] definitionsArray = definitions.split(";"); // split the definitions string into an array
+                    for (int j = 0; j < definitionsArray.length; j++) {
+                        String definition = definitionsArray[j].trim(); // trim any leading/trailing whitespace from the definition
+
+                        // Create a new "sense" element with the n attribute set to the current index + 1
+                        Element sense = doc.createElement("sense");
+                        sense.setAttribute("n", Integer.toString(j + 1));
+
+
+                        Element cit = doc.createElement("cit");
+                        cit.setAttribute("type", "trans");
+
+
+                        Element quote = doc.createElement("quote");
+                        quote.appendChild(doc.createTextNode(definition));
+
+
+                        cit.appendChild(quote);
+
+
+                        sense.appendChild(cit);
+
+
+                        entry.appendChild(sense);
+
+                        Element body = (Element) text.getElementsByTagName("body").item(0);
+                        body.appendChild(entry);
+
+
+                        // Write the modified document back to file
+                        TransformerFactory tf = TransformerFactory.newInstance();
+                        Transformer transformer = tf.newTransformer();
+                        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                        DOMSource source = new DOMSource(doc);
+                        StreamResult result = new StreamResult(new File(Config.ita_tur_tei));
+                        transformer.transform(source, result);
+
+                    }
+                }
+
+                break;
+                case FRENCH: {
+                    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder db = dbf.newDocumentBuilder();
+                    Document doc = db.parse(Config.ita_fra_tei);
+                    Element text = doc.getDocumentElement();
+                    Element entry = doc.createElement("entry");
+
+
+                    Element form = doc.createElement("form");
+
+
+                    Element orth = doc.createElement("orth");
+                    orth.appendChild(doc.createTextNode(word));
+                    form.appendChild(orth);
+
+
+                    entry.appendChild(form);
+
+
+                    String[] definitionsArray = definitions.split(";"); // split the definitions string into an array
+                    for (int j = 0; j < definitionsArray.length; j++) {
+                        String definition = definitionsArray[j].trim(); // trim any leading/trailing whitespace from the definition
+
+                        // Create a new "sense" element with the n attribute set to the current index + 1
+                        Element sense = doc.createElement("sense");
+                        sense.setAttribute("n", Integer.toString(j + 1));
+
+
+                        Element cit = doc.createElement("cit");
+                        cit.setAttribute("type", "trans");
+
+
+                        Element quote = doc.createElement("quote");
+                        quote.appendChild(doc.createTextNode(definition));
+
+
+                        cit.appendChild(quote);
+
+
+                        sense.appendChild(cit);
+
+
+                        entry.appendChild(sense);
+
+                        Element body = (Element) text.getElementsByTagName("body").item(0);
+                        body.appendChild(entry);
+
+
+                        // Write the modified document back to file
+                        TransformerFactory tf = TransformerFactory.newInstance();
+                        Transformer transformer = tf.newTransformer();
+                        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                        DOMSource source = new DOMSource(doc);
+                        StreamResult result = new StreamResult(new File(Config.ita_fra_tei));
+                        transformer.transform(source, result);
+                        break;
+
+                    }
+
+                }
+                case ENGLISH: {
+
+                    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder db = dbf.newDocumentBuilder();
+                    Document doc = db.parse(Config.ita_eng_tei);
+                    Element text = doc.getDocumentElement();
+
+                    Element entry = doc.createElement("entry");
+
+
+                    Element form = doc.createElement("form");
+
+
+                    Element orth = doc.createElement("orth");
+                    orth.appendChild(doc.createTextNode(word));
+                    form.appendChild(orth);
+
+
+                    entry.appendChild(form);
+
+
+                    String[] definitionsArray = definitions.split(";"); // split the definitions string into an array
+                    for (int j = 0; j < definitionsArray.length; j++) {
+                        String definition = definitionsArray[j].trim(); // trim any leading/trailing whitespace from the definition
+
+                        // Create a new "sense" element with the n attribute set to the current index + 1
+                        Element sense = doc.createElement("sense");
+                        sense.setAttribute("n", Integer.toString(j + 1));
+
+
+                        Element cit = doc.createElement("cit");
+                        cit.setAttribute("type", "trans");
+
+
+                        Element quote = doc.createElement("quote");
+                        quote.appendChild(doc.createTextNode(definition));
+
+
+                        cit.appendChild(quote);
+
+
+                        sense.appendChild(cit);
+
+
+                        entry.appendChild(sense);
+
+                        Element body = (Element) text.getElementsByTagName("body").item(0);
+                        body.appendChild(entry);
+
+
+                        // Write the modified document back to file
+                        TransformerFactory tf = TransformerFactory.newInstance();
+                        Transformer transformer = tf.newTransformer();
+                        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                        DOMSource source = new DOMSource(doc);
+                        StreamResult result = new StreamResult(new File(Config.ita_eng_tei));
+                        transformer.transform(source, result);
+
+                    }
+                }
+                case GREEK: {
+
+                    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder db = dbf.newDocumentBuilder();
+                    Document doc = db.parse(Config.ita_ell_tei);
+                    Element text = doc.getDocumentElement();
+
+                    Element entry = doc.createElement("entry");
+
+
+                    Element form = doc.createElement("form");
+
+
+                    Element orth = doc.createElement("orth");
+                    orth.appendChild(doc.createTextNode(word));
+                    form.appendChild(orth);
+
+
+                    entry.appendChild(form);
+
+
+                    String[] definitionsArray = definitions.split(";"); // split the definitions string into an array
+                    for (int j = 0; j < definitionsArray.length; j++) {
+                        String definition = definitionsArray[j].trim(); // trim any leading/trailing whitespace from the definition
+
+                        // Create a new "sense" element with the n attribute set to the current index + 1
+                        Element sense = doc.createElement("sense");
+                        sense.setAttribute("n", Integer.toString(j + 1));
+
+
+                        Element cit = doc.createElement("cit");
+                        cit.setAttribute("type", "trans");
+
+
+                        Element quote = doc.createElement("quote");
+                        quote.appendChild(doc.createTextNode(definition));
+
+
+                        cit.appendChild(quote);
+
+
+                        sense.appendChild(cit);
+
+
+                        entry.appendChild(sense);
+
+                        Element body = (Element) text.getElementsByTagName("body").item(0);
+                        body.appendChild(entry);
+
+
+                        // Write the modified document back to file
+                        TransformerFactory tf = TransformerFactory.newInstance();
+                        Transformer transformer = tf.newTransformer();
+                        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                        DOMSource source = new DOMSource(doc);
+                        StreamResult result = new StreamResult(new File(Config.ita_ell_tei));
+                        transformer.transform(source, result);
+
+                    }
+                }
+                case SWEDISH: {
+
+                    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder db = dbf.newDocumentBuilder();
+                    Document doc = db.parse(Config.ita_swe_tei);
+                    Element text = doc.getDocumentElement();
+
+                    Element entry = doc.createElement("entry");
+
+
+                    Element form = doc.createElement("form");
+
+
+                    Element orth = doc.createElement("orth");
+                    orth.appendChild(doc.createTextNode(word));
+                    form.appendChild(orth);
+
+
+                    entry.appendChild(form);
+
+
+                    String[] definitionsArray = definitions.split(";"); // split the definitions string into an array
+                    for (int j = 0; j < definitionsArray.length; j++) {
+                        String definition = definitionsArray[j].trim(); // trim any leading/trailing whitespace from the definition
+
+                        // Create a new "sense" element with the n attribute set to the current index + 1
+                        Element sense = doc.createElement("sense");
+                        sense.setAttribute("n", Integer.toString(j + 1));
+
+
+                        Element cit = doc.createElement("cit");
+                        cit.setAttribute("type", "trans");
+
+
+                        Element quote = doc.createElement("quote");
+                        quote.appendChild(doc.createTextNode(definition));
+
+
+                        cit.appendChild(quote);
+
+
+                        sense.appendChild(cit);
+
+
+                        entry.appendChild(sense);
+
+                        Element body = (Element) text.getElementsByTagName("body").item(0);
+                        body.appendChild(entry);
+
+
+                        // Write the modified document back to file
+                        TransformerFactory tf = TransformerFactory.newInstance();
+                        Transformer transformer = tf.newTransformer();
+                        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                        DOMSource source = new DOMSource(doc);
+                        StreamResult result = new StreamResult(new File(Config.ita_swe_tei));
+                        transformer.transform(source, result);
+
+                    }
+                }
+                case GERMAN: {
+
+                    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder db = dbf.newDocumentBuilder();
+                    Document doc = db.parse(Config.ita_deu_tei);
+                    Element text = doc.getDocumentElement();
+
+                    Element entry = doc.createElement("entry");
+
+
+                    Element form = doc.createElement("form");
+
+
+                    Element orth = doc.createElement("orth");
+                    orth.appendChild(doc.createTextNode(word));
+                    form.appendChild(orth);
+
+
+                    entry.appendChild(form);
+
+
+                    String[] definitionsArray = definitions.split(";"); // split the definitions string into an array
+                    for (int j = 0; j < definitionsArray.length; j++) {
+                        String definition = definitionsArray[j].trim(); // trim any leading/trailing whitespace from the definition
+
+                        // Create a new "sense" element with the n attribute set to the current index + 1
+                        Element sense = doc.createElement("sense");
+                        sense.setAttribute("n", Integer.toString(j + 1));
+
+
+                        Element cit = doc.createElement("cit");
+                        cit.setAttribute("type", "trans");
+
+
+                        Element quote = doc.createElement("quote");
+                        quote.appendChild(doc.createTextNode(definition));
+
+
+                        cit.appendChild(quote);
+
+
+                        sense.appendChild(cit);
+
+
+                        entry.appendChild(sense);
+
+                        Element body = (Element) text.getElementsByTagName("body").item(0);
+                        body.appendChild(entry);
+
+
+                        // Write the modified document back to file
+                        TransformerFactory tf = TransformerFactory.newInstance();
+                        Transformer transformer = tf.newTransformer();
+                        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                        DOMSource source = new DOMSource(doc);
+                        StreamResult result = new StreamResult(new File(Config.ita_deu_tei));
+                        transformer.transform(source, result);
+
+                    }
+                }
+
+
+            }
+
+
+        }
 
 
     }
 
-    public void addGreek() {
+    public void addGer(String word, String definitions) throws ParserConfigurationException, IOException, SAXException, TransformerException {
+        if (sourceLangComboBox.getValue() == null) {
+            sourceLangComboBox.selectIndex(0);
+        }
+        Word sourceLang = sourceLangComboBox.getValue();
+
+
+        for (int i = 0; i < dataManager.getDEUXDictionaries().size(); i++) {
+            switch (sourceLang.getLanguage()) {
+                case TURKISH: {
+
+                    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder db = dbf.newDocumentBuilder();
+                    Document doc = db.parse(Config.deu_tur_tei);
+                    Element text = doc.getDocumentElement();
+
+                    Element entry = doc.createElement("entry");
+
+
+                    Element form = doc.createElement("form");
+
+
+                    Element orth = doc.createElement("orth");
+                    orth.appendChild(doc.createTextNode(word));
+                    form.appendChild(orth);
+
+
+                    entry.appendChild(form);
+
+
+                    String[] definitionsArray = definitions.split(";"); // split the definitions string into an array
+                    for (int j = 0; j < definitionsArray.length; j++) {
+                        String definition = definitionsArray[j].trim(); // trim any leading/trailing whitespace from the definition
+
+                        // Create a new "sense" element with the n attribute set to the current index + 1
+                        Element sense = doc.createElement("sense");
+                        sense.setAttribute("n", Integer.toString(j + 1));
+
+
+                        Element cit = doc.createElement("cit");
+                        cit.setAttribute("type", "trans");
+
+
+                        Element quote = doc.createElement("quote");
+                        quote.appendChild(doc.createTextNode(definition));
+
+
+                        cit.appendChild(quote);
+
+
+                        sense.appendChild(cit);
+
+
+                        entry.appendChild(sense);
+
+                        Element body = (Element) text.getElementsByTagName("body").item(0);
+                        body.appendChild(entry);
+
+
+                        // Write the modified document back to file
+                        TransformerFactory tf = TransformerFactory.newInstance();
+                        Transformer transformer = tf.newTransformer();
+                        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                        DOMSource source = new DOMSource(doc);
+                        StreamResult result = new StreamResult(new File(Config.deu_tur_tei));
+                        transformer.transform(source, result);
+
+                    }
+                }
+
+                break;
+                case FRENCH: {
+                    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder db = dbf.newDocumentBuilder();
+                    Document doc = db.parse(Config.deu_fra_tei);
+                    Element text = doc.getDocumentElement();
+                    Element entry = doc.createElement("entry");
+
+
+                    Element form = doc.createElement("form");
+
+
+                    Element orth = doc.createElement("orth");
+                    orth.appendChild(doc.createTextNode(word));
+                    form.appendChild(orth);
+
+
+                    entry.appendChild(form);
+
+
+                    String[] definitionsArray = definitions.split(";"); // split the definitions string into an array
+                    for (int j = 0; j < definitionsArray.length; j++) {
+                        String definition = definitionsArray[j].trim(); // trim any leading/trailing whitespace from the definition
+
+                        // Create a new "sense" element with the n attribute set to the current index + 1
+                        Element sense = doc.createElement("sense");
+                        sense.setAttribute("n", Integer.toString(j + 1));
+
+
+                        Element cit = doc.createElement("cit");
+                        cit.setAttribute("type", "trans");
+
+
+                        Element quote = doc.createElement("quote");
+                        quote.appendChild(doc.createTextNode(definition));
+
+
+                        cit.appendChild(quote);
+
+
+                        sense.appendChild(cit);
+
+
+                        entry.appendChild(sense);
+
+                        Element body = (Element) text.getElementsByTagName("body").item(0);
+                        body.appendChild(entry);
+
+
+                        // Write the modified document back to file
+                        TransformerFactory tf = TransformerFactory.newInstance();
+                        Transformer transformer = tf.newTransformer();
+                        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                        DOMSource source = new DOMSource(doc);
+                        StreamResult result = new StreamResult(new File(Config.deu_fra_tei));
+                        transformer.transform(source, result);
+                        break;
+
+                    }
+
+                }
+                case ENGLISH: {
+
+                    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder db = dbf.newDocumentBuilder();
+                    Document doc = db.parse(Config.deu_eng_tei);
+                    Element text = doc.getDocumentElement();
+
+                    Element entry = doc.createElement("entry");
+
+
+                    Element form = doc.createElement("form");
+
+
+                    Element orth = doc.createElement("orth");
+                    orth.appendChild(doc.createTextNode(word));
+                    form.appendChild(orth);
+
+
+                    entry.appendChild(form);
+
+
+                    String[] definitionsArray = definitions.split(";"); // split the definitions string into an array
+                    for (int j = 0; j < definitionsArray.length; j++) {
+                        String definition = definitionsArray[j].trim(); // trim any leading/trailing whitespace from the definition
+
+                        // Create a new "sense" element with the n attribute set to the current index + 1
+                        Element sense = doc.createElement("sense");
+                        sense.setAttribute("n", Integer.toString(j + 1));
+
+
+                        Element cit = doc.createElement("cit");
+                        cit.setAttribute("type", "trans");
+
+
+                        Element quote = doc.createElement("quote");
+                        quote.appendChild(doc.createTextNode(definition));
+
+
+                        cit.appendChild(quote);
+
+
+                        sense.appendChild(cit);
+
+
+                        entry.appendChild(sense);
+
+                        Element body = (Element) text.getElementsByTagName("body").item(0);
+                        body.appendChild(entry);
+
+
+                        // Write the modified document back to file
+                        TransformerFactory tf = TransformerFactory.newInstance();
+                        Transformer transformer = tf.newTransformer();
+                        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                        DOMSource source = new DOMSource(doc);
+                        StreamResult result = new StreamResult(new File(Config.deu_eng_tei));
+                        transformer.transform(source, result);
+
+                    }
+                }
+                case GREEK: {
+
+                    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder db = dbf.newDocumentBuilder();
+                    Document doc = db.parse(Config.deu_ell_tei);
+                    Element text = doc.getDocumentElement();
+
+                    Element entry = doc.createElement("entry");
+
+
+                    Element form = doc.createElement("form");
+
+
+                    Element orth = doc.createElement("orth");
+                    orth.appendChild(doc.createTextNode(word));
+                    form.appendChild(orth);
+
+
+                    entry.appendChild(form);
+
+
+                    String[] definitionsArray = definitions.split(";"); // split the definitions string into an array
+                    for (int j = 0; j < definitionsArray.length; j++) {
+                        String definition = definitionsArray[j].trim(); // trim any leading/trailing whitespace from the definition
+
+                        // Create a new "sense" element with the n attribute set to the current index + 1
+                        Element sense = doc.createElement("sense");
+                        sense.setAttribute("n", Integer.toString(j + 1));
+
+
+                        Element cit = doc.createElement("cit");
+                        cit.setAttribute("type", "trans");
+
+
+                        Element quote = doc.createElement("quote");
+                        quote.appendChild(doc.createTextNode(definition));
+
+
+                        cit.appendChild(quote);
+
+
+                        sense.appendChild(cit);
+
+
+                        entry.appendChild(sense);
+
+                        Element body = (Element) text.getElementsByTagName("body").item(0);
+                        body.appendChild(entry);
+
+
+                        // Write the modified document back to file
+                        TransformerFactory tf = TransformerFactory.newInstance();
+                        Transformer transformer = tf.newTransformer();
+                        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                        DOMSource source = new DOMSource(doc);
+                        StreamResult result = new StreamResult(new File(Config.deu_ell_tei));
+                        transformer.transform(source, result);
+
+                    }
+                }
+                case SWEDISH: {
+
+                    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder db = dbf.newDocumentBuilder();
+                    Document doc = db.parse(Config.deu_swe_tei);
+                    Element text = doc.getDocumentElement();
+
+                    Element entry = doc.createElement("entry");
+
+
+                    Element form = doc.createElement("form");
+
+
+                    Element orth = doc.createElement("orth");
+                    orth.appendChild(doc.createTextNode(word));
+                    form.appendChild(orth);
+
+
+                    entry.appendChild(form);
+
+
+                    String[] definitionsArray = definitions.split(";"); // split the definitions string into an array
+                    for (int j = 0; j < definitionsArray.length; j++) {
+                        String definition = definitionsArray[j].trim(); // trim any leading/trailing whitespace from the definition
+
+                        // Create a new "sense" element with the n attribute set to the current index + 1
+                        Element sense = doc.createElement("sense");
+                        sense.setAttribute("n", Integer.toString(j + 1));
+
+
+                        Element cit = doc.createElement("cit");
+                        cit.setAttribute("type", "trans");
+
+
+                        Element quote = doc.createElement("quote");
+                        quote.appendChild(doc.createTextNode(definition));
+
+
+                        cit.appendChild(quote);
+
+
+                        sense.appendChild(cit);
+
+
+                        entry.appendChild(sense);
+
+                        Element body = (Element) text.getElementsByTagName("body").item(0);
+                        body.appendChild(entry);
+
+
+                        // Write the modified document back to file
+                        TransformerFactory tf = TransformerFactory.newInstance();
+                        Transformer transformer = tf.newTransformer();
+                        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                        DOMSource source = new DOMSource(doc);
+                        StreamResult result = new StreamResult(new File(Config.deu_swe_tei));
+                        transformer.transform(source, result);
+
+                    }
+                }
+                case ITALIAN: {
+
+                    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder db = dbf.newDocumentBuilder();
+                    Document doc = db.parse(Config.deu_ita_tei);
+                    Element text = doc.getDocumentElement();
+
+                    Element entry = doc.createElement("entry");
+
+
+                    Element form = doc.createElement("form");
+
+
+                    Element orth = doc.createElement("orth");
+                    orth.appendChild(doc.createTextNode(word));
+                    form.appendChild(orth);
+
+
+                    entry.appendChild(form);
+
+
+                    String[] definitionsArray = definitions.split(";"); // split the definitions string into an array
+                    for (int j = 0; j < definitionsArray.length; j++) {
+                        String definition = definitionsArray[j].trim(); // trim any leading/trailing whitespace from the definition
+
+                        // Create a new "sense" element with the n attribute set to the current index + 1
+                        Element sense = doc.createElement("sense");
+                        sense.setAttribute("n", Integer.toString(j + 1));
+
+
+                        Element cit = doc.createElement("cit");
+                        cit.setAttribute("type", "trans");
+
+
+                        Element quote = doc.createElement("quote");
+                        quote.appendChild(doc.createTextNode(definition));
+
+
+                        cit.appendChild(quote);
+
+
+                        sense.appendChild(cit);
+
+
+                        entry.appendChild(sense);
+
+                        Element body = (Element) text.getElementsByTagName("body").item(0);
+                        body.appendChild(entry);
+
+
+                        // Write the modified document back to file
+                        TransformerFactory tf = TransformerFactory.newInstance();
+                        Transformer transformer = tf.newTransformer();
+                        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                        DOMSource source = new DOMSource(doc);
+                        StreamResult result = new StreamResult(new File(Config.deu_ita_tei));
+                        transformer.transform(source, result);
+
+                    }
+                }
+
+
+            }
+
+
+        }
+
+
     }
 
-    public void addFra() {
+    public void addFra(String word, String definitions) throws ParserConfigurationException, IOException, SAXException, TransformerException {
+
+
+        if (sourceLangComboBox.getValue() == null) {
+            sourceLangComboBox.selectIndex(0);
+        }
+        Word sourceLang = sourceLangComboBox.getValue();
+
+
+        for (int i = 0; i < dataManager.getFRAXDictionaries().size(); i++) {
+            switch (sourceLang.getLanguage()) {
+                case TURKISH: {
+
+                    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder db = dbf.newDocumentBuilder();
+                    Document doc = db.parse(Config.fra_tur_tei);
+                    Element text = doc.getDocumentElement();
+
+                    Element entry = doc.createElement("entry");
+
+
+                    Element form = doc.createElement("form");
+
+
+                    Element orth = doc.createElement("orth");
+                    orth.appendChild(doc.createTextNode(word));
+                    form.appendChild(orth);
+
+
+                    entry.appendChild(form);
+
+
+                    String[] definitionsArray = definitions.split(";"); // split the definitions string into an array
+                    for (int j = 0; j < definitionsArray.length; j++) {
+                        String definition = definitionsArray[j].trim(); // trim any leading/trailing whitespace from the definition
+
+                        // Create a new "sense" element with the n attribute set to the current index + 1
+                        Element sense = doc.createElement("sense");
+                        sense.setAttribute("n", Integer.toString(j + 1));
+
+
+                        Element cit = doc.createElement("cit");
+                        cit.setAttribute("type", "trans");
+
+
+                        Element quote = doc.createElement("quote");
+                        quote.appendChild(doc.createTextNode(definition));
+
+
+                        cit.appendChild(quote);
+
+
+                        sense.appendChild(cit);
+
+
+                        entry.appendChild(sense);
+
+                        Element body = (Element) text.getElementsByTagName("body").item(0);
+                        body.appendChild(entry);
+
+
+                        // Write the modified document back to file
+                        TransformerFactory tf = TransformerFactory.newInstance();
+                        Transformer transformer = tf.newTransformer();
+                        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                        DOMSource source = new DOMSource(doc);
+                        StreamResult result = new StreamResult(new File(Config.fra_tur_tei));
+                        transformer.transform(source, result);
+
+                    }
+                }
+
+                break;
+                case ENGLISH: {
+                    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder db = dbf.newDocumentBuilder();
+                    Document doc = db.parse(Config.fra_eng_tei);
+                    Element text = doc.getDocumentElement();
+                    Element entry = doc.createElement("entry");
+
+                    Element form = doc.createElement("form");
+
+                    Element orth = doc.createElement("orth");
+                    orth.appendChild(doc.createTextNode(word));
+                    form.appendChild(orth);
+
+
+                    entry.appendChild(form);
+
+
+                    String[] definitionsArray = definitions.split(";"); // split the definitions string into an array
+                    for (int j = 0; j < definitionsArray.length; j++) {
+                        String definition = definitionsArray[j].trim(); // trim any leading/trailing whitespace from the definition
+
+                        // Create a new "sense" element with the n attribute set to the current index + 1
+                        Element sense = doc.createElement("sense");
+                        sense.setAttribute("n", Integer.toString(j + 1));
+
+
+                        Element cit = doc.createElement("cit");
+                        cit.setAttribute("type", "trans");
+
+
+                        Element quote = doc.createElement("quote");
+                        quote.appendChild(doc.createTextNode(definition));
+
+
+                        cit.appendChild(quote);
+
+
+                        sense.appendChild(cit);
+
+
+                        entry.appendChild(sense);
+
+                        Element body = (Element) text.getElementsByTagName("body").item(0);
+                        body.appendChild(entry);
+
+
+                        // Write the modified document back to file
+                        TransformerFactory tf = TransformerFactory.newInstance();
+                        Transformer transformer = tf.newTransformer();
+                        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                        DOMSource source = new DOMSource(doc);
+                        StreamResult result = new StreamResult(new File(Config.fra_eng_tei));
+                        transformer.transform(source, result);
+
+                    }
+                    break;
+
+                }
+                case ITALIAN: {
+
+                    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder db = dbf.newDocumentBuilder();
+                    Document doc = db.parse(Config.fra_ita_tei);
+                    Element text = doc.getDocumentElement();
+
+                    Element entry = doc.createElement("entry");
+
+
+                    Element form = doc.createElement("form");
+
+
+                    Element orth = doc.createElement("orth");
+                    orth.appendChild(doc.createTextNode(word));
+                    form.appendChild(orth);
+
+
+                    entry.appendChild(form);
+
+
+                    String[] definitionsArray = definitions.split(";"); // split the definitions string into an array
+                    for (int j = 0; j < definitionsArray.length; j++) {
+                        String definition = definitionsArray[j].trim(); // trim any leading/trailing whitespace from the definition
+
+                        // Create a new "sense" element with the n attribute set to the current index + 1
+                        Element sense = doc.createElement("sense");
+                        sense.setAttribute("n", Integer.toString(j + 1));
+
+
+                        Element cit = doc.createElement("cit");
+                        cit.setAttribute("type", "trans");
+
+
+                        Element quote = doc.createElement("quote");
+                        quote.appendChild(doc.createTextNode(definition));
+
+
+                        cit.appendChild(quote);
+
+
+                        sense.appendChild(cit);
+
+
+                        entry.appendChild(sense);
+
+                        Element body = (Element) text.getElementsByTagName("body").item(0);
+                        body.appendChild(entry);
+
+
+                        // Write the modified document back to file
+                        TransformerFactory tf = TransformerFactory.newInstance();
+                        Transformer transformer = tf.newTransformer();
+                        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                        DOMSource source = new DOMSource(doc);
+                        StreamResult result = new StreamResult(new File(Config.fra_ita_tei));
+                        transformer.transform(source, result);
+
+                    }
+                }
+                case GREEK: {
+
+                    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder db = dbf.newDocumentBuilder();
+                    Document doc = db.parse(Config.fra_ell_tei);
+                    Element text = doc.getDocumentElement();
+
+                    Element entry = doc.createElement("entry");
+
+
+                    Element form = doc.createElement("form");
+
+
+                    Element orth = doc.createElement("orth");
+                    orth.appendChild(doc.createTextNode(word));
+                    form.appendChild(orth);
+
+
+                    entry.appendChild(form);
+
+
+                    String[] definitionsArray = definitions.split(";"); // split the definitions string into an array
+                    for (int j = 0; j < definitionsArray.length; j++) {
+                        String definition = definitionsArray[j].trim(); // trim any leading/trailing whitespace from the definition
+
+                        // Create a new "sense" element with the n attribute set to the current index + 1
+                        Element sense = doc.createElement("sense");
+                        sense.setAttribute("n", Integer.toString(j + 1));
+
+
+                        Element cit = doc.createElement("cit");
+                        cit.setAttribute("type", "trans");
+
+
+                        Element quote = doc.createElement("quote");
+                        quote.appendChild(doc.createTextNode(definition));
+
+
+                        cit.appendChild(quote);
+
+
+                        sense.appendChild(cit);
+
+
+                        entry.appendChild(sense);
+
+                        Element body = (Element) text.getElementsByTagName("body").item(0);
+                        body.appendChild(entry);
+
+
+                        // Write the modified document back to file
+                        TransformerFactory tf = TransformerFactory.newInstance();
+                        Transformer transformer = tf.newTransformer();
+                        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                        DOMSource source = new DOMSource(doc);
+                        StreamResult result = new StreamResult(new File(Config.fra_ell_tei));
+                        transformer.transform(source, result);
+
+                    }
+                }
+                case SWEDISH: {
+
+                    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder db = dbf.newDocumentBuilder();
+                    Document doc = db.parse(Config.fra_swe_tei);
+                    Element text = doc.getDocumentElement();
+
+                    Element entry = doc.createElement("entry");
+
+
+                    Element form = doc.createElement("form");
+
+
+                    Element orth = doc.createElement("orth");
+                    orth.appendChild(doc.createTextNode(word));
+                    form.appendChild(orth);
+
+
+                    entry.appendChild(form);
+
+
+                    String[] definitionsArray = definitions.split(";"); // split the definitions string into an array
+                    for (int j = 0; j < definitionsArray.length; j++) {
+                        String definition = definitionsArray[j].trim(); // trim any leading/trailing whitespace from the definition
+
+                        // Create a new "sense" element with the n attribute set to the current index + 1
+                        Element sense = doc.createElement("sense");
+                        sense.setAttribute("n", Integer.toString(j + 1));
+
+
+                        Element cit = doc.createElement("cit");
+                        cit.setAttribute("type", "trans");
+
+
+                        Element quote = doc.createElement("quote");
+                        quote.appendChild(doc.createTextNode(definition));
+
+
+                        cit.appendChild(quote);
+
+
+                        sense.appendChild(cit);
+
+
+                        entry.appendChild(sense);
+
+                        Element body = (Element) text.getElementsByTagName("body").item(0);
+                        body.appendChild(entry);
+
+
+                        // Write the modified document back to file
+                        TransformerFactory tf = TransformerFactory.newInstance();
+                        Transformer transformer = tf.newTransformer();
+                        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                        DOMSource source = new DOMSource(doc);
+                        StreamResult result = new StreamResult(new File(Config.fra_swe_tei));
+                        transformer.transform(source, result);
+
+                    }
+                }
+                case GERMAN: {
+
+                    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder db = dbf.newDocumentBuilder();
+                    Document doc = db.parse(Config.fra_deu_tei);
+                    Element text = doc.getDocumentElement();
+
+                    Element entry = doc.createElement("entry");
+
+
+                    Element form = doc.createElement("form");
+
+
+                    Element orth = doc.createElement("orth");
+                    orth.appendChild(doc.createTextNode(word));
+                    form.appendChild(orth);
+
+
+                    entry.appendChild(form);
+
+
+                    String[] definitionsArray = definitions.split(";"); // split the definitions string into an array
+                    for (int j = 0; j < definitionsArray.length; j++) {
+                        String definition = definitionsArray[j].trim(); // trim any leading/trailing whitespace from the definition
+
+                        // Create a new "sense" element with the n attribute set to the current index + 1
+                        Element sense = doc.createElement("sense");
+                        sense.setAttribute("n", Integer.toString(j + 1));
+
+
+                        Element cit = doc.createElement("cit");
+                        cit.setAttribute("type", "trans");
+
+
+                        Element quote = doc.createElement("quote");
+                        quote.appendChild(doc.createTextNode(definition));
+
+
+                        cit.appendChild(quote);
+
+
+                        sense.appendChild(cit);
+
+
+                        entry.appendChild(sense);
+
+                        Element body = (Element) text.getElementsByTagName("body").item(0);
+                        body.appendChild(entry);
+
+
+                        // Write the modified document back to file
+                        TransformerFactory tf = TransformerFactory.newInstance();
+                        Transformer transformer = tf.newTransformer();
+                        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                        DOMSource source = new DOMSource(doc);
+                        StreamResult result = new StreamResult(new File(Config.fra_deu_tei));
+                        transformer.transform(source, result);
+
+                    }
+                }
+
+
+            }
+
+
+        }
+
+
     }
 
-    public void addIta() {
-    }
+    public void addSwe(String word, String definitions) throws ParserConfigurationException, IOException, SAXException, TransformerException {
 
-    public void addSwe() {
-    }
 
-    public void addTur() {
-    }
+        if (sourceLangComboBox.getValue() == null) {
+            sourceLangComboBox.selectIndex(0);
+        }
+        Word sourceLang = sourceLangComboBox.getValue();
 
-    public void addVocab(String string) {
+
+        for (int i = 0; i < dataManager.getSWEXDictionaries().size(); i++) {
+            switch (sourceLang.getLanguage()) {
+                case TURKISH: {
+
+                    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder db = dbf.newDocumentBuilder();
+                    Document doc = db.parse(Config.swe_tur_tei);
+                    Element text = doc.getDocumentElement();
+
+                    Element entry = doc.createElement("entry");
+
+
+                    Element form = doc.createElement("form");
+
+
+                    Element orth = doc.createElement("orth");
+                    orth.appendChild(doc.createTextNode(word));
+                    form.appendChild(orth);
+
+
+                    entry.appendChild(form);
+
+
+                    String[] definitionsArray = definitions.split(";"); // split the definitions string into an array
+                    for (int j = 0; j < definitionsArray.length; j++) {
+                        String definition = definitionsArray[j].trim(); // trim any leading/trailing whitespace from the definition
+
+                        // Create a new "sense" element with the n attribute set to the current index + 1
+                        Element sense = doc.createElement("sense");
+                        sense.setAttribute("n", Integer.toString(j + 1));
+
+
+                        Element cit = doc.createElement("cit");
+                        cit.setAttribute("type", "trans");
+
+
+                        Element quote = doc.createElement("quote");
+                        quote.appendChild(doc.createTextNode(definition));
+
+
+                        cit.appendChild(quote);
+
+
+                        sense.appendChild(cit);
+
+
+                        entry.appendChild(sense);
+
+                        Element body = (Element) text.getElementsByTagName("body").item(0);
+                        body.appendChild(entry);
+
+
+                        // Write the modified document back to file
+                        TransformerFactory tf = TransformerFactory.newInstance();
+                        Transformer transformer = tf.newTransformer();
+                        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                        DOMSource source = new DOMSource(doc);
+                        StreamResult result = new StreamResult(new File(Config.swe_tur_tei));
+                        transformer.transform(source, result);
+
+                    }
+                }
+
+                break;
+                case FRENCH: {
+                    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder db = dbf.newDocumentBuilder();
+                    Document doc = db.parse(Config.swe_fra_tei);
+                    Element text = doc.getDocumentElement();
+                    Element entry = doc.createElement("entry");
+
+
+                    Element form = doc.createElement("form");
+
+
+                    Element orth = doc.createElement("orth");
+                    orth.appendChild(doc.createTextNode(word));
+                    form.appendChild(orth);
+
+
+                    entry.appendChild(form);
+
+
+                    String[] definitionsArray = definitions.split(";"); // split the definitions string into an array
+                    for (int j = 0; j < definitionsArray.length; j++) {
+                        String definition = definitionsArray[j].trim(); // trim any leading/trailing whitespace from the definition
+
+                        // Create a new "sense" element with the n attribute set to the current index + 1
+                        Element sense = doc.createElement("sense");
+                        sense.setAttribute("n", Integer.toString(j + 1));
+
+
+                        Element cit = doc.createElement("cit");
+                        cit.setAttribute("type", "trans");
+
+
+                        Element quote = doc.createElement("quote");
+                        quote.appendChild(doc.createTextNode(definition));
+
+
+                        cit.appendChild(quote);
+
+
+                        sense.appendChild(cit);
+
+
+                        entry.appendChild(sense);
+
+                        Element body = (Element) text.getElementsByTagName("body").item(0);
+                        body.appendChild(entry);
+
+
+                        // Write the modified document back to file
+                        TransformerFactory tf = TransformerFactory.newInstance();
+                        Transformer transformer = tf.newTransformer();
+                        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                        DOMSource source = new DOMSource(doc);
+                        StreamResult result = new StreamResult(new File(Config.swe_fra_tei));
+                        transformer.transform(source, result);
+                        break;
+
+                    }
+
+                }
+                case ITALIAN: {
+
+                    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder db = dbf.newDocumentBuilder();
+                    Document doc = db.parse(Config.swe_ita_tei);
+                    Element text = doc.getDocumentElement();
+
+                    Element entry = doc.createElement("entry");
+
+
+                    Element form = doc.createElement("form");
+
+
+                    Element orth = doc.createElement("orth");
+                    orth.appendChild(doc.createTextNode(word));
+                    form.appendChild(orth);
+
+
+                    entry.appendChild(form);
+
+
+                    String[] definitionsArray = definitions.split(";"); // split the definitions string into an array
+                    for (int j = 0; j < definitionsArray.length; j++) {
+                        String definition = definitionsArray[j].trim(); // trim any leading/trailing whitespace from the definition
+
+                        // Create a new "sense" element with the n attribute set to the current index + 1
+                        Element sense = doc.createElement("sense");
+                        sense.setAttribute("n", Integer.toString(j + 1));
+
+
+                        Element cit = doc.createElement("cit");
+                        cit.setAttribute("type", "trans");
+
+
+                        Element quote = doc.createElement("quote");
+                        quote.appendChild(doc.createTextNode(definition));
+
+
+                        cit.appendChild(quote);
+
+
+                        sense.appendChild(cit);
+
+
+                        entry.appendChild(sense);
+
+                        Element body = (Element) text.getElementsByTagName("body").item(0);
+                        body.appendChild(entry);
+
+
+                        // Write the modified document back to file
+                        TransformerFactory tf = TransformerFactory.newInstance();
+                        Transformer transformer = tf.newTransformer();
+                        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                        DOMSource source = new DOMSource(doc);
+                        StreamResult result = new StreamResult(new File(Config.swe_ita_tei));
+                        transformer.transform(source, result);
+
+                    }
+                }
+                case GREEK: {
+
+                    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder db = dbf.newDocumentBuilder();
+                    Document doc = db.parse(Config.swe_ell_tei);
+                    Element text = doc.getDocumentElement();
+
+                    Element entry = doc.createElement("entry");
+
+
+                    Element form = doc.createElement("form");
+
+
+                    Element orth = doc.createElement("orth");
+                    orth.appendChild(doc.createTextNode(word));
+                    form.appendChild(orth);
+
+
+                    entry.appendChild(form);
+
+
+                    String[] definitionsArray = definitions.split(";"); // split the definitions string into an array
+                    for (int j = 0; j < definitionsArray.length; j++) {
+                        String definition = definitionsArray[j].trim(); // trim any leading/trailing whitespace from the definition
+
+                        // Create a new "sense" element with the n attribute set to the current index + 1
+                        Element sense = doc.createElement("sense");
+                        sense.setAttribute("n", Integer.toString(j + 1));
+
+
+                        Element cit = doc.createElement("cit");
+                        cit.setAttribute("type", "trans");
+
+
+                        Element quote = doc.createElement("quote");
+                        quote.appendChild(doc.createTextNode(definition));
+
+
+                        cit.appendChild(quote);
+
+
+                        sense.appendChild(cit);
+
+
+                        entry.appendChild(sense);
+
+                        Element body = (Element) text.getElementsByTagName("body").item(0);
+                        body.appendChild(entry);
+
+
+                        // Write the modified document back to file
+                        TransformerFactory tf = TransformerFactory.newInstance();
+                        Transformer transformer = tf.newTransformer();
+                        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                        DOMSource source = new DOMSource(doc);
+                        StreamResult result = new StreamResult(new File(Config.swe_ell_tei));
+                        transformer.transform(source, result);
+
+                    }
+                }
+                case ENGLISH: {
+
+                    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder db = dbf.newDocumentBuilder();
+                    Document doc = db.parse(Config.swe_eng_tei);
+                    Element text = doc.getDocumentElement();
+
+                    Element entry = doc.createElement("entry");
+
+
+                    Element form = doc.createElement("form");
+
+
+                    Element orth = doc.createElement("orth");
+                    orth.appendChild(doc.createTextNode(word));
+                    form.appendChild(orth);
+
+
+                    entry.appendChild(form);
+
+
+                    String[] definitionsArray = definitions.split(";"); // split the definitions string into an array
+                    for (int j = 0; j < definitionsArray.length; j++) {
+                        String definition = definitionsArray[j].trim(); // trim any leading/trailing whitespace from the definition
+
+                        // Create a new "sense" element with the n attribute set to the current index + 1
+                        Element sense = doc.createElement("sense");
+                        sense.setAttribute("n", Integer.toString(j + 1));
+
+
+                        Element cit = doc.createElement("cit");
+                        cit.setAttribute("type", "trans");
+
+
+                        Element quote = doc.createElement("quote");
+                        quote.appendChild(doc.createTextNode(definition));
+
+
+                        cit.appendChild(quote);
+
+
+                        sense.appendChild(cit);
+
+
+                        entry.appendChild(sense);
+
+                        Element body = (Element) text.getElementsByTagName("body").item(0);
+                        body.appendChild(entry);
+
+
+                        // Write the modified document back to file
+                        TransformerFactory tf = TransformerFactory.newInstance();
+                        Transformer transformer = tf.newTransformer();
+                        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                        DOMSource source = new DOMSource(doc);
+                        StreamResult result = new StreamResult(new File(Config.swe_eng_tei));
+                        transformer.transform(source, result);
+
+                    }
+                }
+                case GERMAN: {
+
+                    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder db = dbf.newDocumentBuilder();
+                    Document doc = db.parse(Config.swe_deu_tei);
+                    Element text = doc.getDocumentElement();
+
+                    Element entry = doc.createElement("entry");
+
+
+                    Element form = doc.createElement("form");
+
+
+                    Element orth = doc.createElement("orth");
+                    orth.appendChild(doc.createTextNode(word));
+                    form.appendChild(orth);
+
+
+                    entry.appendChild(form);
+
+
+                    String[] definitionsArray = definitions.split(";"); // split the definitions string into an array
+                    for (int j = 0; j < definitionsArray.length; j++) {
+                        String definition = definitionsArray[j].trim(); // trim any leading/trailing whitespace from the definition
+
+                        // Create a new "sense" element with the n attribute set to the current index + 1
+                        Element sense = doc.createElement("sense");
+                        sense.setAttribute("n", Integer.toString(j + 1));
+
+
+                        Element cit = doc.createElement("cit");
+                        cit.setAttribute("type", "trans");
+
+
+                        Element quote = doc.createElement("quote");
+                        quote.appendChild(doc.createTextNode(definition));
+
+
+                        cit.appendChild(quote);
+
+
+                        sense.appendChild(cit);
+
+
+                        entry.appendChild(sense);
+
+                        Element body = (Element) text.getElementsByTagName("body").item(0);
+                        body.appendChild(entry);
+
+
+                        // Write the modified document back to file
+                        TransformerFactory tf = TransformerFactory.newInstance();
+                        Transformer transformer = tf.newTransformer();
+                        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                        DOMSource source = new DOMSource(doc);
+                        StreamResult result = new StreamResult(new File(Config.swe_deu_tei));
+                        transformer.transform(source, result);
+
+                    }
+                }
+
+
+            }
+
+
+        }
+
+
     }
 }
 

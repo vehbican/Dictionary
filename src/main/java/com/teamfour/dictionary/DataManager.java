@@ -1,80 +1,83 @@
 package com.teamfour.dictionary;
 
+import org.apache.commons.collections4.MultiValuedMap;
+import org.apache.commons.collections4.multimap.ArrayListValuedHashMap;
+
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DataManager {
 
+    //ENG-X
+    private HashMap<String, Word> ENG_TUR_DICT;
+    private HashMap<String, Word> ENG_FRA_DICT;
+    private HashMap<String, Word> ENG_GER_DICT;
+    private HashMap<String, Word> ENG_ITA_DICT;
+    private HashMap<String, Word> ENG_GRE_DICT;
+    private HashMap<String, Word> ENG_SWE_DICT;
 
-    private HashMap<Integer, Word> ENG_TUR_DICT;
-    private HashMap<Integer, Word> ENG_FRA_DICT;
-    private HashMap<Integer, Word> ENG_GER_DICT;
-    private HashMap<Integer, Word> ENG_ITA_DICT;
-    private HashMap<Integer, Word> ENG_GRE_DICT;
-    private HashMap<Integer, Word> ENG_SWE_DICT;
+    //FRA-X
+    private HashMap<String, Word> FRA_DEU_DICT;
+    private HashMap<String, Word> FRA_ELL_DICT;
+    private HashMap<String, Word> FRA_ENG_DICT;
+    private HashMap<String, Word> FRA_ITA_DICT;
+    private HashMap<String, Word> FRA_SWE_DICT;
+    private HashMap<String, Word> FRA_TUR_DICT;
 
+    //DEU-X
+    private HashMap<String, Word> DEU_ELL_DICT;
+    private HashMap<String, Word> DEU_ENG_DICT;
+    private HashMap<String, Word> DEU_FRA_DICT;
+    private HashMap<String, Word> DEU_ITA_DICT;
+    private HashMap<String, Word> DEU_SWE_DICT;
+    private HashMap<String, Word> DEU_TUR_DICT;
 
-    private HashMap<Integer, Word> FRA_DEU_DICT;
-    private HashMap<Integer, Word> FRA_ELL_DICT;
-    private HashMap<Integer, Word> FRA_ENG_DICT;
-    private HashMap<Integer, Word> FRA_ITA_DICT;
-    private HashMap<Integer, Word> FRA_SWE_DICT;
-    private HashMap<Integer, Word> FRA_TUR_DICT;
+    //ITA-X
+    private HashMap<String, Word> ITA_ELL_DICT;
+    private HashMap<String, Word> ITA_ENG_DICT;
+    private HashMap<String, Word> ITA_FRA_DICT;
+    private HashMap<String, Word> ITA_DEU_DICT;
+    private HashMap<String, Word> ITA_SWE_DICT;
+    private HashMap<String, Word> ITA_TUR_DICT;
 
+    //SWE-X
+    private HashMap<String, Word> SWE_DEU_DICT;
+    private HashMap<String, Word> SWE_ELL_DICT;
+    private HashMap<String, Word> SWE_ENG_DICT;
+    private HashMap<String, Word> SWE_FRA_DICT;
+    private HashMap<String, Word> SWE_ITA_DICT;
+    private HashMap<String, Word> SWE_TUR_DICT;
 
+    //ELL-ENG
+    private HashMap<String, Word> ELL_ENG_DICT;
 
-    private HashMap<Integer, Word> DEU_ELL_DICT;
-    private HashMap<Integer, Word> DEU_ENG_DICT;
-    private HashMap<Integer, Word> DEU_FRA_DICT;
-    private HashMap<Integer, Word> DEU_ITA_DICT;
-    private HashMap<Integer, Word> DEU_SWE_DICT;
-    private HashMap<Integer, Word> DEU_TUR_DICT;
-
-
-
-
-    private HashMap<Integer, Word> ITA_ELL_DICT;
-    private HashMap<Integer, Word> ITA_ENG_DICT;
-    private HashMap<Integer, Word> ITA_FRA_DICT;
-    private HashMap<Integer, Word> ITA_DEU_DICT;
-    private HashMap<Integer, Word> ITA_SWE_DICT;
-    private HashMap<Integer, Word> ITA_TUR_DICT;
-
-
-
-
-    private HashMap<Integer, Word> SWE_DEU_DICT;
-    private HashMap<Integer, Word> SWE_ELL_DICT;
-    private HashMap<Integer, Word> SWE_ENG_DICT;
-    private HashMap<Integer, Word> SWE_FRA_DICT;
-    private HashMap<Integer, Word> SWE_ITA_DICT;
-    private HashMap<Integer, Word> SWE_TUR_DICT;
-
-
-
-
-    private ArrayList<HashMap<Integer,Word>> FRAXDictionaries;
-    private ArrayList<HashMap<Integer, Word>> ENGXDictionaries;
-    private ArrayList<HashMap<Integer, Word>> DEUXDictionaries;
-    private ArrayList<HashMap<Integer,Word>> SWEXDictionaries;
-    private ArrayList<HashMap<Integer, Word>> ITAXDictionaries;
+    //TUR-ENG
+    private HashMap<String, Word> TUR_ENG_DICT;
 
 
+    private ArrayList<HashMap<String,Word>> FRAXDictionaries;
+    private ArrayList<HashMap<String, Word>> ENGXDictionaries;
+    private ArrayList<HashMap<String, Word>> DEUXDictionaries;
+    private ArrayList<HashMap<String,Word>> SWEXDictionaries;
+    private ArrayList<HashMap<String, Word>> ITAXDictionaries;
+
+    //X-ENG For Synonym Functionality
 
 
-    public HashMap<Integer,Word> WordsDatabase;
+
+
+    public MultiValuedMap<String,Word> WordsDatabase;
 
     public DataManager() {
 
         TEISAXParser teiParser = new TEISAXParser();
-        WordsDatabase = new HashMap<>();
+        WordsDatabase = new ArrayListValuedHashMap<>();
         ENGXDictionaries = new ArrayList<>();
         FRAXDictionaries = new ArrayList<>();
         DEUXDictionaries = new ArrayList<>();
         ITAXDictionaries = new ArrayList<>();
         SWEXDictionaries = new ArrayList<>();
-
 
         //From English to All
         ENG_TUR_DICT = teiParser.ParseIntoHashMap(this,Config.eng_tur_tei, Config.Languages.ENGLISH, Config.Languages.TURKISH);
@@ -92,9 +95,6 @@ public class DataManager {
         ENGXDictionaries.add(Config.eng_ger_index,ENG_GER_DICT);
 
         //From German to All
-
-
-
         DEU_TUR_DICT = teiParser.ParseIntoHashMap(this,Config.deu_tur_tei,Config.Languages.GERMAN,Config.Languages.TURKISH);
         DEU_ELL_DICT = teiParser.ParseIntoHashMap(this,Config.deu_ell_tei, Config.Languages.GERMAN, Config.Languages.GREEK);
         DEU_ENG_DICT = teiParser.ParseIntoHashMap(this,Config.deu_eng_tei, Config.Languages.GERMAN, Config.Languages.ENGLISH);
@@ -109,9 +109,7 @@ public class DataManager {
         DEUXDictionaries.add(Config.deu_ita_index,DEU_ITA_DICT);
         DEUXDictionaries.add(Config.deu_swe_index,DEU_SWE_DICT);
 
-
         //From French to all
-
         FRA_ENG_DICT = teiParser.ParseIntoHashMap(this,Config.fra_eng_tei,Config.Languages.FRENCH,Config.Languages.ENGLISH);
         FRA_ITA_DICT = teiParser.ParseIntoHashMap(this,Config.fra_ita_tei, Config.Languages.FRENCH, Config.Languages.ITALIAN);
         FRA_DEU_DICT = teiParser.ParseIntoHashMap(this,Config.fra_deu_tei, Config.Languages.FRENCH, Config.Languages.GERMAN);
@@ -127,7 +125,6 @@ public class DataManager {
         FRAXDictionaries.add(Config.fra_swe_index,FRA_SWE_DICT);
 
         //From Italian to all
-
         ITA_ENG_DICT = teiParser.ParseIntoHashMap(this,Config.ita_eng_tei,Config.Languages.ITALIAN,Config.Languages.ENGLISH);
         ITA_FRA_DICT = teiParser.ParseIntoHashMap(this,Config.ita_fra_tei, Config.Languages.ITALIAN, Config.Languages.FRENCH);
         ITA_DEU_DICT = teiParser.ParseIntoHashMap(this,Config.ita_deu_tei, Config.Languages.ITALIAN, Config.Languages.GERMAN);
@@ -143,7 +140,6 @@ public class DataManager {
         ITAXDictionaries.add(Config.ita_swe_index,ITA_SWE_DICT);
 
         // From Swedish to All
-
         SWE_ENG_DICT = teiParser.ParseIntoHashMap(this,Config.swe_eng_tei,Config.Languages.SWEDISH,Config.Languages.ENGLISH);
         SWE_FRA_DICT = teiParser.ParseIntoHashMap(this,Config.swe_fra_tei, Config.Languages.SWEDISH, Config.Languages.FRENCH);
         SWE_DEU_DICT = teiParser.ParseIntoHashMap(this,Config.swe_deu_tei, Config.Languages.SWEDISH, Config.Languages.GERMAN);
@@ -158,6 +154,11 @@ public class DataManager {
         SWEXDictionaries.add(Config.swe_ell_index,SWE_ELL_DICT);
         SWEXDictionaries.add(Config.swe_ita_index,SWE_ITA_DICT);
 
+        // From Turkish to English
+        TUR_ENG_DICT = teiParser.ParseIntoHashMap(this,Config.tur_eng_tei, Config.Languages.TURKISH, Config.Languages.ENGLISH);
+
+        // From Greek to English
+        ELL_ENG_DICT = teiParser.ParseIntoHashMap(this,Config.ell_eng_tei, Config.Languages.GREEK, Config.Languages.ENGLISH);
 
 
 
@@ -252,48 +253,151 @@ public class DataManager {
         return new String[]{turkeyFlagImg, franceFlagImg ,italyFlagImg, greeceFlagImg, swedenFlagImg,germanyFlagImg,englandFlagImg};
     }
 
-    public HashMap<Integer, Word> getENG_TUR_DICT() {
+    public HashMap<String, Word> getENG_TUR_DICT() {
         return ENG_TUR_DICT;
     }
 
-    public HashMap<Integer, Word> getENG_FRA_DICT() {
+    public HashMap<String, Word> getENG_FRA_DICT() {
         return ENG_FRA_DICT;
     }
 
-    public HashMap<Integer, Word> getENG_GER_DICT() {
+    public HashMap<String, Word> getENG_GER_DICT() {
         return ENG_GER_DICT;
     }
 
-    public HashMap<Integer, Word> getENG_ITA_DICT() {
+    public HashMap<String, Word> getENG_ITA_DICT() {
         return ENG_ITA_DICT;
     }
 
-    public HashMap<Integer, Word> getENG_GRE_DICT() {
+    public HashMap<String, Word> getENG_GRE_DICT() {
         return ENG_GRE_DICT;
     }
 
-    public HashMap<Integer, Word> getENG_SWE_DICT() {
+    public HashMap<String, Word> getENG_SWE_DICT() {
         return ENG_SWE_DICT;
     }
 
-    public ArrayList<HashMap<Integer, Word>> getENGXDictionaries() {
-        return ENGXDictionaries;
+    public HashMap<String, Word> getELL_ENG_DICT() {
+        return ELL_ENG_DICT;
     }
 
-    public ArrayList<HashMap<Integer,Word>> getDEUXDictionaries(){
+    public HashMap<String, Word> getTUR_ENG_DICT() {
+        return TUR_ENG_DICT;
+    }
+
+    public HashMap<String, Word> getFRA_DEU_DICT() {
+        return FRA_DEU_DICT;
+    }
+
+    public HashMap<String, Word> getFRA_ELL_DICT() {
+        return FRA_ELL_DICT;
+    }
+
+    public HashMap<String, Word> getFRA_ENG_DICT() {
+        return FRA_ENG_DICT;
+    }
+
+    public HashMap<String, Word> getFRA_ITA_DICT() {
+        return FRA_ITA_DICT;
+    }
+
+    public HashMap<String, Word> getFRA_SWE_DICT() {
+        return FRA_SWE_DICT;
+    }
+
+    public HashMap<String, Word> getFRA_TUR_DICT() {
+        return FRA_TUR_DICT;
+    }
+
+    public HashMap<String, Word> getDEU_ELL_DICT() {
+        return DEU_ELL_DICT;
+    }
+
+    public HashMap<String, Word> getDEU_ENG_DICT() {
+        return DEU_ENG_DICT;
+    }
+
+    public HashMap<String, Word> getDEU_FRA_DICT() {
+        return DEU_FRA_DICT;
+    }
+
+    public HashMap<String, Word> getDEU_ITA_DICT() {
+        return DEU_ITA_DICT;
+    }
+
+    public HashMap<String, Word> getDEU_SWE_DICT() {
+        return DEU_SWE_DICT;
+    }
+
+    public HashMap<String, Word> getDEU_TUR_DICT() {
+        return DEU_TUR_DICT;
+    }
+
+    public HashMap<String, Word> getITA_ELL_DICT() {
+        return ITA_ELL_DICT;
+    }
+
+    public HashMap<String, Word> getITA_ENG_DICT() {
+        return ITA_ENG_DICT;
+    }
+
+    public HashMap<String, Word> getITA_FRA_DICT() {
+        return ITA_FRA_DICT;
+    }
+
+    public HashMap<String, Word> getITA_DEU_DICT() {
+        return ITA_DEU_DICT;
+    }
+
+    public HashMap<String, Word> getITA_SWE_DICT() {
+        return ITA_SWE_DICT;
+    }
+
+    public HashMap<String, Word> getITA_TUR_DICT() {
+        return ITA_TUR_DICT;
+    }
+
+    public HashMap<String, Word> getSWE_DEU_DICT() {
+        return SWE_DEU_DICT;
+    }
+
+    public HashMap<String, Word> getSWE_ELL_DICT() {
+        return SWE_ELL_DICT;
+    }
+
+    public HashMap<String, Word> getSWE_ENG_DICT() {
+        return SWE_ENG_DICT;
+    }
+
+    public HashMap<String, Word> getSWE_FRA_DICT() {
+        return SWE_FRA_DICT;
+    }
+
+    public HashMap<String, Word> getSWE_ITA_DICT() {
+        return SWE_ITA_DICT;
+    }
+
+    public HashMap<String, Word> getSWE_TUR_DICT() {
+        return SWE_TUR_DICT;
+    }
+
+    public ArrayList<HashMap<String, Word>> getENGXDictionaries() {
+        return ENGXDictionaries;
+    }
+    public ArrayList<HashMap<String,Word>> getDEUXDictionaries(){
         return DEUXDictionaries;
     }
-    public ArrayList<HashMap<Integer,Word>> getFRAXDictionaries(){
+    public ArrayList<HashMap<String,Word>> getFRAXDictionaries(){
         return FRAXDictionaries;
     }
-    public ArrayList<HashMap<Integer,Word>> getITAXDictionaries(){
+    public ArrayList<HashMap<String,Word>> getITAXDictionaries(){
         return ITAXDictionaries;
     }
-    public ArrayList<HashMap<Integer,Word>> getSWEXDictionaries(){
+    public ArrayList<HashMap<String,Word>> getSWEXDictionaries(){
         return SWEXDictionaries;
     }
 
-    public HashMap<Integer, Word> getWordsDatabase() {
+    public MultiValuedMap<String, Word> getWordsDatabase() {
         return WordsDatabase;
     }
 

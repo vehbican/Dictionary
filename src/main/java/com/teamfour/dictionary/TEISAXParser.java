@@ -14,9 +14,9 @@ import org.xml.sax.helpers.DefaultHandler;
 
 public class TEISAXParser {
 
-    public HashMap<Integer, Word> ParseIntoHashMap(DataManager dataManager, String path, Config.Languages sourceLang, Config.Languages targetLang) {
+    public HashMap<String, Word> ParseIntoHashMap(DataManager dataManager, String path, Config.Languages sourceLang, Config.Languages targetLang) {
 
-        HashMap<Integer, Word> dictionary = new HashMap<>();
+        HashMap<String, Word> dictionary = new HashMap<>();
 
         try {
             // Load the resource from the classpath
@@ -59,14 +59,14 @@ public class TEISAXParser {
         private String currentLang;
         private StringBuilder currentQuote;
 
-        private HashMap<Integer,Word> dictionary;
+        private HashMap<String,Word> dictionary;
         private Config.Languages sourceLang;
         private Config.Languages targetLang;
         private DataManager dataManager;
 
         private List<Word> quotes;
 
-        public MyHandler(HashMap<Integer, Word> dictionary, Config.Languages sourceLang, Config.Languages targetLang, DataManager dataManager) {
+        public MyHandler(HashMap<String, Word> dictionary, Config.Languages sourceLang, Config.Languages targetLang, DataManager dataManager) {
             this.dictionary = dictionary;
             this.sourceLang = sourceLang;
             this.targetLang = targetLang;
@@ -118,18 +118,18 @@ public class TEISAXParser {
                 }
                 Word sourceWord = new Word(sourceLang,currentOrth);
 
-                if(dictionary.containsKey(sourceWord.getHashCode())){
+                if(dictionary.containsKey(sourceWord.getWord())){
 
-                    dictionary.get(sourceWord.getHashCode()).getTranslations().addAll(quotes);
+                    dictionary.get(sourceWord.getWord()).getTranslations().addAll(quotes);
 
                 }else{
 
                     sourceWord.setTranslations(quotes);
-                    dictionary.put(sourceWord.getHashCode(),sourceWord);
+                    dictionary.put(sourceWord.getWord(),sourceWord);
 
                 }
 
-                dataManager.getWordsDatabase().put(sourceWord.getHashCode(),sourceWord);
+                dataManager.getWordsDatabase().put(sourceWord.getWord(),sourceWord);
 
 
                 /*System.out.println("ID: " + currentId);
@@ -158,8 +158,6 @@ public class TEISAXParser {
                     Word quote = new Word(targetLang, q);
 
                     quotes.add(quote);
-
-                    dataManager.getWordsDatabase().put(quote.getHashCode(),quote);
 
                 }
 
