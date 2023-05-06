@@ -50,6 +50,7 @@ public class FileManager {
 
                 Word w = new Word(sourceLanguage,word);
                 w.setTranslations(translations);
+                w.setTargetLanguage(targetLanguage);
                 words.put(word,w);
                 dataManager.getWordsDatabase().put(word,w);
 

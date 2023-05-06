@@ -6,6 +6,7 @@ import java.util.List;
 public class Word {
 
     private Config.Languages language; // which contains this word
+    private Config.Languages targetLanguage;
     private String word;
     private List<Word> translations; // to other languages
     private String type; // pronoun,noun,verb etc.
@@ -23,6 +24,7 @@ public class Word {
             this.hashCode = this.word.hashCode();
         }
 
+        if (this.language == null) return;
         switch (this.language){
 
             case ENGLISH -> this.flagImgPath = Config.englandFlagImg;
@@ -43,6 +45,14 @@ public class Word {
 
     public void setLanguage(Config.Languages languageName) {
         this.language = languageName;
+    }
+
+    public Config.Languages getTargetLanguage() {
+        return targetLanguage;
+    }
+
+    public void setTargetLanguage(Config.Languages targetLanguage) {
+        this.targetLanguage = targetLanguage;
     }
 
     public String getWord() {

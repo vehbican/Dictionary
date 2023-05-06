@@ -5,6 +5,7 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -54,6 +55,8 @@ public class HomePageController implements Initializable {
 
     public Stage stage;
 
+    private static Word editTarget;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -97,7 +100,7 @@ public class HomePageController implements Initializable {
 
         tabPane.getTabs().addAll(tabs);
 
-
+        editTarget = new Word(null,null);
 
 
     }
@@ -114,8 +117,6 @@ public class HomePageController implements Initializable {
             CreateAlert("Empty Field","Filling the search box seems like a good idea! Let's try.");
             return;
         }
-
-        //Word searchTarget = dataManager.getWordsDatabase().get(input);
 
         boolean isFound = dataManager.getWordsDatabase().containsKey(input);
 
@@ -140,7 +141,7 @@ public class HomePageController implements Initializable {
 
         }
 
-
+        editTarget.setWord(input);
 
 
     }
@@ -171,6 +172,68 @@ public class HomePageController implements Initializable {
 
     @FXML
     public void OnEditButton(){
+
+        switch (tabPane.getSelectionModel().getSelectedItem().getText()){
+
+            case "ENGLISH" -> {
+                editTarget.setTargetLanguage(Config.Languages.ENGLISH);
+                editTarget.setTranslations(((WordCard)englishTab.getContent()).getDefinitionsListView().getItems());
+            }
+            case "TURKISH" -> {
+                editTarget.setTargetLanguage(Config.Languages.TURKISH);
+                editTarget.setTranslations(((WordCard)turkishTab.getContent()).getDefinitionsListView().getItems());
+            }
+
+            case "SWEDISH" -> {
+                editTarget.setTargetLanguage(Config.Languages.SWEDISH);
+                editTarget.setTranslations(((WordCard)swedishTab.getContent()).getDefinitionsListView().getItems());
+            }
+
+            case "ITALIAN" -> {
+                editTarget.setTargetLanguage(Config.Languages.ITALIAN);
+                editTarget.setTranslations(((WordCard)italianTab.getContent()).getDefinitionsListView().getItems());
+            }
+
+            case "FRENCH" -> {
+                editTarget.setTargetLanguage(Config.Languages.FRENCH);
+                editTarget.setTranslations(((WordCard)frenchTab.getContent()).getDefinitionsListView().getItems());
+            }
+
+            case "GERMAN" -> {
+                editTarget.setTargetLanguage(Config.Languages.GERMAN);
+                editTarget.setTranslations(((WordCard)germanTab.getContent()).getDefinitionsListView().getItems());
+            }
+
+            case "GREEK" -> {
+                editTarget.setTargetLanguage(Config.Languages.GREEK);
+                editTarget.setTranslations(((WordCard)greekTab.getContent()).getDefinitionsListView().getItems());
+            }
+
+
+        }
+
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("edit-page.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 500, 200);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        EditController editController = fxmlLoader.getController();
+
+        Stage stage = new Stage();
+        stage.setTitle("EDIT WORD");
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
+
+        editController.setData(editTarget,dataManager,stage);
+
+        System.out.println(editController.editWord + ":" + editController.editWord.getLanguage()  + "->" + editController.editWord.getTargetLanguage());
+
+        editController.SetUpEditStage();
+
 
 
 
@@ -250,6 +313,8 @@ public class HomePageController implements Initializable {
         }
         germanTab.setContent(w6);
 
+        editTarget.setLanguage(Config.Languages.TURKISH);
+
 
     }
     @FXML
@@ -283,6 +348,7 @@ public class HomePageController implements Initializable {
 
         }
 
+        editTarget.setLanguage(Config.Languages.ENGLISH);
 
 
 
@@ -318,6 +384,8 @@ public class HomePageController implements Initializable {
 
         }
 
+        editTarget.setLanguage(Config.Languages.FRENCH);
+
 
     }
     @FXML
@@ -350,6 +418,9 @@ public class HomePageController implements Initializable {
 
 
         }
+
+        editTarget.setLanguage(Config.Languages.GERMAN);
+
 
     }
     @FXML
@@ -416,6 +487,9 @@ public class HomePageController implements Initializable {
         }
         germanTab.setContent(w6);
 
+        editTarget.setLanguage(Config.Languages.GREEK);
+
+
     }
     @FXML
     public void SearchInSwedish(){
@@ -447,6 +521,7 @@ public class HomePageController implements Initializable {
 
 
         }
+        editTarget.setLanguage(Config.Languages.SWEDISH);
 
     }
     @FXML
@@ -479,6 +554,9 @@ public class HomePageController implements Initializable {
 
 
         }
+
+        editTarget.setLanguage(Config.Languages.ITALIAN);
+
 
     }
 

@@ -1,14 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.teamfour.dictionary.EditController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="200.0" prefWidth="500.0" style="-fx-background-color: #2b2d42;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.teamfour.dictionary.EditController">
+   <children>
+      <MFXTextField fx:id="editInput" floatMode="DISABLED" layoutX="66.0" layoutY="44.0" promptText="Edit Target" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="50.0" />
+      <MFXComboBox fx:id="editTargetTranslations" allowEdit="true" floatMode="DISABLED" layoutX="241.0" layoutY="101.0" promptText="Translations" selectable="true" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="200.0" />
+      <MFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="347.0" layoutY="46.0" onAction="#ApplyEditOperation" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="46.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="46.0">
+         <graphic>
+            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/checked.png" />
+               </image>
+               <effect>
+                  <Lighting diffuseConstant="1.25" specularConstant="0.5" surfaceScale="3.0">
+                     <bumpInput>
+                        <Shadow />
+                     </bumpInput>
+                     <light>
+                        <Light.Distant />
+                     </light>
+                  </Lighting>
+               </effect>
+            </ImageView>
+         </graphic>
+      </MFXButton>
+   </children>
 </AnchorPane>
