@@ -27,7 +27,7 @@ public class AddController implements Initializable {
     protected MFXComboBox<Word> sourceLangComboBox;
     TEISAXParser teisaxParser = new TEISAXParser();
 
-    DataManager dataManager = new DataManager();
+    DataManager dataManager;
 
     /*
 

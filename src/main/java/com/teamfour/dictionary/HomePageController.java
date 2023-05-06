@@ -1,22 +1,12 @@
 package com.teamfour.dictionary;
 
 import io.github.palexdev.materialfx.controls.MFXButton;
-import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.xml.sax.SAXException;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.*;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 import java.io.*;
 import java.net.URL;
 import java.util.*;
@@ -149,21 +139,6 @@ public class HomePageController implements Initializable {
 
     }
 
-   /* public void addEngWord (String word,String definition)  throws  IOException{
-
-
-        FileWriter fw = new FileWriter(Config.eng_tur_txt,true);
-        RandomAccessFile raf = new RandomAccessFile(String.valueOf(App.class.getResourceAsStream(Config.eng_tur_txt)), "rw");
-        raf.seek(raf.length());
-        fw.write(word + ":" + definition);
-
-        fw.close();
-        raf.close();
-
-
-
-    }*/
-
     @FXML
     public void SearchInTurkish(){
 
@@ -174,16 +149,20 @@ public class HomePageController implements Initializable {
         List<Word> greList=new ArrayList<>();
         List<Word> sweList=new ArrayList<>();
         List<Word> gerList=new ArrayList<>();
-        List<Word> engList = new ArrayList<>(dataManager.getTUR_ENG_DICT().get(input).getTranslations());
+        List<Word> engList = new ArrayList<>(dataManager.getTUR_ENG_DICT().get(input));
 
         for (Word w:engList){
 
-            String i = w.getWord().trim().toLowerCase();
-            fraList.addAll(dataManager.getENG_FRA_DICT().get(i).getTranslations());
-            itaList.addAll(dataManager.getENG_ITA_DICT().get(i).getTranslations());
-            greList.addAll(dataManager.getENG_GRE_DICT().get(i).getTranslations());
-            sweList.addAll(dataManager.getENG_SWE_DICT().get(i).getTranslations());
-            gerList.addAll(dataManager.getENG_GER_DICT().get(i).getTranslations());
+            for (Word s:w.getTranslations()){
+
+                String i = s.getWord().trim().toLowerCase();
+                fraList.addAll(dataManager.getENG_FRA_DICT().get(i));
+                itaList.addAll(dataManager.getENG_ITA_DICT().get(i));
+                greList.addAll(dataManager.getENG_GRE_DICT().get(i));
+                sweList.addAll(dataManager.getENG_SWE_DICT().get(i));
+                gerList.addAll(dataManager.getENG_GER_DICT().get(i));
+
+            }
 
         }
 
@@ -194,25 +173,36 @@ public class HomePageController implements Initializable {
         WordCard w5 = new WordCard();
         WordCard w6 = new WordCard();
 
-        w1.getDefinitionsListView().getItems().addAll(engList);
+
+        for (Word w:engList) {
+            w1.getDefinitionsListView().getItems().addAll(w.getTranslations());
+        }
         englishTab.setContent(w1);
 
-        w2.getDefinitionsListView().getItems().addAll(fraList);
+        for (Word w:fraList) {
+            w2.getDefinitionsListView().getItems().addAll(w.getTranslations());
+        }
         frenchTab.setContent(w2);
 
-        w3.getDefinitionsListView().getItems().addAll(itaList);
+        for (Word w:itaList) {
+            w3.getDefinitionsListView().getItems().addAll(w.getTranslations());
+        }
         italianTab.setContent(w3);
 
-        w4.getDefinitionsListView().getItems().addAll(greList);
+        for (Word w:greList) {
+            w4.getDefinitionsListView().getItems().addAll(w.getTranslations());
+        }
         greekTab.setContent(w4);
 
-        w5.getDefinitionsListView().getItems().addAll(sweList);
+        for (Word w:sweList) {
+            w5.getDefinitionsListView().getItems().addAll(w.getTranslations());
+        }
         swedishTab.setContent(w5);
 
-        w6.getDefinitionsListView().getItems().addAll(gerList);
+        for (Word w:gerList) {
+            w6.getDefinitionsListView().getItems().addAll(w.getTranslations());
+        }
         germanTab.setContent(w6);
-
-        //Synonyms?
 
 
     }
@@ -221,70 +211,33 @@ public class HomePageController implements Initializable {
 
         ClearTabContents();
 
-        ArrayList<Word> syns = new ArrayList<>();
-
         for (Tab t:tabPane.getTabs()){
 
-            Word temp = null;
+            Collection<Word> temp = null;
             WordCard w = new WordCard();
 
             switch (t.getText()){
 
-                case "ENGLISH" -> {
-
-                    continue;
-
-                }
-                case  "TURKISH" -> {
-
-                    temp = dataManager.getENG_TUR_DICT().get(input);
-
-                }
-                case  "FRENCH" -> {
-
-                    temp = dataManager.getENG_FRA_DICT().get(input);
-
-                }
-                case  "GERMAN" -> {
-
-                    temp = dataManager.getENG_GER_DICT().get(input);
-
-                }
-                case  "GREEK" -> {
-
-                    temp = dataManager.getENG_GRE_DICT().get(input);
-
-                }
-                case  "ITALIAN" -> {
-
-                    temp = dataManager.getENG_ITA_DICT().get(input);
-
-                }
-                case  "SWEDISH" -> {
-
-                    temp = dataManager.getENG_SWE_DICT().get(input);
-
-                }
+                case "ENGLISH" -> {continue;}
+                case  "TURKISH" -> temp = dataManager.getENG_TUR_DICT().get(input);
+                case  "FRENCH" -> temp = dataManager.getENG_FRA_DICT().get(input);
+                case  "GERMAN" -> temp = dataManager.getENG_GER_DICT().get(input);
+                case  "GREEK" -> temp = dataManager.getENG_GRE_DICT().get(input);
+                case  "ITALIAN" -> temp = dataManager.getENG_ITA_DICT().get(input);
+                case  "SWEDISH" -> temp = dataManager.getENG_SWE_DICT().get(input);
 
             }
 
-            if (temp == null) {
-
-                temp = new Word(Config.Languages.ENGLISH,"Message");
-                temp.getTranslations().add(new Word(Config.Languages.ENGLISH,"\""+input+"\" is not found in this language."));
+            if (temp==null) continue;
+            for (Word word:temp) {
+                w.getDefinitionsListView().getItems().addAll(word.getTranslations());
             }
-            System.out.println("------------------------------------------");
-            System.out.println(temp.getTranslations());
-            System.out.println("------------------------------------------");
-            w.getDefinitionsListView().getItems().addAll(temp.getTranslations());
             t.setContent(w);
 
 
         }
 
-        /*WordCard synonymsCard = new WordCard();
-        synonymsCard.getDefinitionsListView().getItems().addAll(syns);
-        synonymsTab.setContent(synonymsCard);*/
+
 
 
     }
@@ -293,69 +246,32 @@ public class HomePageController implements Initializable {
 
         ClearTabContents();
 
-        ArrayList<Word> syns = new ArrayList<>();
-
         for (Tab t:tabPane.getTabs()){
 
-            Word temp = null;
+            Collection<Word> temp = null;
             WordCard w = new WordCard();
 
             switch (t.getText()){
 
-                case "ENGLISH" -> {
-
-                    temp = dataManager.getFRA_ENG_DICT().get(input);
-
-                }
-                case  "TURKISH" -> {
-
-                    temp = dataManager.getFRA_TUR_DICT().get(input);
-
-                }
-                case  "FRENCH" -> {
-
-                    continue;
-
-                }
-                case  "GERMAN" -> {
-
-                    temp = dataManager.getFRA_DEU_DICT().get(input);
-
-                }
-                case  "GREEK" -> {
-
-                    temp = dataManager.getFRA_ELL_DICT().get(input);
-
-                }
-                case  "ITALIAN" -> {
-
-                    temp = dataManager.getFRA_ITA_DICT().get(input);
-
-                }
-                case  "SWEDISH" -> {
-
-                    temp = dataManager.getFRA_SWE_DICT().get(input);
-
-                }
+                case "ENGLISH" -> temp = dataManager.getFRA_ENG_DICT().get(input);
+                case  "TURKISH" -> temp = dataManager.getFRA_TUR_DICT().get(input);
+                case  "FRENCH" -> {continue;}
+                case  "GERMAN" -> temp = dataManager.getFRA_DEU_DICT().get(input);
+                case  "GREEK" -> temp = dataManager.getFRA_ELL_DICT().get(input);
+                case  "ITALIAN" -> temp = dataManager.getFRA_ITA_DICT().get(input);
+                case  "SWEDISH" -> temp = dataManager.getFRA_SWE_DICT().get(input);
 
             }
 
-            if (temp == null) {
-                temp = new Word(Config.Languages.ENGLISH,"Message");
-                temp.getTranslations().add(new Word(Config.Languages.ENGLISH,"\""+input+"\" is not found in this language."));
+            if (temp==null) continue;
+            for (Word word:temp){
+                w.getDefinitionsListView().getItems().addAll(word.getTranslations());
             }
-            System.out.println("------------------------------------------");
-            System.out.println(temp.getTranslations());
-            System.out.println("------------------------------------------");
-            w.getDefinitionsListView().getItems().addAll(temp.getTranslations());
             t.setContent(w);
 
 
         }
 
-        /*WordCard synonymsCard = new WordCard();
-        synonymsCard.getDefinitionsListView().getItems().addAll(syns);
-        synonymsTab.setContent(synonymsCard);*/
 
     }
     @FXML
@@ -363,70 +279,31 @@ public class HomePageController implements Initializable {
 
         ClearTabContents();
 
-        ArrayList<Word> syns = new ArrayList<>();
-
         for (Tab t:tabPane.getTabs()){
 
-            Word temp = null;
+            Collection<Word> temp = null;
             WordCard w = new WordCard();
 
             switch (t.getText()){
 
-                case "ENGLISH" -> {
-
-                    temp = dataManager.getDEU_ENG_DICT().get(input);
-
-                }
-                case  "TURKISH" -> {
-
-                    temp = dataManager.getDEU_TUR_DICT().get(input);
-
-                }
-                case  "FRENCH" -> {
-
-                    temp = dataManager.getDEU_FRA_DICT().get(input);
-
-                }
-                case  "GERMAN" -> {
-
-                    continue;
-
-                }
-                case  "GREEK" -> {
-
-                    temp = dataManager.getDEU_ELL_DICT().get(input);
-
-                }
-                case  "ITALIAN" -> {
-
-                    temp = dataManager.getDEU_ITA_DICT().get(input);
-
-                }
-                case  "SWEDISH" -> {
-
-                    temp = dataManager.getDEU_SWE_DICT().get(input);
-
-                }
+                case "ENGLISH" -> temp = dataManager.getDEU_ENG_DICT().get(input);
+                case  "TURKISH" -> temp = dataManager.getDEU_TUR_DICT().get(input);
+                case  "FRENCH" -> temp = dataManager.getDEU_FRA_DICT().get(input);
+                case  "GERMAN" -> {continue;}
+                case  "GREEK" -> temp = dataManager.getDEU_ELL_DICT().get(input);
+                case  "ITALIAN" -> temp = dataManager.getDEU_ITA_DICT().get(input);
+                case  "SWEDISH" -> temp = dataManager.getDEU_SWE_DICT().get(input);
 
             }
 
-            if (temp == null) {
-
-                temp = new Word(Config.Languages.ENGLISH,"Message");
-                temp.getTranslations().add(new Word(Config.Languages.ENGLISH,"\""+input+"\" is not found in this language."));
+            if (temp==null) continue;
+            for (Word word:temp){
+                w.getDefinitionsListView().getItems().addAll(word.getTranslations());
             }
-            System.out.println("------------------------------------------");
-            System.out.println(temp.getTranslations());
-            System.out.println("------------------------------------------");
-            w.getDefinitionsListView().getItems().addAll(temp.getTranslations());
             t.setContent(w);
 
 
         }
-
-        /*WordCard synonymsCard = new WordCard();
-        synonymsCard.getDefinitionsListView().getItems().addAll(syns);
-        synonymsTab.setContent(synonymsCard);*/
 
     }
     @FXML
@@ -439,16 +316,20 @@ public class HomePageController implements Initializable {
         List<Word> turList =new ArrayList<>();
         List<Word> sweList=new ArrayList<>();
         List<Word> gerList=new ArrayList<>();
-        List<Word> engList = new ArrayList<>(dataManager.getELL_ENG_DICT().get(input).getTranslations());
+        List<Word> engList = new ArrayList<>(dataManager.getELL_ENG_DICT().get(input));
 
         for (Word w:engList){
 
-            String i = w.getWord().trim().toLowerCase();
-            fraList.addAll(dataManager.getENG_FRA_DICT().get(i).getTranslations());
-            itaList.addAll(dataManager.getENG_ITA_DICT().get(i).getTranslations());
-            turList .addAll(dataManager.getENG_TUR_DICT().get(i).getTranslations());
-            sweList.addAll(dataManager.getENG_SWE_DICT().get(i).getTranslations());
-            gerList.addAll(dataManager.getENG_GER_DICT().get(i).getTranslations());
+            for (Word s:w.getTranslations()){
+
+                String i = s.getWord().trim().toLowerCase();
+                fraList.addAll(dataManager.getENG_FRA_DICT().get(i));
+                itaList.addAll(dataManager.getENG_ITA_DICT().get(i));
+                turList.addAll(dataManager.getENG_TUR_DICT().get(i));
+                sweList.addAll(dataManager.getENG_SWE_DICT().get(i));
+                gerList.addAll(dataManager.getENG_GER_DICT().get(i));
+
+            }
 
         }
 
@@ -459,25 +340,35 @@ public class HomePageController implements Initializable {
         WordCard w5 = new WordCard();
         WordCard w6 = new WordCard();
 
-        w1.getDefinitionsListView().getItems().addAll(engList);
+        for (Word w:engList) {
+            w1.getDefinitionsListView().getItems().addAll(w.getTranslations());
+        }
         englishTab.setContent(w1);
 
-        w2.getDefinitionsListView().getItems().addAll(fraList);
+        for (Word w:fraList) {
+            w2.getDefinitionsListView().getItems().addAll(w.getTranslations());
+        }
         frenchTab.setContent(w2);
 
-        w3.getDefinitionsListView().getItems().addAll(itaList);
+        for (Word w:itaList) {
+            w3.getDefinitionsListView().getItems().addAll(w.getTranslations());
+        }
         italianTab.setContent(w3);
 
-        w4.getDefinitionsListView().getItems().addAll(turList );
+        for (Word w:turList) {
+            w4.getDefinitionsListView().getItems().addAll(w.getTranslations());
+        }
         turkishTab.setContent(w4);
 
-        w5.getDefinitionsListView().getItems().addAll(sweList);
+        for (Word w:sweList) {
+            w5.getDefinitionsListView().getItems().addAll(w.getTranslations());
+        }
         swedishTab.setContent(w5);
 
-        w6.getDefinitionsListView().getItems().addAll(gerList);
+        for (Word w:gerList) {
+            w6.getDefinitionsListView().getItems().addAll(w.getTranslations());
+        }
         germanTab.setContent(w6);
-
-        //Synonyms?
 
     }
     @FXML
@@ -485,70 +376,31 @@ public class HomePageController implements Initializable {
 
         ClearTabContents();
 
-        ArrayList<Word> syns = new ArrayList<>();
-
         for (Tab t:tabPane.getTabs()){
 
-            Word temp = null;
+            Collection<Word> temp = null;
             WordCard w = new WordCard();
 
             switch (t.getText()){
 
-                case "ENGLISH" -> {
-
-                    temp = dataManager.getSWE_ENG_DICT().get(input);
-
-                }
-                case  "TURKISH" -> {
-
-                    temp = dataManager.getSWE_TUR_DICT().get(input);
-
-                }
-                case  "FRENCH" -> {
-
-                    temp = dataManager.getSWE_FRA_DICT().get(input);
-
-                }
-                case  "GERMAN" -> {
-
-                    temp = dataManager.getSWE_DEU_DICT().get(input);
-
-                }
-                case  "GREEK" -> {
-
-                    temp = dataManager.getSWE_ELL_DICT().get(input);
-
-                }
-                case  "ITALIAN" -> {
-
-                    temp = dataManager.getSWE_ITA_DICT().get(input);
-
-                }
-                case  "SWEDISH" -> {
-
-                    continue;
-
-                }
+                case "ENGLISH" -> temp = dataManager.getSWE_ENG_DICT().get(input);
+                case  "TURKISH" -> temp = dataManager.getSWE_TUR_DICT().get(input);
+                case  "FRENCH" -> temp = dataManager.getSWE_FRA_DICT().get(input);
+                case  "GERMAN" -> temp = dataManager.getSWE_DEU_DICT().get(input);
+                case  "GREEK" -> temp = dataManager.getSWE_ELL_DICT().get(input);
+                case  "ITALIAN" -> temp = dataManager.getSWE_ITA_DICT().get(input);
+                case  "SWEDISH" -> {continue;}
 
             }
 
-            if (temp == null) {
-
-                temp = new Word(Config.Languages.ENGLISH,"Message");
-                temp.getTranslations().add(new Word(Config.Languages.ENGLISH,"\""+input+"\" is not found in this language."));
+            if (temp==null) continue;
+            for (Word word:temp) {
+                w.getDefinitionsListView().getItems().addAll(word.getTranslations());
             }
-            System.out.println("------------------------------------------");
-            System.out.println(temp.getTranslations());
-            System.out.println("------------------------------------------");
-            w.getDefinitionsListView().getItems().addAll(temp.getTranslations());
             t.setContent(w);
 
 
         }
-
-        /*WordCard synonymsCard = new WordCard();
-        synonymsCard.getDefinitionsListView().getItems().addAll(syns);
-        synonymsTab.setContent(synonymsCard);*/
 
     }
     @FXML
@@ -556,73 +408,33 @@ public class HomePageController implements Initializable {
 
         ClearTabContents();
 
-        ArrayList<Word> syns = new ArrayList<>();
-
         for (Tab t:tabPane.getTabs()){
 
-            Word temp = null;
+            Collection<Word> temp = null;
             WordCard w = new WordCard();
 
             switch (t.getText()){
 
-                case "ENGLISH" -> {
-
-                    temp = dataManager.getITA_ENG_DICT().get(input);
-
-                }
-                case  "TURKISH" -> {
-
-                    temp = dataManager.getITA_TUR_DICT().get(input);
-
-                }
-                case  "FRENCH" -> {
-
-                    temp = dataManager.getITA_FRA_DICT().get(input);
-
-                }
-                case  "GERMAN" -> {
-
-                    temp = dataManager.getITA_DEU_DICT().get(input);
-
-                }
-                case  "GREEK" -> {
-
-                    temp = dataManager.getITA_ELL_DICT().get(input);
-
-                }
-                case  "ITALIAN" -> {
-
-                    continue;
-
-                }
-                case  "SWEDISH" -> {
-
-                    temp = dataManager.getITA_SWE_DICT().get(input);
-
-                }
+                case "ENGLISH" -> temp = dataManager.getITA_ENG_DICT().get(input);
+                case  "TURKISH" -> temp = dataManager.getITA_TUR_DICT().get(input);
+                case  "FRENCH" -> temp = dataManager.getITA_FRA_DICT().get(input);
+                case  "GERMAN" -> temp = dataManager.getITA_DEU_DICT().get(input);
+                case  "GREEK" -> temp = dataManager.getITA_ELL_DICT().get(input);
+                case  "ITALIAN" -> {continue;}
+                case  "SWEDISH" -> temp = dataManager.getITA_SWE_DICT().get(input);
 
             }
 
-            if (temp == null) {
-
-                temp = new Word(Config.Languages.ENGLISH,"Message");
-                temp.getTranslations().add(new Word(Config.Languages.ENGLISH,"\""+input+"\" is not found in this language."));
+            if (temp==null) continue;
+            for (Word word:temp) {
+                w.getDefinitionsListView().getItems().addAll(word.getTranslations());
             }
-            System.out.println("------------------------------------------");
-            System.out.println(temp.getTranslations());
-            System.out.println("------------------------------------------");
-            w.getDefinitionsListView().getItems().addAll(temp.getTranslations());
             t.setContent(w);
 
 
         }
 
-        /*WordCard synonymsCard = new WordCard();
-        synonymsCard.getDefinitionsListView().getItems().addAll(syns);
-        synonymsTab.setContent(synonymsCard);*/
-
     }
-
 
     private void CreateAlert(String title,String message){
 
@@ -632,7 +444,6 @@ public class HomePageController implements Initializable {
         alert.show();
 
     }
-
 
     private void ClearTabContents(){
 

@@ -13,48 +13,48 @@ public class Config {
     public static final String turkeyFlagImg = "images/turkey.png";
 
 
-    public static final String eng_ita_tei = "dicts/eng-ita.tei";
-    public static final String eng_tur_tei = "dicts/eng-tur.tei";
-    public static final String eng_deu_tei = "dicts/eng-deu.tei";
-    public static final String eng_ell_tei = "dicts/eng-ell.tei";
-    public static final String eng_swe_tei = "dicts/eng-swe.tei";
-    public static final String eng_fra_tei = "dicts/eng-fra.tei";
+    public static final String eng_ita_tei = "dicts/eng-ita.txt";
+    public static final String eng_tur_tei = "dicts/eng-tur.txt";
+    public static final String eng_deu_tei = "dicts/eng-deu.txt";
+    public static final String eng_ell_tei = "dicts/eng-ell.txt";
+    public static final String eng_swe_tei = "dicts/eng-swe.txt";
+    public static final String eng_fra_tei = "dicts/eng-fra.txt";
 
 
-    public static final String deu_tur_tei = "dicts/deu-tur.tei";
-    public static final String deu_ell_tei = "dicts/deu-ell.tei";
-    public static final String deu_eng_tei = "dicts/deu-eng.tei";
-    public static final String deu_fra_tei = "dicts/deu-fra.tei";
-    public static final String deu_ita_tei = "dicts/deu-ita.tei";
-    public static final String deu_swe_tei = "dicts/deu-swe.tei";
+    public static final String deu_tur_tei = "dicts/deu-tur.txt";
+    public static final String deu_ell_tei = "dicts/deu-ell.txt";
+    public static final String deu_eng_tei = "dicts/deu-eng.txt";
+    public static final String deu_fra_tei = "dicts/deu-fra.txt";
+    public static final String deu_ita_tei = "dicts/deu-ita.txt";
+    public static final String deu_swe_tei = "dicts/deu-swe.txt";
 
 
 
-    public static final String fra_eng_tei = "dicts/fra-eng.tei";
-    public static final String fra_ita_tei = "dicts/fra-ita.tei";
-    public static final String fra_deu_tei = "dicts/fra-deu.tei";
-    public static final String fra_tur_tei = "dicts/fra-tur.tei";
-    public static final String fra_ell_tei = "dicts/fra-ell.tei";
-    public static final String fra_swe_tei = "dicts/fra-swe.tei";
+    public static final String fra_eng_tei = "dicts/fra-eng.txt";
+    public static final String fra_ita_tei = "dicts/fra-ita.txt";
+    public static final String fra_deu_tei = "dicts/fra-deu.txt";
+    public static final String fra_tur_tei = "dicts/fra-tur.txt";
+    public static final String fra_ell_tei = "dicts/fra-ell.txt";
+    public static final String fra_swe_tei = "dicts/fra-swe.txt";
 
 
-    public static final String swe_eng_tei = "dicts/swe-eng.tei";
-    public static final String swe_tur_tei = "dicts/swe-tur.tei";
-    public static final String swe_fra_tei = "dicts/swe-fra.tei";
-    public static final String swe_ell_tei = "dicts/swe-ell.tei";
-    public static final String swe_deu_tei = "dicts/swe-deu.tei";
-    public static final String swe_ita_tei = "dicts/swe-ita.tei";
+    public static final String swe_eng_tei = "dicts/swe-eng.txt";
+    public static final String swe_tur_tei = "dicts/swe-tur.txt";
+    public static final String swe_fra_tei = "dicts/swe-fra.txt";
+    public static final String swe_ell_tei = "dicts/swe-ell.txt";
+    public static final String swe_deu_tei = "dicts/swe-deu.txt";
+    public static final String swe_ita_tei = "dicts/swe-ita.txt";
 
 
-    public static final String ita_eng_tei = "dicts/ita-eng.tei";
-    public static final String ita_deu_tei = "dicts/ita-deu.tei";
-    public static final String ita_ell_tei = "dicts/ita-ell.tei";
-    public static final String ita_swe_tei = "dicts/ita-swe.tei";
-    public static final String ita_tur_tei = "dicts/ita-tur.tei";
-    public static final String ita_fra_tei = "dicts/ita-fra.tei";
+    public static final String ita_eng_tei = "dicts/ita-eng.txt";
+    public static final String ita_deu_tei = "dicts/ita-deu.txt";
+    public static final String ita_ell_tei = "dicts/ita-ell.txt";
+    public static final String ita_swe_tei = "dicts/ita-swe.txt";
+    public static final String ita_tur_tei = "dicts/ita-tur.txt";
+    public static final String ita_fra_tei = "dicts/ita-fra.txt";
 
-    public static final String ell_eng_tei = "dicts/ell-eng.tei";
-    public static final String tur_eng_tei = "dicts/tur-eng.tei";
+    public static final String ell_eng_tei = "dicts/ell-eng.txt";
+    public static final String tur_eng_tei = "dicts/tur-eng.txt";
 
     //public static final String eng_tur_txt = "C:\\Users\\can\\Desktop";
 

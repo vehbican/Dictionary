@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class App extends Application {
 
@@ -33,15 +34,6 @@ public class App extends Application {
 
         controller.dataManager = dataManager;
         controller.searchButton.setOnAction(event -> controller.HandleSearchButtonAction(dataManager));
-
-       /* controller.searchButton.setOnAction(event -> {
-            try {
-                controller.addEngWord("fenerbahçe","şampiyon");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });*/
-
 
 
     }
