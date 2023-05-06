@@ -15,11 +15,10 @@ import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
+import java.io.*;
 import java.util.ResourceBundle;
 
 
@@ -364,71 +363,24 @@ public class AddController implements Initializable {
                         Transformer transformer = tf.newTransformer();
                         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
                         DOMSource source = new DOMSource(doc);
-                        StreamResult result = new StreamResult(new File(Config.eng_swe_tei));
-                        transformer.transform(source, result);
+                    //    StreamResult result = new StreamResult(new File(Config.eng_tur_txt));
+                     //   transformer.transform(source, result);
 
                     }
                 }
-                case GERMAN: {
+             /*   case GERMAN: {
+                    FileWriter fw = new FileWriter(Config.eng_deu_tei,true);
+                    RandomAccessFile raf = new RandomAccessFile(String.valueOf(App.class.getResourceAsStream(Config.eng_tur_txt)), "rw");
+                    raf.seek(raf.length());
+                    fw.write(word);
 
-                    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-                    DocumentBuilder db = dbf.newDocumentBuilder();
-                    Document doc = db.parse(Config.eng_deu_tei);
-                    Element text = doc.getDocumentElement();
-
-                    Element entry = doc.createElement("entry");
-
-
-                    Element form = doc.createElement("form");
+                    fw.close();
+                    raf.close();
 
 
-                    Element orth = doc.createElement("orth");
-                    orth.appendChild(doc.createTextNode(word));
-                    form.appendChild(orth);
 
 
-                    entry.appendChild(form);
-
-
-                    String[] definitionsArray = definitions.split(";"); // split the definitions string into an array
-                    for (int j = 0; j < definitionsArray.length; j++) {
-                        String definition = definitionsArray[j].trim(); // trim any leading/trailing whitespace from the definition
-
-                        // Create a new "sense" element with the n attribute set to the current index + 1
-                        Element sense = doc.createElement("sense");
-                        sense.setAttribute("n", Integer.toString(j + 1));
-
-
-                        Element cit = doc.createElement("cit");
-                        cit.setAttribute("type", "trans");
-
-
-                        Element quote = doc.createElement("quote");
-                        quote.appendChild(doc.createTextNode(definition));
-
-
-                        cit.appendChild(quote);
-
-
-                        sense.appendChild(cit);
-
-
-                        entry.appendChild(sense);
-
-                        Element body = (Element) text.getElementsByTagName("body").item(0);
-                        body.appendChild(entry);
-
-
-                        // Write the modified document back to file
-                        TransformerFactory tf = TransformerFactory.newInstance();
-                        Transformer transformer = tf.newTransformer();
-                        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-                        DOMSource source = new DOMSource(doc);
-                        StreamResult result = new StreamResult(new File(Config.eng_deu_tei));
-                        transformer.transform(source, result);
-
-                    }
-                }
+                }*/
 
 
             }

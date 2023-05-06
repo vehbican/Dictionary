@@ -17,9 +17,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.URL;
 import java.util.*;
 
@@ -106,7 +104,6 @@ public class HomePageController implements Initializable {
 
 
 
-
     }
 
 
@@ -151,6 +148,21 @@ public class HomePageController implements Initializable {
 
 
     }
+
+   /* public void addEngWord (String word,String definition)  throws  IOException{
+
+
+        FileWriter fw = new FileWriter(Config.eng_tur_txt,true);
+        RandomAccessFile raf = new RandomAccessFile(String.valueOf(App.class.getResourceAsStream(Config.eng_tur_txt)), "rw");
+        raf.seek(raf.length());
+        fw.write(word + ":" + definition);
+
+        fw.close();
+        raf.close();
+
+
+
+    }*/
 
     @FXML
     public void SearchInTurkish(){

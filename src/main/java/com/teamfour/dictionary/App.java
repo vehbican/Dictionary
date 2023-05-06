@@ -34,6 +34,14 @@ public class App extends Application {
         controller.dataManager = dataManager;
         controller.searchButton.setOnAction(event -> controller.HandleSearchButtonAction(dataManager));
 
+       /* controller.searchButton.setOnAction(event -> {
+            try {
+                controller.addEngWord("fenerbahçe","şampiyon");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });*/
+
 
 
     }
