@@ -55,7 +55,19 @@ public class Config {
     public static final String ita_fra_tei = "dicts/ita-fra.txt";
 
     public static final String ell_eng_tei = "dicts/ell-eng.txt";
+    public static final String ell_deu_tei = "dicts/ell-deu.txt";
+    public static final String ell_ita_tei = "dicts/ell-ita.txt";
+    public static final String ell_swe_tei = "dicts/ell-swe.txt";
+    public static final String ell_tur_tei = "dicts/ell-tur.txt";
+    public static final String ell_fra_tei = "dicts/ell-fra.txt";
+
+
     public static final String tur_eng_tei = "dicts/tur-eng.txt";
+    public static final String tur_deu_tei = "dicts/tur-deu.txt";
+    public static final String tur_ell_tei = "dicts/tur-ell.txt";
+    public static final String tur_swe_tei = "dicts/tur-swe.txt";
+    public static final String tur_ita_tei = "dicts/tur-ita.txt";
+    public static final String tur_fra_tei = "dicts/tur-fra.txt";
 
 
 

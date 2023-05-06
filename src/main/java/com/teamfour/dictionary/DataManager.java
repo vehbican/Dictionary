@@ -52,9 +52,19 @@ public class DataManager {
 
     //ELL-ENG
     private MultiValuedMap<String, Word> ELL_ENG_DICT;
+    private MultiValuedMap<String, Word> ELL_TUR_DICT;
+    private MultiValuedMap<String, Word> ELL_FRA_DICT;
+    private MultiValuedMap<String, Word> ELL_DEU_DICT;
+    private MultiValuedMap<String, Word> ELL_ITA_DICT;
+    private MultiValuedMap<String, Word> ELL_SWE_DICT;
 
     //TUR-ENG
     private MultiValuedMap<String, Word> TUR_ENG_DICT;
+    private MultiValuedMap<String, Word> TUR_FRA_DICT;
+    private MultiValuedMap<String, Word> TUR_DEU_DICT;
+    private MultiValuedMap<String, Word> TUR_ELL_DICT;
+    private MultiValuedMap<String, Word> TUR_ITA_DICT;
+    private MultiValuedMap<String, Word> TUR_SWE_DICT;
 
 
     private ArrayList<MultiValuedMap<String,Word>> FRAXDictionaries;
@@ -62,6 +72,8 @@ public class DataManager {
     private ArrayList<MultiValuedMap<String, Word>> DEUXDictionaries;
     private ArrayList<MultiValuedMap<String,Word>> SWEXDictionaries;
     private ArrayList<MultiValuedMap<String, Word>> ITAXDictionaries;
+    private ArrayList<MultiValuedMap<String, Word>> TURXDictionaries;
+    private ArrayList<MultiValuedMap<String, Word>> ELLXDictionaries;
 
     //X-ENG For Synonym Functionality
 
@@ -72,13 +84,14 @@ public class DataManager {
 
     public DataManager() throws IOException {
 
-        TEISAXParser teiParser = new TEISAXParser();
         WordsDatabase = new ArrayListValuedHashMap<>();
         ENGXDictionaries = new ArrayList<>();
         FRAXDictionaries = new ArrayList<>();
         DEUXDictionaries = new ArrayList<>();
         ITAXDictionaries = new ArrayList<>();
         SWEXDictionaries = new ArrayList<>();
+        TURXDictionaries = new ArrayList<>();
+        ELLXDictionaries = new ArrayList<>();
 
         //From English to All
         ENG_TUR_DICT = FileManager.Parse(this,Config.eng_tur_tei, Config.Languages.ENGLISH, Config.Languages.TURKISH);
@@ -157,10 +170,34 @@ public class DataManager {
 
         // From Turkish to English
         TUR_ENG_DICT = FileManager.Parse(this,Config.tur_eng_tei, Config.Languages.TURKISH, Config.Languages.ENGLISH);
+        TUR_DEU_DICT = FileManager.Parse(this,Config.tur_deu_tei, Config.Languages.TURKISH, Config.Languages.GERMAN);
+        TUR_SWE_DICT = FileManager.Parse(this,Config.tur_swe_tei, Config.Languages.TURKISH, Config.Languages.SWEDISH);
+        TUR_ELL_DICT = FileManager.Parse(this,Config.tur_ell_tei, Config.Languages.TURKISH, Config.Languages.GREEK);
+        TUR_FRA_DICT = FileManager.Parse(this,Config.tur_fra_tei, Config.Languages.TURKISH, Config.Languages.FRENCH);
+        TUR_ITA_DICT = FileManager.Parse(this,Config.tur_ita_tei, Config.Languages.TURKISH, Config.Languages.ITALIAN);
+
+        TURXDictionaries.add(TUR_ENG_DICT);
+        TURXDictionaries.add(TUR_DEU_DICT);
+        TURXDictionaries.add(TUR_SWE_DICT);
+        TURXDictionaries.add(TUR_ELL_DICT);
+        TURXDictionaries.add(TUR_FRA_DICT);
+        TURXDictionaries.add(TUR_ITA_DICT);
+
 
         // From Greek to English
         ELL_ENG_DICT = FileManager.Parse(this,Config.ell_eng_tei, Config.Languages.GREEK, Config.Languages.ENGLISH);
+        ELL_DEU_DICT = FileManager.Parse(this,Config.ell_deu_tei, Config.Languages.GREEK, Config.Languages.GERMAN);
+        ELL_SWE_DICT = FileManager.Parse(this,Config.ell_swe_tei, Config.Languages.GREEK, Config.Languages.SWEDISH);
+        ELL_TUR_DICT = FileManager.Parse(this,Config.ell_tur_tei, Config.Languages.GREEK, Config.Languages.TURKISH);
+        ELL_FRA_DICT = FileManager.Parse(this,Config.ell_fra_tei, Config.Languages.GREEK, Config.Languages.FRENCH);
+        ELL_ITA_DICT = FileManager.Parse(this,Config.ell_ita_tei, Config.Languages.GREEK, Config.Languages.ITALIAN);
 
+        ELLXDictionaries.add(ELL_ENG_DICT);
+        ELLXDictionaries.add(ELL_DEU_DICT);
+        ELLXDictionaries.add(ELL_SWE_DICT);
+        ELLXDictionaries.add(ELL_TUR_DICT);
+        ELLXDictionaries.add(ELL_FRA_DICT);
+        ELLXDictionaries.add(ELL_ITA_DICT);
 
 
 
@@ -381,6 +418,54 @@ public class DataManager {
 
     public MultiValuedMap<String, Word> getSWE_TUR_DICT() {
         return SWE_TUR_DICT;
+    }
+
+    public MultiValuedMap<String, Word> getELL_TUR_DICT() {
+        return ELL_TUR_DICT;
+    }
+
+    public MultiValuedMap<String, Word> getELL_FRA_DICT() {
+        return ELL_FRA_DICT;
+    }
+
+    public MultiValuedMap<String, Word> getELL_DEU_DICT() {
+        return ELL_DEU_DICT;
+    }
+
+    public MultiValuedMap<String, Word> getELL_ITA_DICT() {
+        return ELL_ITA_DICT;
+    }
+
+    public MultiValuedMap<String, Word> getELL_SWE_DICT() {
+        return ELL_SWE_DICT;
+    }
+
+    public MultiValuedMap<String, Word> getTUR_FRA_DICT() {
+        return TUR_FRA_DICT;
+    }
+
+    public MultiValuedMap<String, Word> getTUR_DEU_DICT() {
+        return TUR_DEU_DICT;
+    }
+
+    public MultiValuedMap<String, Word> getTUR_ELL_DICT() {
+        return TUR_ELL_DICT;
+    }
+
+    public MultiValuedMap<String, Word> getTUR_ITA_DICT() {
+        return TUR_ITA_DICT;
+    }
+
+    public MultiValuedMap<String, Word> getTUR_SWE_DICT() {
+        return TUR_SWE_DICT;
+    }
+
+    public ArrayList<MultiValuedMap<String, Word>> getTURXDictionaries() {
+        return TURXDictionaries;
+    }
+
+    public ArrayList<MultiValuedMap<String, Word>> getELLXDictionaries() {
+        return ELLXDictionaries;
     }
 
     public ArrayList<MultiValuedMap<String, Word>> getENGXDictionaries() {

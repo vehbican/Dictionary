@@ -284,32 +284,38 @@ public class HomePageController implements Initializable {
 
 
         for (Word w:engList) {
-            w1.getDefinitionsListView().getItems().addAll(w.getTranslations());
+            if (!w1.getDefinitionsListView().getItems().containsAll(w.getTranslations()))
+                w1.getDefinitionsListView().getItems().addAll(w.getTranslations());
         }
         englishTab.setContent(w1);
 
         for (Word w:fraList) {
-            w2.getDefinitionsListView().getItems().addAll(w.getTranslations());
+            if (!w2.getDefinitionsListView().getItems().containsAll(w.getTranslations()))
+                w2.getDefinitionsListView().getItems().addAll(w.getTranslations());
         }
         frenchTab.setContent(w2);
 
         for (Word w:itaList) {
-            w3.getDefinitionsListView().getItems().addAll(w.getTranslations());
+            if (!w3.getDefinitionsListView().getItems().containsAll(w.getTranslations()))
+                w3.getDefinitionsListView().getItems().addAll(w.getTranslations());
         }
         italianTab.setContent(w3);
 
         for (Word w:greList) {
-            w4.getDefinitionsListView().getItems().addAll(w.getTranslations());
+            if (!w4.getDefinitionsListView().getItems().containsAll(w.getTranslations()))
+                w4.getDefinitionsListView().getItems().addAll(w.getTranslations());
         }
         greekTab.setContent(w4);
 
         for (Word w:sweList) {
-            w5.getDefinitionsListView().getItems().addAll(w.getTranslations());
+            if (!w5.getDefinitionsListView().getItems().containsAll(w.getTranslations()))
+                w5.getDefinitionsListView().getItems().addAll(w.getTranslations());
         }
         swedishTab.setContent(w5);
 
         for (Word w:gerList) {
-            w6.getDefinitionsListView().getItems().addAll(w.getTranslations());
+            if (!w6.getDefinitionsListView().getItems().containsAll(w.getTranslations()))
+                w6.getDefinitionsListView().getItems().addAll(w.getTranslations());
         }
         germanTab.setContent(w6);
 
