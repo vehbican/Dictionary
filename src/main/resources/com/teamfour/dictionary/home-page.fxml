@@ -5,6 +5,9 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -28,6 +31,16 @@
                                  <image>
                                     <Image url="@images/turkey.png" />
                                  </image>
+                                 <effect>
+                                    <Lighting diffuseConstant="1.32" specularConstant="0.75" surfaceScale="3.0">
+                                       <bumpInput>
+                                          <Shadow />
+                                       </bumpInput>
+                                       <light>
+                                          <Light.Distant />
+                                       </light>
+                                    </Lighting>
+                                 </effect>
                               </ImageView>
                            </graphic>
                         </MFXButton>
@@ -37,6 +50,16 @@
                                  <image>
                                     <Image url="@images/england.png" />
                                  </image>
+                                 <effect>
+                                    <Lighting diffuseConstant="1.32" specularConstant="0.75" surfaceScale="3.0">
+                                       <bumpInput>
+                                          <Shadow />
+                                       </bumpInput>
+                                       <light>
+                                          <Light.Distant />
+                                       </light>
+                                    </Lighting>
+                                 </effect>
                               </ImageView>
                            </graphic>
                         </MFXButton>
@@ -46,6 +69,16 @@
                                  <image>
                                     <Image url="@images/italy.png" />
                                  </image>
+                                 <effect>
+                                    <Lighting diffuseConstant="1.32" specularConstant="0.75" surfaceScale="3.0">
+                                       <bumpInput>
+                                          <Shadow />
+                                       </bumpInput>
+                                       <light>
+                                          <Light.Distant />
+                                       </light>
+                                    </Lighting>
+                                 </effect>
                               </ImageView>
                            </graphic>
                         </MFXButton>
@@ -55,6 +88,16 @@
                                  <image>
                                     <Image url="@images/france.png" />
                                  </image>
+                                 <effect>
+                                    <Lighting diffuseConstant="1.32" specularConstant="0.75" surfaceScale="3.0">
+                                       <bumpInput>
+                                          <Shadow />
+                                       </bumpInput>
+                                       <light>
+                                          <Light.Distant />
+                                       </light>
+                                    </Lighting>
+                                 </effect>
                               </ImageView>
                            </graphic>
                         </MFXButton>
@@ -64,6 +107,16 @@
                                  <image>
                                     <Image url="@images/greece.png" />
                                  </image>
+                                 <effect>
+                                    <Lighting diffuseConstant="1.32" specularConstant="0.75" surfaceScale="3.0">
+                                       <bumpInput>
+                                          <Shadow />
+                                       </bumpInput>
+                                       <light>
+                                          <Light.Distant />
+                                       </light>
+                                    </Lighting>
+                                 </effect>
                               </ImageView>
                            </graphic>
                         </MFXButton>
@@ -73,6 +126,16 @@
                                  <image>
                                     <Image url="@images/germany.png" />
                                  </image>
+                                 <effect>
+                                    <Lighting diffuseConstant="1.32" specularConstant="0.75" surfaceScale="3.0">
+                                       <bumpInput>
+                                          <Shadow />
+                                       </bumpInput>
+                                       <light>
+                                          <Light.Distant />
+                                       </light>
+                                    </Lighting>
+                                 </effect>
                               </ImageView>
                            </graphic>
                         </MFXButton>
@@ -82,6 +145,16 @@
                                  <image>
                                     <Image url="@images/sweden.png" />
                                  </image>
+                                 <effect>
+                                    <Lighting diffuseConstant="1.32" specularConstant="0.75" surfaceScale="3.0">
+                                       <bumpInput>
+                                          <Shadow />
+                                       </bumpInput>
+                                       <light>
+                                          <Light.Distant />
+                                       </light>
+                                    </Lighting>
+                                 </effect>
                               </ImageView>
                            </graphic>
                         </MFXButton>
@@ -100,7 +173,70 @@
           </AnchorPane>
       </left>
       <right>
-         <AnchorPane prefWidth="100.0" style="-fx-background-color: #2b2d32;" BorderPane.alignment="CENTER" />
+         <AnchorPane prefWidth="100.0" style="-fx-background-color: #2b2d32;" BorderPane.alignment="CENTER">
+            <children>
+               <VBox alignment="CENTER" spacing="5.0" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="200.0">
+                  <children>
+                     <MFXButton fx:id="addButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" depthLevel="LEVEL5" graphicTextGap="0.0" layoutX="14.0" layoutY="170.0" onAction="#OnAddButton" prefHeight="75.0" prefWidth="75.0" style="-fx-background-color: transparent;" textAlignment="CENTER">
+                        <graphic>
+                           <ImageView fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                 <Image url="@images/add.png" />
+                              </image>
+                              <effect>
+                                 <Lighting diffuseConstant="1.32" specularConstant="0.75" surfaceScale="3.0">
+                                    <bumpInput>
+                                       <Shadow />
+                                    </bumpInput>
+                                    <light>
+                                       <Light.Distant />
+                                    </light>
+                                 </Lighting>
+                              </effect>
+                           </ImageView>
+                        </graphic>
+                     </MFXButton>
+                     <MFXButton fx:id="editButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" depthLevel="LEVEL5" graphicTextGap="0.0" onAction="#OnEditButton" prefHeight="75.0" prefWidth="75.0" style="-fx-background-color: transparent;" textAlignment="CENTER">
+                        <graphic>
+                           <ImageView fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                 <Image url="@images/edit.png" />
+                              </image>
+                              <effect>
+                                 <Lighting diffuseConstant="1.32" specularConstant="0.75" surfaceScale="3.0">
+                                    <bumpInput>
+                                       <Shadow />
+                                    </bumpInput>
+                                    <light>
+                                       <Light.Distant />
+                                    </light>
+                                 </Lighting>
+                              </effect>
+                           </ImageView>
+                        </graphic>
+                     </MFXButton>
+                     <MFXButton fx:id="helpButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" depthLevel="LEVEL5" graphicTextGap="0.0" layoutX="14.0" layoutY="170.0" onAction="#OnHelpButton" prefHeight="75.0" prefWidth="75.0" style="-fx-background-color: transparent;" textAlignment="CENTER">
+                        <graphic>
+                           <ImageView fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                 <Image url="@images/question-mark.png" />
+                              </image>
+                              <effect>
+                                 <Lighting diffuseConstant="1.32" specularConstant="0.75" surfaceScale="3.0">
+                                    <bumpInput>
+                                       <Shadow />
+                                    </bumpInput>
+                                    <light>
+                                       <Light.Distant />
+                                    </light>
+                                 </Lighting>
+                              </effect>
+                           </ImageView>
+                        </graphic>
+                     </MFXButton>
+                  </children>
+               </VBox>
+            </children></AnchorPane>
       </right>
       <center>
          <AnchorPane focusTraversable="true" nodeOrientation="LEFT_TO_RIGHT" style="-fx-border-color: transparent; -fx-border-width: 0;" BorderPane.alignment="CENTER">
@@ -122,6 +258,16 @@
                   <graphic>
                         <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                             <Image url="@images/search.png" />
+                        <effect>
+                           <Lighting diffuseConstant="1.5" specularConstant="0.75" surfaceScale="5.0">
+                              <bumpInput>
+                                 <Shadow />
+                              </bumpInput>
+                              <light>
+                                 <Light.Distant />
+                              </light>
+                           </Lighting>
+                        </effect>
                         </ImageView>
                   </graphic>
                  </MFXButton>

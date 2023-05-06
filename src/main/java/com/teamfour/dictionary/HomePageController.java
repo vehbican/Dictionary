@@ -3,10 +3,14 @@ package com.teamfour.dictionary;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
+
 import java.io.*;
 import java.net.URL;
 import java.util.*;
@@ -47,6 +51,8 @@ public class HomePageController implements Initializable {
     public DataManager dataManager;
 
     private static String input;
+
+    public Stage stage;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -138,6 +144,46 @@ public class HomePageController implements Initializable {
 
 
     }
+
+    @FXML
+    public void OnAddButton(){
+
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("add-page.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 720, 200);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        AddController addController = fxmlLoader.getController();
+
+        Stage stage = new Stage();
+        stage.setTitle("ADD WORD");
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
+
+        addController.setData(stage,dataManager);
+
+
+    }
+
+    @FXML
+    public void OnEditButton(){
+
+
+
+    }
+
+    @FXML
+    public void OnHelpButton(){
+
+
+
+    }
+
+
 
     @FXML
     public void SearchInTurkish(){

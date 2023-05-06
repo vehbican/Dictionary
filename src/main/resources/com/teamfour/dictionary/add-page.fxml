@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="200.0" prefWidth="720.0" style="-fx-background-color: #2b2d42;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.teamfour.dictionary.AddController">
+   <children>
+      <MFXComboBox fx:id="sourceLanguages" floatMode="DISABLED" layoutX="480.0" layoutY="70.0" prefWidth="200.0" promptText="Source Language" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="60.0" />
+      <MFXTextField fx:id="wordInput" floatMode="DISABLED" layoutX="50.0" layoutY="200.0" prefWidth="200.0" promptText="Word" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="50.0" />
+      <MFXComboBox fx:id="targetLanguages" floatMode="DISABLED" layoutX="60.0" layoutY="160.0" prefWidth="200.0" promptText="Target Language" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="60.0" />
+      <MFXTextField fx:id="translationInput" floatMode="DISABLED" layoutX="60.0" layoutY="230.0" prefWidth="200.0" promptText="Translation" AnchorPane.bottomAnchor="60.0" AnchorPane.rightAnchor="50.0" />
+      <MFXButton buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="277.0" layoutY="20.0" onAction="#ApplyAddOperation" style="-fx-background-color: transparent;" textAlignment="CENTER" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="275.0" AnchorPane.rightAnchor="275.0" AnchorPane.topAnchor="20.0">
+         <graphic>
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
+               <image>
+                  <Image url="@images/down.png" />
+               </image>
+               <effect>
+                  <Lighting diffuseConstant="1.5" specularConstant="0.5" surfaceScale="3.0">
+                     <bumpInput>
+                        <Shadow />
+                     </bumpInput>
+                     <light>
+                        <Light.Distant />
+                     </light>
+                  </Lighting>
+               </effect>
+            </ImageView>
+         </graphic>
+      </MFXButton>
+   </children>
+</AnchorPane>

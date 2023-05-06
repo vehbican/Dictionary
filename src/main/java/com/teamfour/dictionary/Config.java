@@ -110,8 +110,7 @@ public class Config {
         GREEK,
         ITALIAN,
         SWEDISH,
-        TURKISH,
-        HELP
+        TURKISH
 
     }
 

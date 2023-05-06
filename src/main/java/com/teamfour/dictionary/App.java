@@ -32,6 +32,7 @@ public class App extends Application {
 
         controller = fxmlLoader.getController();
 
+        controller.stage = stage;
         controller.dataManager = dataManager;
         controller.searchButton.setOnAction(event -> controller.HandleSearchButtonAction(dataManager));
 
