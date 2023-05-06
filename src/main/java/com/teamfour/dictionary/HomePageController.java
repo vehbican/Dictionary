@@ -55,9 +55,9 @@ public class HomePageController implements Initializable {
 
         int w = 50;
 
-        tabPane.setTabMinWidth(100);
+        tabPane.setTabMinWidth(125);
         tabPane.setTabMinHeight(30);
-        tabPane.setTabMaxWidth(100);
+        tabPane.setTabMaxWidth(125);
         tabPane.setTabMaxHeight(30);
 
         tabPane.setTabDragPolicy(TabPane.TabDragPolicy.REORDER);

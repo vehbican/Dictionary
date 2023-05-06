@@ -85,15 +85,6 @@
                               </ImageView>
                            </graphic>
                         </MFXButton>
-                         <MFXButton fx:id="helpButton" alignment="CENTER" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" depthLevel="LEVEL5" graphicTextGap="0.0" onAction="#DisplayHelp" prefHeight="75.0" prefWidth="150.0" style="-fx-background-color: #2b2d32; -fx-background-radius: 20;" textAlignment="CENTER">
-                             <graphic>
-                                 <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                                     <image>
-                                         <Image url="@images/help.png" />
-                                     </image>
-                                 </ImageView>
-                             </graphic>
-                         </MFXButton>
                      </children>
                   </VBox>
                </children>
