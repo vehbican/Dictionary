@@ -46,17 +46,20 @@ public class TEISAXParser {
     }
 
 
-
-
     private static class MyHandler extends DefaultHandler {
         private boolean inEntry = false;
+        private boolean inForm = false;
         private boolean inOrth = false;
-        private boolean inDef = false; //for eng-greek dictionary
         private boolean inSense = false;
+        private boolean inCit = false;
         private boolean inQuote = false;
+        private boolean inDef = false; //for eng-greek dictionary
+        private boolean inTrans = false;
+        private boolean inExample = false;
         private String currentId;
         private String currentOrth;
         private String currentLang;
+        private String currentType;
         private StringBuilder currentQuote;
 
         private HashMap<String,Word> dictionary;
@@ -79,16 +82,52 @@ public class TEISAXParser {
                 inEntry = true;
                 currentId = attributes.getValue("xml:id");
                 quotes = new ArrayList<>();
-            } else if (qName.equalsIgnoreCase("orth") && inEntry) {
+            }
+            else if (qName.equalsIgnoreCase("form") && inEntry){
+                inForm = true;
+            }
+            else if (qName.equalsIgnoreCase("orth") && inForm) {
                 inOrth = true;
-            }else if (qName.equalsIgnoreCase("sense") && inEntry) {
+            }
+            else if (qName.equalsIgnoreCase("sense") && inEntry) {
                 inSense = true;
-            } else if ((qName.equalsIgnoreCase("quote") || qName.equalsIgnoreCase("def")) && inSense) {
+            }
+            else if (qName.equalsIgnoreCase("cit") && attributes.getValue("type").equals("trans") && inSense){
+                inCit = true;
+                inTrans = true;
+                inExample = false;
+                currentType = "trans";
+            }
+            else if (qName.equalsIgnoreCase("cit") && attributes.getValue("type").equals("example") && inSense){
+                inCit = true;
+                inTrans = false;
+                inExample = true;
+                currentType = "example";
+            }
+            else if (qName.equalsIgnoreCase("quote") && inCit && inTrans) {
                 inQuote = true;
+                currentLang = attributes.getValue("xml:lang");
+                currentQuote = new StringBuilder();
+            }
+            else if (qName.equalsIgnoreCase("def") && inCit && inTrans){
                 inDef = true;
                 currentLang = attributes.getValue("xml:lang");
                 currentQuote = new StringBuilder();
             }
+            /*System.out.println("----------------------------------------");
+            System.out.println("In Entry: "+ inEntry);
+            System.out.println("In Form:" +inForm);
+            System.out.println("In Orth:" + inOrth);
+            System.out.println("In Sense:" + inSense);
+            System.out.println("In Cit:" + inCit);
+            System.out.println("In Trans:" + inTrans);
+            System.out.println("In Example"+ inExample);
+            System.out.println("In Quote:"+inQuote);
+            System.out.println("In Def:" + inDef);
+            System.out.println("Current Type:"+currentType);
+            System.out.println("----------------------------------------");*/
+
+
         }
 
         @Override
@@ -96,9 +135,25 @@ public class TEISAXParser {
             if (inOrth) {
                 currentOrth = new String(ch, start, length);
                 inOrth = false;
-            } else if (inQuote || inDef) {
+            } else if (inQuote) {
+                currentQuote.append(new String(ch, start, length));
+            }else if (inDef){
                 currentQuote.append(new String(ch, start, length));
             }
+
+            /*System.out.println("----------------------------------------");
+            System.out.println("In Entry: "+ inEntry);
+            System.out.println("In Form:" +inForm);
+            System.out.println("In Orth:" + inOrth);
+            System.out.println("In Sense:" + inSense);
+            System.out.println("In Cit:" + inCit);
+            System.out.println("In Trans:" + inTrans);
+            System.out.println("In Example"+ inExample);
+            System.out.println("In Quote:"+inQuote);
+            System.out.println("In Def:" + inDef);
+            System.out.println("Current Type:"+currentType);
+            System.out.println("----------------------------------------");*/
+
         }
 
         @Override
@@ -109,13 +164,14 @@ public class TEISAXParser {
                 inEntry = false;
                 /*System.out.println("ID: " + currentId);
                 System.out.println("Orth: " + currentOrth + " - " + quotes);
-                System.out.println();*/
+                System.out.println("Type:" + currentType);*/
 
                 if(dataManager.IsFirstCharUpper(currentOrth)){
 
                     currentOrth = currentOrth.trim().toLowerCase();
 
                 }
+
                 Word sourceWord = new Word(sourceLang,currentOrth);
 
                 if(dictionary.containsKey(sourceWord.getWord())){
@@ -137,11 +193,29 @@ public class TEISAXParser {
                 System.out.println();*/
 
 
-            } else if (qName.equalsIgnoreCase("sense")) {
+            } else if (inSense) {
                 inSense = false;
-
-            } else if (qName.equalsIgnoreCase("quote") || qName.equalsIgnoreCase("def")) {
+            } else if (qName.equalsIgnoreCase("quote") && inQuote) {
                 inQuote = false;
+
+                //System.out.println("Quote (" + currentLang + "): " + currentQuote);
+
+                if(currentQuote != null){
+
+                    String q = currentQuote.toString().trim();
+                    if(dataManager.IsFirstCharUpper(q)){
+
+                        q = q.trim().toLowerCase();
+
+                    }
+
+                    Word quote = new Word(targetLang, q);
+
+                    quotes.add(quote);
+
+                }
+
+            }else if (qName.equalsIgnoreCase("def") && inDef){
                 inDef = false;
 
                 //System.out.println("Quote (" + currentLang + "): " + currentQuote);
@@ -162,8 +236,20 @@ public class TEISAXParser {
                 }
 
 
-
             }
+
+            /*System.out.println("----------------------------------------");
+            System.out.println("In Entry: "+ inEntry);
+            System.out.println("In Form:" +inForm);
+            System.out.println("In Orth:" + inOrth);
+            System.out.println("In Sense:" + inSense);
+            System.out.println("In Cit:" + inCit);
+            System.out.println("In Trans:" + inTrans);
+            System.out.println("In Example"+ inExample);
+            System.out.println("In Quote:"+inQuote);
+            System.out.println("In Def:" + inDef);
+            System.out.println("Current Type:"+currentType);
+            System.out.println("----------------------------------------");*/
 
         }
         String decodeText(String input, Charset charset){

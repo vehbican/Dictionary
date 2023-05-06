@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
-<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
@@ -20,26 +19,75 @@
       <left>
           <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
               <Pane layoutY="50.0" prefWidth="200.0" style="-fx-background-color: #ef233c;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
-                  <MFXComboBox fx:id="sourceLangComboBox" floatMode="DISABLED" layoutX="10.0" layoutY="25.0" prefWidth="180.0" promptText="Source Language" selectable="true" style="-fx-background-color: transparent; -fx-border-style: hidden hidden solid hidden; -fx-border-radius: 0;" textFill="white">
-                      <font>
-                          <Font name="System Bold" size="15.0" />
-                      </font>
-                  </MFXComboBox>
-                  <MFXTextField fx:id="searchInput" borderGap="0.0" caretVisible="false" floatMode="DISABLED" layoutX="10.0" layoutY="100.0" prefWidth="180.0" promptText="Search" style="-fx-background-color: transparent; -fx-border-style: hidden hidden solid hidden; -fx-border-radius: 0;" textFill="white">
-                      <textFill>
-                          <Color red="1.0" green="1.0" blue="1.0" opacity="0.8700000047683716" />
-                      </textFill>
-                      <font>
-                          <Font name="System Bold" size="15.0" />
-                      </font>
-                  </MFXTextField>
-                 <MFXButton fx:id="searchButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" depthLevel="LEVEL5" graphicTextGap="0.0" layoutX="42.0" layoutY="175.0" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: transparent;" textAlignment="CENTER">
-                  <graphic>
-                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                            <Image url="@images/search.png" />
-                        </ImageView>
-                  </graphic>
-                 </MFXButton>
+               <children>
+                  <VBox alignment="CENTER" layoutY="35.0" prefWidth="200.0" spacing="10.0">
+                     <children>
+                        <MFXButton fx:id="turkishButton" alignment="CENTER" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" depthLevel="LEVEL5" graphicTextGap="0.0" onAction="#SearchInTurkish" prefHeight="75.0" prefWidth="150.0" style="-fx-background-color: #2b2d32; -fx-background-radius: 20;" textAlignment="CENTER">
+                           <graphic>
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/turkey.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MFXButton>
+                        <MFXButton fx:id="englishButton" alignment="CENTER" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" depthLevel="LEVEL5" graphicTextGap="0.0" onAction="#SearchInEnglish" prefHeight="75.0" prefWidth="150.0" style="-fx-background-color: #2b2d32; -fx-background-radius: 20;" textAlignment="CENTER">
+                           <graphic>
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/england.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MFXButton>
+                        <MFXButton fx:id="italianButton" alignment="CENTER" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" depthLevel="LEVEL5" graphicTextGap="0.0" onAction="#SearchInItalian" prefHeight="75.0" prefWidth="150.0" style="-fx-background-color: #2b2d32; -fx-background-radius: 20;" textAlignment="CENTER">
+                           <graphic>
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/italy.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MFXButton>
+                        <MFXButton fx:id="frenchButton" alignment="CENTER" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" depthLevel="LEVEL5" graphicTextGap="0.0" onAction="#SearchInFrench" prefHeight="75.0" prefWidth="150.0" style="-fx-background-color: #2b2d32; -fx-background-radius: 20;" textAlignment="CENTER">
+                           <graphic>
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/france.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MFXButton>
+                        <MFXButton fx:id="greekButton" alignment="CENTER" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" depthLevel="LEVEL5" graphicTextGap="0.0" onAction="#SearchInGreek" prefHeight="75.0" prefWidth="150.0" style="-fx-background-color: #2b2d32; -fx-background-radius: 20;" textAlignment="CENTER">
+                           <graphic>
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/greece.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MFXButton>
+                        <MFXButton fx:id="germanButton" alignment="CENTER" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" depthLevel="LEVEL5" graphicTextGap="0.0" onAction="#SearchInGerman" prefHeight="75.0" prefWidth="150.0" style="-fx-background-color: #2b2d32; -fx-background-radius: 20;" textAlignment="CENTER">
+                           <graphic>
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/germany.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MFXButton>
+                        <MFXButton fx:id="swedishButton" alignment="CENTER" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" depthLevel="LEVEL5" graphicTextGap="0.0" layoutX="10.0" layoutY="550.0" onAction="#SearchInSwedish" prefHeight="75.0" prefWidth="150.0" style="-fx-background-color: #2b2d32; -fx-background-radius: 20;" textAlignment="CENTER">
+                           <graphic>
+                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/sweden.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MFXButton>
+                     </children>
+                  </VBox>
+               </children>
               </Pane>
             <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="10.0" prefWidth="180.0" style="-fx-background-color: transparent; -fx-border-radius: 0; -fx-border-color: #FFFFFF; -fx-border-width: 5; -fx-border-style: solid hidden solid hidden; -fx-border-insets: 0;" text="DICT4TEAM" textAlignment="JUSTIFY" textFill="WHITE" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
                <font>
@@ -52,16 +100,31 @@
           </AnchorPane>
       </left>
       <right>
-         <AnchorPane prefWidth="100.0" style="-fx-background-color: #2b2d42;" BorderPane.alignment="CENTER" />
+         <AnchorPane prefWidth="100.0" style="-fx-background-color: #2b2d32;" BorderPane.alignment="CENTER" />
       </right>
       <center>
          <AnchorPane focusTraversable="true" nodeOrientation="LEFT_TO_RIGHT" style="-fx-border-color: transparent; -fx-border-width: 0;" BorderPane.alignment="CENTER">
             <children>
-               <ListView fx:id="cardListView" nodeOrientation="LEFT_TO_RIGHT" pickOnBounds="false" style="-fx-background-color: #2b2d42; -fx-border-color: transparent; -fx-border-insets: 0;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
-                  <cursor>
-                     <Cursor fx:constant="DEFAULT" />
-                  </cursor>
-               </ListView>
+               <Pane style="-fx-background-color: #2b2d32;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+               <TabPane id="tabPane" fx:id="tabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="150.0" />
+               <MFXTextField fx:id="searchInput" borderGap="0.0" floatMode="DISABLED" layoutX="50.0" layoutY="62.0" promptText="SEARCH A WORD" style="-fx-background-radius: 10; -fx-border-color: transparent;" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="175.0" AnchorPane.topAnchor="62.0">
+                  <font>
+                     <Font name="System Bold" size="15.0" />
+                  </font>
+                  <textFill>
+                     <Color />
+                  </textFill>
+                  <opaqueInsets>
+                     <Insets />
+                  </opaqueInsets>
+               </MFXTextField>
+                 <MFXButton fx:id="searchButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" depthLevel="LEVEL5" graphicTextGap="0.0" layoutX="590.0" layoutY="29.0" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: transparent;" textAlignment="CENTER" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="25.0">
+                  <graphic>
+                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                            <Image url="@images/search.png" />
+                        </ImageView>
+                  </graphic>
+                 </MFXButton>
             </children>
             <BorderPane.margin>
                <Insets />
