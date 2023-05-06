@@ -57,7 +57,7 @@ public class Config {
     public static final String ell_eng_tei = "dicts/ell-eng.txt";
     public static final String tur_eng_tei = "dicts/tur-eng.txt";
 
-    //public static final String eng_tur_txt = "C:\\Users\\can\\Desktop";
+
 
 
 
