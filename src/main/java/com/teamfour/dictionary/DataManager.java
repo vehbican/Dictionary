@@ -247,10 +247,11 @@ public class DataManager {
         String italyFlagImg = Config.italyFlagImg;
         String swedenFlagImg = Config.swedenFlagImg;
         String turkeyFlagImg = Config.turkeyFlagImg;
+        String helpButtonImg = Config.helpButtonImg;
 
 
 
-        return new String[]{turkeyFlagImg, franceFlagImg ,italyFlagImg, greeceFlagImg, swedenFlagImg,germanyFlagImg,englandFlagImg};
+        return new String[]{turkeyFlagImg, franceFlagImg ,italyFlagImg, greeceFlagImg, swedenFlagImg,germanyFlagImg,englandFlagImg,helpButtonImg};
     }
 
     public HashMap<String, Word> getENG_TUR_DICT() {

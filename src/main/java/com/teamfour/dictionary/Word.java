@@ -32,6 +32,7 @@ public class Word {
             case SWEDISH -> this.flagImgPath = Config.swedenFlagImg;
             case ITALIAN -> this.flagImgPath = Config.italyFlagImg;
             case TURKISH -> this.flagImgPath = Config.turkeyFlagImg;
+            case HELP -> this.flagImgPath = Config.helpButtonImg;
 
         }
 

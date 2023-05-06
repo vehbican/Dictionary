@@ -11,6 +11,7 @@ public class Config {
     public static final String italyFlagImg = "images/italy.png";
     public static final String swedenFlagImg = "images/sweden.png";
     public static final String turkeyFlagImg = "images/turkey.png";
+    public static final String helpButtonImg = "images/help.png";
 
 
     public static final String eng_ita_tei = "dicts/eng-ita.tei";
@@ -109,7 +110,8 @@ public class Config {
         GREEK,
         ITALIAN,
         SWEDISH,
-        TURKISH
+        TURKISH,
+        HELP
 
     }
 

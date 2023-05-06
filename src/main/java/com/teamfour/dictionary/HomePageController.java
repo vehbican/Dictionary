@@ -11,6 +11,8 @@ import javafx.scene.image.ImageView;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
+
+import javax.swing.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -43,6 +45,8 @@ public class HomePageController implements Initializable {
     protected MFXButton germanButton;
     @FXML
     protected MFXButton greekButton;
+    @FXML
+    protected MFXButton helpButton;
 
     private List<Tab> tabs;
     private Tab turkishTab;
@@ -53,6 +57,7 @@ public class HomePageController implements Initializable {
     private Tab greekTab;
     private Tab swedishTab;
     private Tab synonymsTab;
+    private Tab helpTab;
 
     public DataManager dataManager;
 
@@ -96,8 +101,11 @@ public class HomePageController implements Initializable {
         synonymsTab = new Tab("SYNONYMS");
         //tab8.setGraphic(buildTabIcon(Config.turkeyFlagImg,w));
 
+        helpTab = new Tab("HELP");
+        helpTab.setGraphic(buildTabIcon(Config.helpButtonImg,w));
 
-        tabs = List.of(turkishTab,englishTab,frenchTab,germanTab,greekTab,italianTab,swedishTab,synonymsTab);
+
+        tabs = List.of(turkishTab,englishTab,frenchTab,germanTab,greekTab,italianTab,swedishTab,synonymsTab,helpTab);
 
         tabPane.getTabs().addAll(tabs);
 
@@ -213,6 +221,8 @@ public class HomePageController implements Initializable {
         germanTab.setContent(w6);
 
         //Synonyms?
+
+
 
 
     }
@@ -621,6 +631,16 @@ public class HomePageController implements Initializable {
         synonymsCard.getDefinitionsListView().getItems().addAll(syns);
         synonymsTab.setContent(synonymsCard);*/
 
+    }
+    @FXML
+    public void DisplayHelp(){
+        ClearTabContents();
+
+        for (Tab t:tabPane.getTabs()){
+            System.out.println("------------------------------------------");
+            System.out.println("DONT WORRY HELP IS HERE");
+            System.out.println("------------------------------------------");
+        }
     }
 
 
