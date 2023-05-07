@@ -563,6 +563,7 @@ public class HomePageController implements Initializable {
         germanTab.setContent(w6);
 
         editTarget.setLanguage(Config.Languages.GREEK);
+        searchInGreekHelper();
 
 
     }
