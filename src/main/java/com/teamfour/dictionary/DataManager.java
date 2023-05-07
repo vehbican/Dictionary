@@ -3,6 +3,7 @@ package com.teamfour.dictionary;
 import org.apache.commons.collections4.MultiValuedMap;
 import org.apache.commons.collections4.multimap.ArrayListValuedHashMap;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import java.util.regex.Matcher;
@@ -200,7 +201,12 @@ public class DataManager {
         ELLXDictionaries.add(ELL_ITA_DICT);
 
 
+        File f = new File(Config.projectCreatedText);
+        if (!f.isFile()){
 
+            f.createNewFile();
+
+        }
 
 
 

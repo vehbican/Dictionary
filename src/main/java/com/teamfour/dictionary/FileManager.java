@@ -12,10 +12,26 @@ public class FileManager {
 
     public static MultiValuedMap<String,Word> Parse(DataManager dataManager,String path, Config.Languages sourceLanguage, Config.Languages targetLanguage) throws IOException {
 
-        InputStream is = App.class.getResourceAsStream(path);
+        File f = new File(Config.projectCreatedText);
+
+        File file = new File(path);
+        String absolutePath = file.getCanonicalPath();
+
+        InputStream is = App.class.getResourceAsStream("dicts/"+path);
 
         assert is != null;
-        BufferedReader reader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
+
+        BufferedReader reader;
+
+        if (f.isFile()){
+
+            reader = new BufferedReader(new FileReader(absolutePath, StandardCharsets.UTF_8));
+
+        }else {
+
+            reader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
+        }
+
 
         MultiValuedMap<String,Word> words = new ArrayListValuedHashMap<>();
 
@@ -66,13 +82,67 @@ public class FileManager {
 
     }
 
+    public static MultiValuedMap<String,Word> ParseLoaded(DataManager dataManager,String path, Config.Languages sourceLanguage, Config.Languages targetLanguage) throws IOException {
+
+        File file = new File(path);
+        String absolutePath = file.getCanonicalPath();
+
+        BufferedReader reader = new BufferedReader(new FileReader(absolutePath, StandardCharsets.UTF_8));
+
+        MultiValuedMap<String,Word> words = new ArrayListValuedHashMap<>();
+
+        String line;
+        String word;
+
+        while ((line = reader.readLine()) != null){
+
+            ArrayList<Word> translations = new ArrayList<>();
+
+            if (line.isBlank()){continue;}
+
+            String[] lineArray = line.trim().split(":");
+
+            if (lineArray.length < 2) continue;
+
+            word = lineArray[0].trim().toLowerCase();
+
+            String[] translationArray;
+
+            translationArray = lineArray[1].trim().split(";");
+
+
+            for (String t:translationArray){
+
+                Word trans = new Word(targetLanguage,t.trim().toLowerCase());
+                translations.add(trans);
+
+            }
+
+            if (!word.isBlank()){
+
+                Word w = new Word(sourceLanguage,word);
+                w.setTranslations(translations);
+                w.setTargetLanguage(targetLanguage);
+                words.put(word,w);
+                dataManager.getWordsDatabase().put(word,w);
+
+            }
+
+        }
+
+        reader.close();
+
+
+        return words;
+
+    }
+
     public static void FromHashMapToFile(MultiValuedMap<String,Word> map,String outputPath){
 
         try {
 
             File file = new File(outputPath);
             String absolutePath = file.getCanonicalPath();
-
 
             BufferedWriter writer = new BufferedWriter(new FileWriter(absolutePath,StandardCharsets.UTF_8));
 

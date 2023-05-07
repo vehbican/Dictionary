@@ -294,8 +294,10 @@ public class HomePageController implements Initializable {
             }
 
             if (temp==null) continue;
+            List<Word> l = ((WordCard)t.getContent()).getDefinitionsListView().getItems();
             for (Word word:temp){
-                w.getDefinitionsListView().getItems().addAll(word.getTranslations());
+                if (!l.containsAll(word.getTranslations()))
+                    w.getDefinitionsListView().getItems().addAll(word.getTranslations());
             }
             ((WordCard)t.getContent()).getDefinitionsListView().getItems().addAll(w.getDefinitionsListView().getItems());
 
@@ -327,8 +329,10 @@ public class HomePageController implements Initializable {
             }
 
             if (temp==null) continue;
+            List<Word> l = ((WordCard)t.getContent()).getDefinitionsListView().getItems();
             for (Word word:temp){
-                w.getDefinitionsListView().getItems().addAll(word.getTranslations());
+                if (!l.containsAll(word.getTranslations()))
+                    w.getDefinitionsListView().getItems().addAll(word.getTranslations());
             }
             ((WordCard)t.getContent()).getDefinitionsListView().getItems().addAll(w.getDefinitionsListView().getItems());
 
