@@ -297,7 +297,7 @@ public class HomePageController implements Initializable {
             for (Word word:temp){
                 w.getDefinitionsListView().getItems().addAll(word.getTranslations());
             }
-            t.setContent(w);
+            ((WordCard)t.getContent()).getDefinitionsListView().getItems().addAll(w.getDefinitionsListView().getItems());
 
 
         }
@@ -330,7 +330,7 @@ public class HomePageController implements Initializable {
             for (Word word:temp){
                 w.getDefinitionsListView().getItems().addAll(word.getTranslations());
             }
-            t.setContent(w);
+            ((WordCard)t.getContent()).getDefinitionsListView().getItems().addAll(w.getDefinitionsListView().getItems());
 
 
         }
