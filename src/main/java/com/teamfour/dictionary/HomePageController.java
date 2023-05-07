@@ -2,6 +2,8 @@ package com.teamfour.dictionary;
 
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -10,11 +12,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.*;
 import java.net.URL;
 import java.util.*;
+import java.util.List;
 
 public class HomePageController implements Initializable {
 
@@ -38,6 +44,8 @@ public class HomePageController implements Initializable {
     protected MFXButton germanButton;
     @FXML
     protected MFXButton greekButton;
+    @FXML
+    protected MFXButton helpButton;
 
     private List<Tab> tabs;
     private Tab turkishTab;
@@ -146,29 +154,6 @@ public class HomePageController implements Initializable {
 
     }
 
-    @FXML
-    public void OnAddButton(){
-
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("add-page.fxml"));
-        Scene scene = null;
-        try {
-            scene = new Scene(fxmlLoader.load(), 720, 200);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        AddController addController = fxmlLoader.getController();
-
-        Stage stage = new Stage();
-        stage.setTitle("ADD WORD");
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
-
-        addController.setData(stage,dataManager);
-
-
-    }
 
     @FXML
     public void OnEditButton(){
@@ -240,11 +225,55 @@ public class HomePageController implements Initializable {
     }
 
     @FXML
-    public void OnHelpButton(){
+    public void OnHelpButton( ){
+        File file = new File("src/main/resources/com/teamfour/dictionary/Help-Guide.pdf");
+        if (file.exists()){
+            try{
+                new ProcessBuilder("cmd","/c",file.getAbsolutePath()).start();
+            }
+            catch (IOException e ){
+                e.printStackTrace();
+            }
+        }
+
+
+
 
 
 
     }
+
+
+
+
+        @FXML
+        public void OnAddButton(){
+
+            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("add-page.fxml"));
+            Scene scene = null;
+            try {
+                scene = new Scene(fxmlLoader.load(), 720, 200);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            AddController addController = fxmlLoader.getController();
+
+            Stage stage = new Stage();
+            stage.setTitle("ADD WORD");
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+
+            addController.setData(stage,dataManager);
+
+
+        }
+
+
+
+
+
     @FXML
     public void searchInTurkishHelper(){
         for (Tab t:tabPane.getTabs()){
