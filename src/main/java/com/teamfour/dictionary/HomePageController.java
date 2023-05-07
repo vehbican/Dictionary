@@ -245,6 +245,73 @@ public class HomePageController implements Initializable {
 
 
     }
+    @FXML
+    public void searchInTurkishHelper(){
+        for (Tab t:tabPane.getTabs()){
+
+            Collection<Word> temp = null;
+            WordCard w = new WordCard();
+
+            switch (t.getText()){
+
+                case "ENGLISH" -> temp = dataManager.getTUR_ENG_DICT().get(input);
+                case  "TURKISH" -> {continue;}
+                case  "FRENCH" -> temp = dataManager.getTUR_FRA_DICT().get(input);
+                case  "GERMAN" -> temp = dataManager.getTUR_DEU_DICT().get(input);
+                case  "GREEK" -> temp = dataManager.getTUR_ELL_DICT().get(input);
+                case  "ITALIAN" -> temp = dataManager.getTUR_ITA_DICT().get(input);
+                case  "SWEDISH" -> temp = dataManager.getTUR_SWE_DICT().get(input);
+
+            }
+
+            if (temp==null) continue;
+            for (Word word:temp){
+                w.getDefinitionsListView().getItems().addAll(word.getTranslations());
+            }
+            t.setContent(w);
+
+
+        }
+
+        editTarget.setLanguage(Config.Languages.TURKISH);
+
+
+
+    }
+    @FXML
+    public void searchInGreekHelper(){
+        for (Tab t:tabPane.getTabs()){
+
+            Collection<Word> temp = null;
+            WordCard w = new WordCard();
+
+            switch (t.getText()){
+
+                case "ENGLISH" -> temp = dataManager.getELL_ENG_DICT().get(input);
+                case  "TURKISH" -> temp = dataManager.getELL_TUR_DICT().get(input);
+                case  "FRENCH" -> temp = dataManager.getELL_FRA_DICT().get(input);
+                case  "GERMAN" -> temp = dataManager.getELL_DEU_DICT().get(input);
+                case  "GREEK" -> {continue;}
+                case  "ITALIAN" -> temp = dataManager.getELL_ITA_DICT().get(input);
+                case  "SWEDISH" -> temp = dataManager.getELL_SWE_DICT().get(input);
+
+            }
+
+            if (temp==null) continue;
+            for (Word word:temp){
+                w.getDefinitionsListView().getItems().addAll(word.getTranslations());
+            }
+            t.setContent(w);
+
+
+        }
+
+        editTarget.setLanguage(Config.Languages.GREEK);
+
+
+
+    }
+
 
 
 
@@ -281,6 +348,7 @@ public class HomePageController implements Initializable {
         WordCard w4 = new WordCard();
         WordCard w5 = new WordCard();
         WordCard w6 = new WordCard();
+
 
 
         for (Word w:engList) {
@@ -320,6 +388,7 @@ public class HomePageController implements Initializable {
         germanTab.setContent(w6);
 
         editTarget.setLanguage(Config.Languages.TURKISH);
+        searchInTurkishHelper();
 
 
     }

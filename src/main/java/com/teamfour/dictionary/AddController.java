@@ -459,10 +459,140 @@ public class AddController implements Initializable {
     }
 
     public void addTurWord() {
+        Word sourceLange = targetLanguages.getValue();
+        switch (sourceLange.getLanguage()){
+            case ENGLISH:{
+                Word w = new Word(Config.Languages.TURKISH, word.getText());
+                Word definitions = new Word(Config.Languages.ENGLISH, definition.getText());
+                w.getTranslations().add(definitions);
+
+
+                dataManager.getTUR_ENG_DICT().put(word.getText(), w);
+                dataManager.getWordsDatabase().put(word.getText(), w);
+                break;
+
+            }
+            case FRENCH:{
+                Word w = new Word(Config.Languages.TURKISH, word.getText());
+                Word definitions = new Word(Config.Languages.FRENCH, definition.getText());
+                w.getTranslations().add(definitions);
+
+
+                dataManager.getTUR_FRA_DICT().put(word.getText(), w);
+                dataManager.getWordsDatabase().put(word.getText(), w);
+                break;
+            }
+            case SWEDISH:{
+                Word w = new Word(Config.Languages.TURKISH, word.getText());
+                Word definitions = new Word(Config.Languages.SWEDISH, definition.getText());
+                w.getTranslations().add(definitions);
+
+
+                dataManager.getTUR_SWE_DICT().put(word.getText(), w);
+                dataManager.getWordsDatabase().put(word.getText(), w);
+                break;
+            }
+            case GREEK:{
+                Word w = new Word(Config.Languages.TURKISH, word.getText());
+                Word definitions = new Word(Config.Languages.GREEK, definition.getText());
+                w.getTranslations().add(definitions);
+
+
+                dataManager.getTUR_ELL_DICT().put(word.getText(), w);
+                dataManager.getWordsDatabase().put(word.getText(), w);
+                break;
+            }
+            case GERMAN:{
+                Word w = new Word(Config.Languages.TURKISH, word.getText());
+                Word definitions = new Word(Config.Languages.GERMAN, definition.getText());
+                w.getTranslations().add(definitions);
+
+
+                dataManager.getTUR_DEU_DICT().put(word.getText(), w);
+                dataManager.getWordsDatabase().put(word.getText(), w);
+                break;
+            }
+            case ITALIAN:{
+                Word w = new Word(Config.Languages.TURKISH, word.getText());
+                Word definitions = new Word(Config.Languages.ITALIAN, definition.getText());
+                w.getTranslations().add(definitions);
+
+
+                dataManager.getTUR_ITA_DICT().put(word.getText(), w);
+                dataManager.getWordsDatabase().put(word.getText(), w);
+                break;
+            }
+
+        }
 
     }
 
     public void addGreWord() {
+        Word sourceLange = targetLanguages.getValue();
+        switch (sourceLange.getLanguage()){
+            case ITALIAN :{
+                Word w = new Word(Config.Languages.GREEK, word.getText());
+                Word definitions = new Word(Config.Languages.ITALIAN, definition.getText());
+                w.getTranslations().add(definitions);
+
+
+                dataManager.getELL_ITA_DICT().put(word.getText(), w);
+                dataManager.getWordsDatabase().put(word.getText(), w);
+                break;
+            }
+            case GERMAN:{
+                Word w = new Word(Config.Languages.GREEK, word.getText());
+                Word definitions = new Word(Config.Languages.GERMAN, definition.getText());
+                w.getTranslations().add(definitions);
+
+
+                dataManager.getELL_DEU_DICT().put(word.getText(), w);
+                dataManager.getWordsDatabase().put(word.getText(), w);
+                break;
+            }
+            case SWEDISH:{
+                Word w = new Word(Config.Languages.GREEK, word.getText());
+                Word definitions = new Word(Config.Languages.SWEDISH, definition.getText());
+                w.getTranslations().add(definitions);
+
+
+                dataManager.getELL_SWE_DICT().put(word.getText(), w);
+                dataManager.getWordsDatabase().put(word.getText(), w);
+                break;
+
+            }
+            case ENGLISH:{
+                Word w = new Word(Config.Languages.GREEK, word.getText());
+                Word definitions = new Word(Config.Languages.ENGLISH, definition.getText());
+                w.getTranslations().add(definitions);
+
+
+                dataManager.getELL_ENG_DICT().put(word.getText(), w);
+                dataManager.getWordsDatabase().put(word.getText(), w);
+                break;
+            }
+            case FRENCH:{
+                Word w = new Word(Config.Languages.GREEK, word.getText());
+                Word definitions = new Word(Config.Languages.FRENCH, definition.getText());
+                w.getTranslations().add(definitions);
+
+
+                dataManager.getELL_FRA_DICT().put(word.getText(), w);
+                dataManager.getWordsDatabase().put(word.getText(), w);
+                break;
+            }
+            case TURKISH:{
+                Word w = new Word(Config.Languages.GREEK, word.getText());
+                Word definitions = new Word(Config.Languages.TURKISH, definition.getText());
+                w.getTranslations().add(definitions);
+
+
+                dataManager.getELL_TUR_DICT().put(word.getText(), w);
+                dataManager.getWordsDatabase().put(word.getText(), w);
+                break;
+            }
+
+        }
 
     }
 
