@@ -697,9 +697,9 @@ public class HomePageController implements Initializable {
 
     private Image createFlagImage(String path) {
 
-        URL url = TEISAXParser.class.getResource(path);
+        URL url = App.class.getResource(path);
         assert url != null;
-        InputStream inputStream = TEISAXParser.class.getResourceAsStream(path);
+        InputStream inputStream = App.class.getResourceAsStream(path);
         assert inputStream != null;
         return new Image(inputStream);
 

@@ -6,7 +6,7 @@ import org.apache.commons.collections4.multimap.ArrayListValuedHashMap;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Map;
 
 public class FileManager {
 
@@ -63,6 +63,47 @@ public class FileManager {
 
 
         return words;
+
+    }
+
+    public static void FromHashMapToFile(MultiValuedMap<String,Word> map,String outputPath){
+
+        try {
+
+            File file = new File(outputPath);
+            String absolutePath = file.getCanonicalPath();
+
+
+            BufferedWriter writer = new BufferedWriter(new FileWriter(absolutePath,StandardCharsets.UTF_8));
+
+            StringBuilder line;
+
+            for (Map.Entry<String,Word> entry:map.entries()){
+
+                line = new StringBuilder();
+                line.append(entry.getKey()).append(":");
+
+                for (Word t:entry.getValue().getTranslations()){
+
+                    line.append(t.getWord()).append(";");
+
+                }
+
+                line.deleteCharAt(line.length()-1);
+
+                writer.write(line.toString());
+                writer.newLine();
+
+            }
+
+            writer.close();
+
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
     }
 

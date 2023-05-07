@@ -70,6 +70,7 @@ public class Config {
     public static final String tur_fra_tei = "dicts/tur-fra.txt";
 
 
+    public static final String testOutputPath = "src/main/resources/com/teamfour/dictionary/dicts/testOutput.txt";
 
 
 
