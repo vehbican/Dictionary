@@ -86,7 +86,7 @@ public class DataManager {
     public DataManager() throws IOException {
 
         WordsDatabase = new ArrayListValuedHashMap<>();
-        ENGXDictionaries = new ArrayList<>();
+        /*ENGXDictionaries = new ArrayList<>();
         FRAXDictionaries = new ArrayList<>();
         DEUXDictionaries = new ArrayList<>();
         ITAXDictionaries = new ArrayList<>();
@@ -198,7 +198,7 @@ public class DataManager {
         ELLXDictionaries.add(ELL_SWE_DICT);
         ELLXDictionaries.add(ELL_TUR_DICT);
         ELLXDictionaries.add(ELL_FRA_DICT);
-        ELLXDictionaries.add(ELL_ITA_DICT);
+        ELLXDictionaries.add(ELL_ITA_DICT);*/
 
 
         File f = new File(Config.projectCreatedText);

@@ -17,10 +17,6 @@ public class FileManager {
         File file = new File(path);
         String absolutePath = file.getCanonicalPath();
 
-        InputStream is = App.class.getResourceAsStream("dicts/"+path);
-
-        assert is != null;
-
         BufferedReader reader;
 
         if (f.isFile()){
@@ -28,8 +24,11 @@ public class FileManager {
             reader = new BufferedReader(new FileReader(absolutePath, StandardCharsets.UTF_8));
 
         }else {
+            InputStream is = App.class.getResourceAsStream("dicts/"+path);
 
+            assert is != null;
             reader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
+            is.close();
         }
 
 
@@ -74,7 +73,7 @@ public class FileManager {
 
         }
 
-        is.close();
+
         reader.close();
 
 
@@ -137,42 +136,34 @@ public class FileManager {
 
     }
 
-    public static void FromHashMapToFile(MultiValuedMap<String,Word> map,String outputPath){
+    public static void FromHashMapToFile(MultiValuedMap<String,Word> map,String outputPath) throws IOException{
 
-        try {
+        File file = new File(outputPath);
+        String absolutePath = file.getCanonicalPath();
 
-            File file = new File(outputPath);
-            String absolutePath = file.getCanonicalPath();
+        BufferedWriter writer = new BufferedWriter(new FileWriter(absolutePath,StandardCharsets.UTF_8));
 
-            BufferedWriter writer = new BufferedWriter(new FileWriter(absolutePath,StandardCharsets.UTF_8));
+        StringBuilder line;
 
-            StringBuilder line;
+        for (Map.Entry<String,Word> entry:map.entries()){
 
-            for (Map.Entry<String,Word> entry:map.entries()){
+            line = new StringBuilder();
+            line.append(entry.getKey()).append(":");
 
-                line = new StringBuilder();
-                line.append(entry.getKey()).append(":");
+            for (Word t:entry.getValue().getTranslations()){
 
-                for (Word t:entry.getValue().getTranslations()){
-
-                    line.append(t.getWord()).append(";");
-
-                }
-
-                line.deleteCharAt(line.length()-1);
-
-                writer.write(line.toString());
-                writer.newLine();
+                line.append(t.getWord()).append(";");
 
             }
 
-            writer.close();
+            line.deleteCharAt(line.length()-1);
 
+            writer.write(line.toString());
+            writer.newLine();
 
-
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+
+        writer.close();
 
 
     }

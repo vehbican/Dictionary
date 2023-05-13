@@ -24,7 +24,13 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        stage.onCloseRequestProperty().set(e->OnClose());
+        stage.onCloseRequestProperty().set(e-> {
+            try {
+                OnClose();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("home-page.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1080, 720);
@@ -94,7 +100,7 @@ public class App extends Application {
         launch();
     }
 
-    public void OnClose(){
+    public void OnClose() throws IOException {
 
         FileManager.FromHashMapToFile(dataManager.getENG_TUR_DICT(),Config.eng_tur_tei);
         FileManager.FromHashMapToFile(dataManager.getENG_FRA_DICT(),Config.eng_fra_tei);
