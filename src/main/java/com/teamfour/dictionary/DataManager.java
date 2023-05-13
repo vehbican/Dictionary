@@ -212,7 +212,7 @@ public class DataManager {
 
     }
 
-    boolean IsFirstCharUpper(String input){
+    public boolean IsFirstCharUpper(String input){
 
         input = input.trim();
         Pattern p = Pattern.compile("\\b([A-Z][a-z]*)\\b");
@@ -221,6 +221,7 @@ public class DataManager {
         return m.find();
 
     }
+
    /* public String[] getSWEDictionaries(){
         String swe_eng = Config.swe_eng_tei;
         String swe_fra = Config.swe_fra_tei;
